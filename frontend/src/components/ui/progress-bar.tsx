@@ -11,11 +11,11 @@ const ProgressBarVariants = cva('loading', {
     },
     variant: {
       primary: ['bg-green-500'],
-      secondary: ['bg-secondary-500'],
-      success: ['bg-success-500'],
-      danger: ['bg-danger-500'],
-      warning: ['bg-warning-500'],
-      info: ['bg-info-500'],
+      secondary: ['bg-emerald-600'],
+      success: ['bg-green-600'],
+      danger: ['bg-red-500'],
+      warning: ['bg-yellow-500'],
+      info: ['bg-sky-500'],
     },
   },
   defaultVariants: {
