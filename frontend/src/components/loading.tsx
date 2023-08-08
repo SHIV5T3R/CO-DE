@@ -12,10 +12,7 @@ function LoadingPage({ message, progress }: LoadingPageProps) {
         className="w-40 h-40 mx-auto mb-8 rounded-md shadow-md shadow-slate-600"
         alt="logo"
       />
-      <ProgressBar progress={progress} size={'sm'} variant={'danger'} />
       <ProgressBar progress={progress} />
-      <ProgressBar progress={progress} size={'lg'} variant={'info'} />
-      <ProgressBar progress={progress} size={'xl'} variant={'secondary'} />
       <p className="text-slate-500 text-sm text-center">{message}...</p>
     </div>
   );
