@@ -1,7 +1,7 @@
 import { VariantProps, cva } from 'class-variance-authority';
 import { cn } from '../../utils/lib';
 
-const loadingVariants = cva('loading', {
+const ProgressBarVariants = cva('loading', {
   variants: {
     size: {
       sm: ['h-1.5'],
@@ -23,16 +23,20 @@ const loadingVariants = cva('loading', {
     variant: 'primary',
   },
 });
-export interface LoadingProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof loadingVariants> {
+export interface ProgressBarProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof ProgressBarVariants> {
   progress?: number;
   determinate?: boolean;
 }
-function LoadingProgressBar({ progress = 0, determinate = false, size, variant, className }: LoadingProps) {
+function ProgressBar({ progress = 0, determinate = false, size, variant, className }: ProgressBarProps) {
   return (
-    <div className={cn('w-full bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700', loadingVariants({ size }))}>
+    <div className={cn('w-full bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700', ProgressBarVariants({ size }))}>
       <div
+        aria-label="progress-bar"
+        title="progress-bar"
         className={cn(
-          loadingVariants({ size, variant }),
+          ProgressBarVariants({ size, variant }),
           determinate && 'animate-pulse animate-infinite animate-ease-in',
           'rounded-full transition-all ease-out',
           className
@@ -43,4 +47,4 @@ function LoadingProgressBar({ progress = 0, determinate = false, size, variant, 
   );
 }
 
-export default LoadingProgressBar;
+export default ProgressBar;
