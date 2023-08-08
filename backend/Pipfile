@@ -8,6 +8,9 @@ flask = "*"
 motor = "*"
 flask-socketio = "*"
 python-dotenv = "*"
+flask-limiter = "*"
+flask-restful = "*"
+pyjwt = "*"
 
 [dev-packages]
 
