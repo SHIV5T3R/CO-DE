@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import LoadingPage from './components/loading';
 
+const LOADING_MESSAGE = [
+  'Load environment variables',
+  'Load configuration',
+  'Load database',
+  'Load cache',
+  'Load logger',
+];
 function App() {
-  const [count, setCount] = useState(0)
+  const [progress, setProgress] = React.useState<number>(0);
+  const [message, setMessage] = React.useState<string>(LOADING_MESSAGE[0]);
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prevProgress) => (prevProgress + 1) % 100);
+    }, 100);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setMessage(LOADING_MESSAGE[Math.floor(Math.random() * LOADING_MESSAGE.length)]);
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main className="flex flex-col items-center justify-center w-full h-screen bg-gray-100 dark:bg-gray-900 px-40">
+      <LoadingPage progress={progress} message={message} />
+    </main>
+  );
 }
 
-export default App
+export default App;

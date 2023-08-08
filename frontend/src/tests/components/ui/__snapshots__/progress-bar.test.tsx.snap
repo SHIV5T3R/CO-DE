@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ProgressBar > should render 1`] = `
+<div>
+  <div
+    class="w-full rounded-full mb-4 dark:bg-gray-700 loading h-2 bg-green-500"
+  >
+    <div
+      aria-label="progress-bar"
+      class="loading h-2 bg-green-500 rounded-full transition-all ease-out"
+      style="width: 0%;"
+    />
+  </div>
+</div>
+`;
