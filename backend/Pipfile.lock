@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "2189ee112c4aa2ac7fba550692bc0bb61a82627146ffa9e1e13701349078b408"
+            "sha256": "5c1521f5c1caef3eb3b837fe99cbf90fa2a2e074c22c31b027766bf2a13ff7c7"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -65,11 +65,11 @@
         },
         "dnspython": {
             "hashes": [
-                "sha256:5b7488477388b8c0b70a8ce93b227c5603bc7b77f1565afe8e729c36c51447d7",
-                "sha256:c33971c79af5be968bb897e95c2448e11a645ee84d93b265ce0b7aabe5dfdca8"
+                "sha256:57c6fbaaeaaf39c891292012060beb141791735dbb4004798328fc2c467402d8",
+                "sha256:8dcfae8c7460a2f84b4072e26f1c9f4101ca20c071649cb7c34e8b6a93d58984"
             ],
             "markers": "python_version >= '3.8' and python_version < '4.0'",
-            "version": "==2.4.1"
+            "version": "==2.4.2"
         },
         "flask": {
             "hashes": [
@@ -206,6 +206,14 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==0.1.2"
+        },
+        "mongoengine": {
+            "hashes": [
+                "sha256:8f38df7834dc4b192d89f2668dcf3091748d12f74d55648ce77b919167a4a49b",
+                "sha256:c3523b8f886052f3deb200b3218bcc13e4b781661e3bea38587cc936c80ea358"
+            ],
+            "index": "pypi",
+            "version": "==0.27.0"
         },
         "motor": {
             "hashes": [

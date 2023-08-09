@@ -11,6 +11,7 @@ python-dotenv = "*"
 flask-limiter = "*"
 flask-restful = "*"
 pyjwt = "*"
+mongoengine = "*"
 
 [dev-packages]
 
