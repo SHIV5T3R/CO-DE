@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "prepare": "husky install"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.0",
@@ -36,7 +37,9 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "eslint-plugin-tailwindcss": "^3.13.0",
+    "husky": "^8.0.3",
     "jsdom": "^22.1.0",
+    "lint-staged": "^13.2.3",
     "postcss": "^8.4.27",
     "prettier": "^3.0.1",
     "prettier-plugin-tailwindcss": "^0.4.1",
@@ -46,5 +49,8 @@
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vitest": "^0.34.1"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": "eslint --cache --fix"
   }
 }
