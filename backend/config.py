@@ -20,11 +20,8 @@ class Config:
 class DevelopmentConfig:
     DEBUG = True
     # development db config
-    DB_USERNAME = os.getenv('DB_USERNAME_DEV')
-    DB_PASSWORD = os.getenv('DB_PASSWORD_DEV')
-    DB_HOST = os.getenv('DB_HOST_DEV')
-    DB_NAME = os.getenv('DB_NAME_DEV')
-    
+    MONGO_URI = os.getenv('MONGO_URI')
+
     # rate limiting requests development config
     RATELIMIT_GLOBAL = '10000/hour'
     
@@ -40,11 +37,10 @@ class ProductionConfig:
 def get_config():
     flask_env = os.getenv('FLASK_ENV')
     cfg = None
+
     if flask_env == 'DEVELOPMENT':
         cfg = DevelopmentConfig
     elif flask_env == 'PRODUCTION':
         cfg = ProductionConfig
-    
-    cfg.SQLALCHEMY_DATABASE_URI = f'somesqldb://{cfg.DB_USERNAME}:{cfg.DB_PASSWORD}@{cfg.DB_HOST}/{cfg.DB_NAME}'
 
     return cfg

@@ -7,6 +7,7 @@ from flask_limiter import Limiter
 
 from config import get_config
 from services.utils import config_socketio
+from services.database import MotorInstance as db
 
 def register_endpoints(_app):
     from views.blueprints import blueprints
@@ -23,11 +24,15 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(get_config())
     Limiter(app)
+
     app.logger.setLevel(logging.INFO)
     app.logger.info(f"Flask env: {os.getenv('FLASK_ENV')}")
     app.url_map.strict_slashes = False # more forgiving with trailing slashes in url
+    app.db = db(app)
+
     config_socketio(app)
     register_endpoints(app)
+
     return app
 
 
