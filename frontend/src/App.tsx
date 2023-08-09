@@ -1,12 +1,13 @@
-import React from 'react';
-import LoadingPage from './components/loading';
+import React from "react";
+
+import LoadingPage from "./components/loading";
 
 const LOADING_MESSAGE = [
-  'Load environment variables',
-  'Load configuration',
-  'Load database',
-  'Load cache',
-  'Load logger',
+  "Load environment variables",
+  "Load configuration",
+  "Load database",
+  "Load cache",
+  "Load logger",
 ];
 function App() {
   const [progress, setProgress] = React.useState<number>(0);
@@ -22,7 +23,9 @@ function App() {
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      setMessage(LOADING_MESSAGE[Math.floor(Math.random() * LOADING_MESSAGE.length)]);
+      setMessage(
+        LOADING_MESSAGE[Math.floor(Math.random() * LOADING_MESSAGE.length)]
+      );
     }, 1000);
     return () => {
       clearInterval(interval);
@@ -30,7 +33,7 @@ function App() {
   }, []);
 
   return (
-    <main className="flex flex-col items-center justify-center w-full h-screen bg-gray-100 dark:bg-gray-900 px-40">
+    <main className="flex h-screen w-full flex-col items-center justify-center bg-gray-100 px-40 dark:bg-gray-900">
       <LoadingPage progress={progress} message={message} />
     </main>
   );

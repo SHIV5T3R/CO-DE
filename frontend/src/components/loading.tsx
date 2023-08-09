@@ -1,5 +1,5 @@
-import Logo from './ui/logo';
-import ProgressBar from './ui/progress-bar';
+import Logo from "./ui/logo";
+import ProgressBar from "./ui/progress-bar";
 
 type LoadingPageProps = {
   message?: string;
@@ -8,9 +8,9 @@ type LoadingPageProps = {
 function LoadingPage({ message, progress }: LoadingPageProps) {
   return (
     <div className="w-screen max-w-md">
-      <Logo className="mx-auto mb-8 rounded-md " mode={'dark'} />
+      <Logo className="mx-auto mb-8 rounded-md " mode="dark" />
       <ProgressBar progress={progress} />
-      <p className="text-slate-500 text-sm text-center">{message}...</p>
+      <p className="text-center text-sm text-slate-500">{message}...</p>
     </div>
   );
 }
