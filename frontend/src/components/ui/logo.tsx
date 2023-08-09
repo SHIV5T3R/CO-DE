@@ -1,9 +1,13 @@
 import { cva } from 'class-variance-authority';
 import { cn } from '../../utils/lib';
 
+export type Mode = {
+  theme?: 'dark' | 'light'; //Todo: Extends for multiple theme
+}
+
 type Props = {
   size?: 'sm' | 'md' | 'lg' | 'xl';
-  mode?: 'light' | 'dark'; //Todo: Extends for multiple theme
+  mode?: Mode
 } & React.HTMLAttributes<HTMLImageElement>;
 
 const LogoVariants = cva('loading', {
@@ -23,7 +27,7 @@ const LogoVariants = cva('loading', {
 function Logo({ size, className, mode, ...res }: Props) {
   return (
     <img
-      src={mode === 'dark' ? '/logo/main_logo_dark.svg' : '/logo/main_logo.svg'}
+      src={mode?.theme === 'dark' ? '/logo/main_logo_dark.svg' : '/logo/main_logo.svg'}
       className={cn('w-auto', className, LogoVariants({ size }))}
       alt="logo"
       {...res}
@@ -32,3 +36,4 @@ function Logo({ size, className, mode, ...res }: Props) {
 }
 
 export default Logo;
+
