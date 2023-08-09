@@ -6,6 +6,7 @@ To set up the development environment, first clone the repo.
 
 Change into the frontend directory and run the following commands:
 
+
 `npm install`
 `npm run dev`
 
@@ -21,7 +22,6 @@ Enable the virtual environment and run the flask application (defaults to port 5
 `flask run`
 
 # What is CO-DE?
-
 CO-DE is an open-source real-time collaborative code editor.
 
 CO-DE is the current ongoing project for the Ship-In-30 project from [David's Developer Safeplace](https://discord.gg/devsafeplace) Discord server.
@@ -33,6 +33,7 @@ Yet to be discussed.
 ## Tech Stack
 
 CO-DE uses React with TypeScript (Vite) for the frontend website and uses Flask (Python) for the backend API and WebSocket infrastructure.
+
 
 ## Contribution
 
@@ -52,19 +53,13 @@ Upon completing your changes **that are tested**, please raise a pull request th
 
 ### Tasks
 
-Within this project, contributors can help to work on tasks. Tasks will be split into different issues. To claim a task, find the issue that includes your chosen task and comment that you would like to work on a specific part of the issue. It's key that we communicate with each other to create a more productive and efficient development environment. You can also mention that you've claimed a task in the [discussion](https://discord.com/channels/368853404723707914/1073307477405335592) channel.
+Within this project, contributors can help to work on tasks. Tasks will be split into different issues. To claim a task, find the issue that includes your chosen task and comment that you would like to work on a specific part of the issue. It's key that we communicate with each other to create a more productive and efficient development environment. You can also mention that you've claimed a task in the [discussion](https://discord.com/channels/368853404723707914/1073307477405335592) channel. 
 
 Make sure to read all the discussion within the issue to know what needs to be completed, there will be a checklist of tasks and who's working on them in the issue description to help things flow smoothly.
 
-If you would like to unclaim a task, make sure to comment on the relevant issue to let everybody else know that the issue is open for contribution.
+If you would like to unclaim a task, make sure to comment on the relevant issue to let everybody else know that the issue is open for contribution. 
 
 You can also collaborate on a task with another contributor, just let the rest of the team know in the issue discussion.
-
-### Style Guides
-
-**React:**
-
-- <https://github.com/airbnb/javascript/tree/master/react>
 
 ---
 
