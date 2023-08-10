@@ -9,9 +9,24 @@ load_dotenv(path.join(basedir, '.env'))
 
 
 class Config:
+<<<<<<< Updated upstream
     # caching config 
     CACHE_TYPE = "SimpleCache" # cache won't clear until app stops or restarts
     CACHE_DEFAULT_TIMEOUT = 300 # 5 min
+=======
+    FLASK_ENV = os.getenv('FLASK_ENV')
+    DEBUG = os.getenv('DEBUG', 'False') == 'True'
+
+    # db config
+    DB_NAME = os.getenv('DB_NAME')
+    DB_HOST = os.getenv('DB_HOST')
+    DB_PORT = int(os.getenv('DB_PORT'))
+    DB_ALIAS = os.getenv('DB_')
+
+    # Caching Config
+    CACHE_TYPE = os.getenv('CACHE_TYPE')
+    CACHE_DEFAULT_TIMEOUT = os.getenv('CACHE_DEFAULT_TIMEOUT')
+>>>>>>> Stashed changes
     
     # rate limiting requests config (requests per hour)
     RATELIMIT_GLOBAL = '100/hour'
