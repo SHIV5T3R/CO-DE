@@ -1,6 +1,5 @@
 from flask import current_app as app
 from services.utils import socketio
-
 class WebsocketsRepo:
     @classmethod
     def connect_user(self):
