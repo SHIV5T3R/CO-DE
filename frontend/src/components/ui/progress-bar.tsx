@@ -1,26 +1,26 @@
-import { VariantProps, cva } from 'class-variance-authority';
-import { cn } from '../../utils/lib';
+import { VariantProps, cva } from "class-variance-authority";
+import { cn } from "../../lib/utils";
 
-const ProgressBarVariants = cva('loading', {
+const ProgressBarVariants = cva("loading", {
   variants: {
     size: {
-      sm: ['h-1.5'],
-      md: ['h-2'],
-      lg: ['h-3'],
-      xl: ['h-4'],
+      sm: ["h-1.5"],
+      md: ["h-2"],
+      lg: ["h-3"],
+      xl: ["h-4"],
     },
     variant: {
-      primary: ['bg-green-500'],
-      secondary: ['bg-emerald-600'],
-      success: ['bg-green-600'],
-      danger: ['bg-red-500'],
-      warning: ['bg-yellow-500'],
-      info: ['bg-sky-500'],
+      primary: ["bg-green-500"],
+      secondary: ["bg-emerald-600"],
+      success: ["bg-green-600"],
+      danger: ["bg-red-500"],
+      warning: ["bg-yellow-500"],
+      info: ["bg-sky-500"],
     },
   },
   defaultVariants: {
-    size: 'md',
-    variant: 'primary',
+    size: "md",
+    variant: "primary",
   },
 });
 export interface ProgressBarProps
@@ -29,24 +29,32 @@ export interface ProgressBarProps
   progress?: number;
   determinate?: boolean;
 }
-function ProgressBar({ progress = 0, determinate = false, size, variant, className }: ProgressBarProps) {
+function ProgressBar({
+  progress = 0,
+  determinate = false,
+  size,
+  variant,
+  className,
+}: ProgressBarProps) {
   return (
-    <div className={cn(
-      'w-full bg-gray-300 rounded-full h-1.5 mb-4 dark:bg-gray-700',
-      ProgressBarVariants({ size }).replace(/\sbg-[a-z]+-\d+/, '')
-      // remove the variant background-color from this div since that color is for the moving progress bar,
-      // this div is just the background of it so we can see it move
-      )}>
+    <div
+      className={cn(
+        "w-full bg-foreground rounded-full h-1.5 mb-4 dark:bg-foreground",
+        ProgressBarVariants({ size }).replace(/\sbg-[a-z]+-\d+/, "")
+        // remove the variant background-color from this div since that color is for the moving progress bar,
+        // this div is just the background of it so we can see it move
+      )}
+    >
       <div
         aria-label="progress-bar"
         title="progress-bar"
         className={cn(
           ProgressBarVariants({ size, variant }),
-          determinate && 'animate-pulse animate-infinite animate-ease-in',
-          'rounded-full transition-all ease-out',
+          determinate && "animate-pulse animate-infinite animate-ease-in",
+          "rounded-full transition-all ease-out",
           className
         )}
-        style={{ width: determinate ? '100%' : `${progress}%` }}
+        style={{ width: determinate ? "100%" : `${progress}%` }}
       />
     </div>
   );
