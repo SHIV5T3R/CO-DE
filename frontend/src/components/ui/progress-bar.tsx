@@ -31,7 +31,12 @@ export interface ProgressBarProps
 }
 function ProgressBar({ progress = 0, determinate = false, size, variant, className }: ProgressBarProps) {
   return (
-    <div className={cn('w-full bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700', ProgressBarVariants({ size }))}>
+    <div className={cn(
+      'w-full bg-gray-300 rounded-full h-1.5 mb-4 dark:bg-gray-700',
+      ProgressBarVariants({ size }).replace(/\sbg-[a-z]+-\d+/, '')
+      // remove the variant background-color from this div since that color is for the moving progress bar,
+      // this div is just the background of it so we can see it move
+      )}>
       <div
         aria-label="progress-bar"
         title="progress-bar"
