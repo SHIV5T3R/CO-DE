@@ -1,6 +1,5 @@
 from flask import current_app as app
 
-from services.utils import db
 # model used to structure user in db
 from models.users import User
 
