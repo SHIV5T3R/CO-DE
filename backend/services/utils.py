@@ -1,6 +1,19 @@
+from flask import Flask
 from flask_socketio import SocketIO
+from mongoengine import connect
 
-
+def config_mongodb(_app):
+    if not _app or not isinstance(_app, Flask):
+        raise TypeError("Invalid Flask application instance")
+    
+    _app.logger.info("Start mongoengine config")
+    db = connect(
+        db=_app.config["DB_USERNAME"],
+        username=_app.config["DB_PASSWORD"],
+        password=_app.config["DB_HOST"],
+        host=_app.config["DB_NAME"],
+    )
+    _app.logger.info(f"End mongoengine config {db}")
 
 def config_socketio(_app):
     global socketio
