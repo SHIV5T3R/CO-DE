@@ -1,6 +1,6 @@
 type User = {
-    first_name: string;
-    last_name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     image: string; // Needs to be an actual image.
 }

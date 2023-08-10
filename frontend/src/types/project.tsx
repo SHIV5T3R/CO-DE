@@ -3,10 +3,10 @@ import { User, UserPermissions } from './user';
 type Project = {
     title: string,
     owner: User,
-    created_at: Date,
-    is_deleted: boolean|false,
-    is_private: boolean|true,
-    invite_token: string,
+    createdAt: Date,
+    isDeleted: boolean|false,
+    isPrivate: boolean|true,
+    inviteToken: string,
     directory: string,
     image: string
 }

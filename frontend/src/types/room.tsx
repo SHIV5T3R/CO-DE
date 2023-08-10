@@ -5,18 +5,18 @@ type Room = {
     title: string,
     description: string,
     owner: User,
-    is_private: boolean|true,
-    created_at: Date,
-    invite_token: string
+    isPrivate: boolean|true,
+    createdAt: Date,
+    inviteToken: string
     project: Project,
-    is_deleted: boolean|false
+    isDeleted: boolean|false
 }
 
 type RoomMessage = {
     room: Room,
     content: string,
-    sent_by: User,
-    created_at: Date,
+    sentBy: User,
+    createdAt: Date,
     file: string
 }
 

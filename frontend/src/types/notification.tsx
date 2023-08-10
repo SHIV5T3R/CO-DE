@@ -5,10 +5,10 @@ type Notification = {
     content: string,
     for: User,
     generated_by: User,
-    type: Notification_Type
+    type: NotificationType
 }
 
-enum Notification_Type {
+enum NotificationType {
     NEW_MESSAGE,
     PROJECT_CHANGED,
     APPROVAL_REQUIRED,
@@ -17,5 +17,5 @@ enum Notification_Type {
 
 export {
     type Notification,
-    Notification_Type
+    NotificationType
 }
