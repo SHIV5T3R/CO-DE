@@ -5,6 +5,7 @@ type LoadingPageProps = {
   message?: string;
   progress?: number;
   mode?: Mode;
+  mode?: Mode;
 };
 function LoadingPage({ message, progress, mode }: LoadingPageProps) {
   return (

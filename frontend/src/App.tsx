@@ -8,6 +8,11 @@ const LOADING_MESSAGE = [
   "Load database",
   "Load cache",
   "Load logger",
+  "Load environment variables",
+  "Load configuration",
+  "Load database",
+  "Load cache",
+  "Load logger",
 ];
 function App() {
   const [progress, setProgress] = React.useState<number>(0);
@@ -27,6 +32,9 @@ function App() {
 
   React.useEffect(() => {
     const interval = setInterval(() => {
+      setMessage(
+        LOADING_MESSAGE[Math.floor(Math.random() * LOADING_MESSAGE.length)]
+      );
       setMessage(
         LOADING_MESSAGE[Math.floor(Math.random() * LOADING_MESSAGE.length)]
       );

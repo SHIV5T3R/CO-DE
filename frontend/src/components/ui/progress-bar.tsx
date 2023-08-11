@@ -54,7 +54,7 @@ function ProgressBar({
           "rounded-full transition-all ease-out",
           className
         )}
-        style={{ width: determinate ? "100%" : `${progress}%` }}
+        style={{ width: determinate ? '100%' : `${progress}%` }}
       />
     </div>
   );
