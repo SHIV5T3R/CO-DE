@@ -10,11 +10,6 @@ const LOADING_MESSAGE = [
   "Load database",
   "Load cache",
   "Load logger",
-  "Load environment variables",
-  "Load configuration",
-  "Load database",
-  "Load cache",
-  "Load logger",
 ];
 function App() {
   const [progress, setProgress] = React.useState<number>(0);
@@ -34,9 +29,6 @@ function App() {
       setMessage(
         LOADING_MESSAGE[Math.floor(Math.random() * LOADING_MESSAGE.length)]
       );
-      setMessage(
-        LOADING_MESSAGE[Math.floor(Math.random() * LOADING_MESSAGE.length)]
-      );
     }, 1000);
     return () => {
       clearInterval(interval);
@@ -45,7 +37,7 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="co-de-ui-theme">
-      <main className="flex flex-col items-center justify-center w-full h-screen bg-background dark:bg-background px-40">
+      <main className="flex h-screen w-full flex-col items-center justify-center bg-background px-40 dark:bg-background">
         <div className="absolute right-3 top-3">
           <ModeToggle />
         </div>
