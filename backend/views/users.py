@@ -19,6 +19,11 @@ create_user_parser.add_argument('full_name', location='json', required=True)
 create_user_parser.add_argument('email', location='json', required=True)
 create_user_parser.add_argument('password', location='json', required=True)
 
+login_api_model = {
+    **user_api_model,
+    "access_token": fields.String,
+    "refresh_token": fields.String,
+}
 
 login_user_parser = reqparse.RequestParser()
 login_user_parser.add_argument('email', location='json', required=True)

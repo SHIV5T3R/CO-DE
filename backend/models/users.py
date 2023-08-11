@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import re
 
 from constants import REGEX
+from services.tokens import JWTGenerator
 
 
 def is_email(email):
@@ -39,6 +40,12 @@ class User(Document):
     gh_refresh_key = StringField(max_length=255)
     avatar = StringField()
 
+    def __init__(self, *args, **kwargs):
+        super(User, self).__init__(*args, **kwargs)
+        # Define virtual fields
+        self.access_token = None
+        self.refresh_token = None
+
     def set_password(self, password):
         """Hash the clear-text password and store its encrypted form."""
         self.password = generate_password_hash(password)
@@ -46,7 +53,12 @@ class User(Document):
     def check_password(self, password):
         """Check if the provided password matches the hashed version."""
         return check_password_hash(self.password, password)
-    
+
+    def generate_tokens(self):
+        payload = {"id": str(self.id)}
+        self.access_token = JWTGenerator.generate_access_token(payload)
+        self.refresh_token = JWTGenerator.generate_refresh_token(payload)
+
     @classmethod
     def pre_save_post_validation(cls, sender, document, **kwargs):
         """Encrypts the password before initial save"""

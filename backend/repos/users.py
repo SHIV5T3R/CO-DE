@@ -42,6 +42,7 @@ class UsersRepo:
                 raise ValueError()
 
             app.logger.info("User successfully logged in")
+            user.generate_tokens()
             return user
         except (DoesNotExist, ValueError) as e:
             app.logger.error("Authentication Failed: User doesnt exist")
