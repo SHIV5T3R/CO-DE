@@ -1,6 +1,6 @@
 from flask import current_app as app
 from flask_restful import abort
-from mongoengine import ValidationError, NotUniqueError
+from mongoengine import ValidationError, NotUniqueError, DoesNotExist
 
 # model used to structure user in db
 from models.users import User
@@ -31,3 +31,18 @@ class UsersRepo:
             # Exception raised for duplicating field values
             app.logger.error("Failed User Creation: Email or Username already exists")
             abort(400, message="A user with that email or username already exists")
+
+    @classmethod
+    def login_user(cls, user_data):
+        app.logger.info("Logging in User...")
+
+        try:
+            user = User.objects(email=user_data["email"]).get()
+            if not user.check_password(user_data["password"]):
+                raise ValueError()
+
+            app.logger.info("User successfully logged in")
+            return user
+        except (DoesNotExist, ValueError) as e:
+            app.logger.error("Authentication Failed: User doesnt exist")
+            abort(401, message="Login failed; Invalid email or password")
