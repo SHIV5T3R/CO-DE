@@ -3,72 +3,41 @@
 @tailwind utilities;
 
 @layer base {
-  /* temporarily, root will be dark css variables until light theme color design system is completed 
   :root {
-    --background: 0 0% 100%;
-    --foreground:229, 26%, 16%;
+    --background: 233 27% 94%;
+    --foreground: 260 27% 4%;
 
-    --card: 0 0% 100%;
-    --card-foreground:229, 26%, 16%;
+    --card: 233 27% 94%;
+    --card-foreground: 260 27% 4%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground:229, 26%, 16%;
+    --popover: 233 27% 94%;
+    --popover-foreground: 260 27% 4%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 260 27% 4%;
     --primary-foreground: 233 27% 94%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 233 27% 94%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring:229, 26%, 16%;
-
-    --radius: 0.5rem;
-  } */
-
-  /* this root is a duplicate of the dark theme variables. This means light and dark theme currently share same colors temporarily*/
-  :root {
-    --background: 229 26% 16%;
-    --foreground: 233 27% 94%;
-
-    --card: 229 26% 16%;
-    --card-foreground: 233 27% 94%;
-
-    --popover: 229 26% 16%;
-    --popover-foreground: 233 27% 94%;
-
-    --primary: 233 27% 94%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 229 73% 86%;
+    --secondary: 226 8% 33%;
     --secondary-foreground: 233 27% 94%;
 
-    --muted: 229 73% 86%;
-    --muted-foreground: 220 13% 47%;
+    --muted: 226 8% 33%;
+    --muted-foreground: 228 12% 57%;
 
-    --accent: 229 73% 86%;
+    --accent: 226 8% 33%;
     --accent-foreground: 233 27% 94%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 349 89% 64%;
+    --destructive-cancel: 229 24% 34%;
+
     --destructive-foreground: 233 27% 94%;
 
-    --border: 229 73% 86%;
-    --input: 229 73% 86%;
-    --success: 349 89% 72%;
-    --danger: 89 51% 61%;
-    --ring: hsl(212.7, 26.8%, 83.9);
-    --ring-error: hsl(var(--danger));
-    --ring-success:hsl(var(--success))
+    --border: 228 12% 57%;
+    --input: 228 12% 57%;
+    --success: 166 95% 32%;
+    --danger: 0 89% 56%;
+    --ring: 260 27% 4%;
+    --ring-error: 0 89% 56%;
+    --ring-success: 166 95% 32%;
+    --radius: 0.5rem;
   }
   .dark {
     --background: 229 26% 16%;
@@ -91,15 +60,18 @@
 
     --accent: 229 73% 86%;
     --accent-foreground: 233 27% 94%;
-
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 349 89% 64%;
+    --destructive-cancel: 229 24% 34%;
     --destructive-foreground: 233 27% 94%;
 
     --border: 229 73% 86%;
     --input: 229 73% 86%;
     --success: 349 89% 72%;
     --error: 89 51% 61%;
-    --ring: hsl(212.7, 26.8%, 83.9);
+    --ring: 212.7 26.8% 83.9%;
+    --ring-error: var(--danger);
+    --ring-success: var(--success);
+    --radius: 0.5rem;
   }
 }
 

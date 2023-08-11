@@ -1,13 +1,11 @@
 import { cva } from "class-variance-authority";
 import { cn } from "../../lib/utils";
+import { useTheme } from "@shadcn/ui/theme-provider";
 
-export type Mode = {
-  theme?: "dark" | "light"; //Todo: Extends for multiple theme
-};
+
 
 type Props = {
   size?: "sm" | "md" | "lg" | "xl";
-  mode?: Mode;
 } & React.HTMLAttributes<HTMLImageElement>;
 
 const LogoVariants = cva("loading", {
@@ -24,13 +22,12 @@ const LogoVariants = cva("loading", {
   },
 });
 
-function Logo({ size, className, mode, ...res }: Props) {
+function Logo({ size, className, ...res }: Props) {
+  const { theme } = useTheme();
   return (
     <img
       src={
-        mode?.theme === "dark"
-          ? "/logo/main_logo_dark.svg"
-          : "/logo/main_logo.svg"
+        theme === "dark" ? "/logo/main_logo_dark.svg" : "/logo/main_logo.svg"
       }
       className={cn("w-auto", className, LogoVariants({ size }))}
       alt="logo"

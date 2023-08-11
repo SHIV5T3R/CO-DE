@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+
+
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
@@ -14,8 +16,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
+      "@/*": ["./src/*"],
+      "@shadcn/*": ["shadcn/components/*"],
+      "@lib/*": ["lib/*"],
       "@/components/*": ["./src/components/*"],
       "@/components/ui/*": ["./src/components/ui/*"],
       "@/components/layout/*": ["./src/components/layout/*"],
@@ -30,9 +35,8 @@
       "@/public/*": ["./public/*"],
       "@/store/*": ["./src/store/*"],
       "@/services/*": ["./src/services/*"],
-      "@/*": ["./*"]
     }
   },
-  "include": ["src", "@/components/ui", "@/components/ui"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src", "@/components/ui", "@/components/ui","*.ts", "*.tsx", "src/**/*.ts", "src/**/*.d.ts"],
+  "exclude": ["node_modules", "dist"]
 }

@@ -4,6 +4,7 @@ module.exports = {
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
+    "./src/shadcn/components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
   ],
@@ -36,6 +37,7 @@ module.exports = {
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
+          cancel: "hsl(var(--destructive-cancel))",
           foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
@@ -46,8 +48,10 @@ module.exports = {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
           error: "hsl(var(--error))",
-          success: "hsl(var(--success)",
+          success: "hsl(var(--success))",
         },
+        danger: "hsl(var(--error))",
+        success: "hsl(var(--success))",
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
