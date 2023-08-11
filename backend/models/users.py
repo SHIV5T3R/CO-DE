@@ -2,10 +2,12 @@ from mongoengine import Document, StringField, DateTimeField, BooleanField, Vali
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
 
+from constants import REGEX
+
 
 def is_email(email):
     """Validate string is a valid email format"""
-    if not re.match(r"^[\w\-\.]+@([\w-]+\.)+[\w-]{2,4}$", email):
+    if not re.match(REGEX.EMAIL, email):
         raise ValidationError("Invalid Email Format")
 
 
@@ -21,7 +23,7 @@ def is_secure_password(password):
     :param password: the password to be validated
     :raise ValidationError: if password doesnt match format
     """
-    if not re.match(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,}$", password):
+    if not re.match(REGEX.PASSWORD, password):
         raise ValidationError("Invalid Password Format")
 
 
