@@ -2,8 +2,6 @@ import { cva } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 import { useTheme } from "@shadcn/ui/theme-provider";
 
-
-
 type Props = {
   size?: "sm" | "md" | "lg" | "xl";
 } & React.HTMLAttributes<HTMLImageElement>;
@@ -24,6 +22,7 @@ const LogoVariants = cva("loading", {
 
 function Logo({ size, className, ...res }: Props) {
   const { theme } = useTheme();
+  
   return (
     <img
       src={
