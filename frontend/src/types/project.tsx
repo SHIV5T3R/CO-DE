@@ -4,8 +4,8 @@ type Project = {
     _id: string,
     title: string,
     description: string,
-    deleted_at: Date,
-    is_deleted: boolean,
+    deletedAt: Date,
+    isDeleted: boolean,
     directory: string,
     image: string
 }

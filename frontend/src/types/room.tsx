@@ -7,9 +7,9 @@ type Room = {
     description: string,
     owner: (string|User),
     members: string[]|User[],
-    is_private: boolean,
+    isPrivate: boolean,
     project: string|Project,
-    invite_token: string
+    inviteToken: string
 }
 
 type RoomMessage = {
@@ -22,15 +22,15 @@ type Message = {
     _id: string,
     sender: string|User,
     content: any, // For now.
-    sent_at: Date,
-    read_by: MessageReadBy[],
+    sentAt: Date,
+    readBy: MessageReadBy[],
     url: string
 }
 
 type MessageReadBy = {
     _id: string,
     reader: string|User,
-    read_at: Date
+    readAt: Date
 }
 
 export {

@@ -1,13 +1,13 @@
 type User = {
     _id: string,
     username: string,
-    full_name: string,
-    deleted_at: Date,
-    is_deleted: boolean,
+    fullName: string,
+    deletedAt: Date,
+    isDeleted: boolean,
     email: string,
     password: string,
-    gh_access_key: string,
-    gh_refresh_key: string,
+    ghAccessKey: string,
+    ghRefreshKey: string,
     avatar: string
 }
 
