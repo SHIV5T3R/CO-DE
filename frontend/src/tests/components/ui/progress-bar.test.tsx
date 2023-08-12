@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { describe, test } from "vitest";
+import { describe, test, expect } from "vitest";
 
 import ProgressBar from "../../../components/ui/progress-bar";
 
@@ -24,7 +24,7 @@ describe("ProgressBar", () => {
   test("should width 50% when progress is 50", async () => {
     const { findByTitle } = render(<ProgressBar progress={50} />);
     const progressBar = await findByTitle("progress-bar");
-    expect(progressBar).toHaveStyle("width: 50%");
+    expect(progressBar).toHaveStyle("width: 50%")
   });
 
   test("should width 100% when progress is 100", async () => {
