@@ -69,3 +69,9 @@ You can also collaborate on a task with another contributor, just let the rest o
 ---
 
 ![alt text](https://images-ext-1.discordapp.net/external/ZodgpNW25bKMHly3yapNdxjUcH8s__4xR5pqVxXy1dA/https/cdn-longterm.mee6.xyz/plugins/embeds/images/368853404723707914/668c5398d4a84cfbd3475ae6d201c456e398f819dcbf513c719b6d00aac67756.png?width=848&height=676)
+
+**Docker:**
+
+```bash
+docker compose -f compose.yml up
+```
