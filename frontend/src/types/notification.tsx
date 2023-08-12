@@ -1,10 +1,11 @@
 import { User } from './user';
 
 type Notification = {
+    _id: string,
     title: string,
     content: string,
-    for: User,
-    generated_by: User,
+    receivers: string[]|User[],
+    sender: string|User,
     type: NotificationType
 }
 

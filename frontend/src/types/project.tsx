@@ -1,23 +1,15 @@
-import { User, UserPermissions } from './user';
+import { User } from './user';
 
 type Project = {
+    _id: string,
     title: string,
-    owner: User,
-    createdAt: Date,
-    isDeleted: boolean|false,
-    isPrivate: boolean|true,
-    inviteToken: string,
+    description: string,
+    deleted_at: Date,
+    is_deleted: boolean,
     directory: string,
     image: string
 }
 
-type ProjectMember = {
-    user: User,
-    project: Project,
-    permissions: UserPermissions
-}
-
 export { 
     type Project,
-    type ProjectMember
 };

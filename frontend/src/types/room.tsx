@@ -1,33 +1,39 @@
 import { Project } from './project';
-import { User, UserPermissions } from './user';
+import { User } from './user';
 
 type Room = {
+    _id: string,
     title: string,
     description: string,
-    owner: User,
-    isPrivate: boolean|true,
-    createdAt: Date,
-    inviteToken: string
-    project: Project,
-    isDeleted: boolean|false
+    owner: (string|User),
+    members: string[]|User[],
+    is_private: boolean,
+    project: string|Project,
+    invite_token: string
 }
 
 type RoomMessage = {
-    room: Room,
-    content: string,
-    sentBy: User,
-    createdAt: Date,
-    file: string
+    _id: string,
+    room: string|Room,
+    messages: string[]|Message[]
 }
 
-type RoomMember = {
-    user: User,
-    permissions: UserPermissions,
-    has_left: boolean|false
+type Message = {
+    _id: string,
+    sender: string|User,
+    content: any, // For now.
+    sent_at: Date,
+    read_by: MessageReadBy[],
+    url: string
+}
+
+type MessageReadBy = {
+    _id: string,
+    reader: string|User,
+    read_at: Date
 }
 
 export {
     type Room,
     type RoomMessage,
-    type RoomMember
 };

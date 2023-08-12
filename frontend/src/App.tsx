@@ -3,11 +3,13 @@ import LoadingPage from "./components/loading";
 import { Mode } from "./components/ui/logo";
 
 const LOADING_MESSAGE = [
-  "Load environment variables",
-  "Load configuration",
-  "Load database",
-  "Load cache",
-  "Load logger",
+  "Loading environment variables",
+  "Loading configuration",
+  "Loading database",
+  "Loading cache",
+  "Loading logger",
+  "Establishing connection",
+  "Eating a hot dog",
 ];
 function App() {
   const [progress, setProgress] = React.useState<number>(0);
@@ -54,7 +56,7 @@ function App() {
 
   return (
     <main className="flex h-screen w-full flex-col items-center justify-center bg-gray-100 px-40 dark:bg-gray-900">
-      <LoadingPage progress={progress} message={message} mode={mode} />
+        <LoadingPage progress={progress} message={message} mode={mode} />
     </main>
   );
 }
