@@ -1,4 +1,4 @@
-version: "1.0"
+version: '1.0'
 services:
   db: #Mongodb
     image: mongo:latest
@@ -25,7 +25,7 @@ services:
     networks:
       - mongo-net
   api:
-    container_name: CODE_API_FLASK_APP
+    container_name: CODE_BACKEND
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -48,6 +48,17 @@ services:
       - cache
     volumes:
       - ./:/app
+    networks:
+      - mongo-net
+  web:
+    container_name: CODE_WEB
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app
     networks:
       - mongo-net
 volumes:
