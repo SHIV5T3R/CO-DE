@@ -1,0 +1,60 @@
+version: "1.0"
+services:
+  db: #Mongodb
+    image: mongo:latest
+    container_name: CODE_MONGODB
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - db:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=code
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+    networks:
+      - mongo-net
+  cache: # Redis
+    image: redis:alpine
+    restart: always
+    ports:
+      - 6379:6379
+    command: redis-server --save 60 1 --loglevel verbose --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes:
+      - cache:/data
+    networks:
+      - mongo-net
+  api:
+    container_name: CODE_API_FLASK_APP
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+      - cache
+    ports:
+      - 5000:5000
+    environment:
+      - REDIS_HOST=cache
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+      - DB_USERNAME=root
+      - DB_PASSWORD=example
+      - DB_HOST=mongodb://root:example@mongo:27017
+      - DB_NAME=mongodb
+      - DB_PORT=27017
+    links:
+      - db
+      - cache
+    volumes:
+      - ./:/app
+    networks:
+      - mongo-net
+volumes:
+  db: #Mongodb
+    driver: local
+  cache: # Redis
+    driver: local
+networks:
+  mongo-net:
+    driver: bridge
