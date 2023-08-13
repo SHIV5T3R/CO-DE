@@ -18,5 +18,5 @@ def config_mongodb(_app):
 def config_socketio(_app):
     global socketio
     _app.logger.info("Start websocket config")
-    socketio = SocketIO(_app)
+    socketio = SocketIO(_app, cors_allowed_origins="*")
     _app.logger.info(f"End websocket config {socketio}")
