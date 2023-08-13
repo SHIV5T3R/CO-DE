@@ -1,5 +1,8 @@
+/// <reference types="vitest" />
+/// <reference types="vite/client" />
 import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
+import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,10 +14,12 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      "@": path.resolve(__dirname, "./src"),
+      "@shadcn": path.resolve(__dirname, "./src/shadcn/components"), // alias for shadcn primitive components
+      "@lib": path.resolve(__dirname, "./src/lib"),
       "@/components/*": "./src/components/*",
       "@/components/ui/*": "./src/components/ui/*",
       "@/components/layout/*": "./src/components/layout/*",
-      "@/lib/*": "./src/lib/*",
       "@/hooks/*": "./src/hooks/*",
       "@/pages/*": "./src/pages/*",
       "@/types/*": "./types/*",
@@ -24,8 +29,7 @@ export default defineConfig({
       "@/assets/*": "./src/assets/*",
       "@/public/*": "./public/*",
       "@/store/*": "./src/store/*",
-      "@/services/*": "./src/services/*",
-      "@/*": "./*",
+      "@/services/*": "./src/services/*"
     },
   },
 });

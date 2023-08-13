@@ -1,22 +1,19 @@
 import React from "react";
 import LoadingPage from "./components/loading";
-import { Mode } from "./components/ui/logo";
+
+import { ModeToggle } from "./shadcn/components/ui/mode-toggle";
+import { ThemeProvider } from "@shadcn/ui/theme-provider";
 
 const LOADING_MESSAGE = [
-  "Loading environment variables",
-  "Loading configuration",
-  "Loading database",
-  "Loading cache",
-  "Loading logger",
-  "Establishing connection",
-  "Eating a hot dog",
+  "Load environment variables",
+  "Load configuration",
+  "Load database",
+  "Load cache",
+  "Load logger",
 ];
 function App() {
   const [progress, setProgress] = React.useState<number>(0);
   const [message, setMessage] = React.useState<string>(LOADING_MESSAGE[0]);
-  // mode should be part of the app context/Redux store or whatever state management
-  // is going to be used since it should be available to all components of the app if they need it
-  const [mode, setMode] = React.useState<Mode>();
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -38,26 +35,15 @@ function App() {
     };
   }, []);
 
-  React.useEffect(() => {
-    // for now we only implemented dark and light themes so this should be sufficient
-
-    const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
-    setMode({
-      // sets the theme on load...
-      theme: mediaQueryList.matches ? "dark" : "light",
-    });
-    mediaQueryList.addEventListener("change", (event) => {
-      setMode({
-        // ...changes the theme if the user changes it on their device
-        theme: event.matches ? "dark" : "light",
-      });
-    });
-  }, []);
-
   return (
-    <main className="flex h-screen w-full flex-col items-center justify-center bg-gray-100 px-40 dark:bg-gray-900">
-        <LoadingPage progress={progress} message={message} mode={mode} />
-    </main>
+    <ThemeProvider defaultTheme="dark" storageKey="co-de-ui-theme">
+      <main className="flex h-screen w-full flex-col items-center justify-center bg-background px-40 dark:bg-background">
+        <div className="absolute right-3 top-3">
+          <ModeToggle />
+        </div>
+        <LoadingPage progress={progress} message={message} />
+      </main>
+    </ThemeProvider>
   );
 }
 
