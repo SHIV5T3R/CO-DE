@@ -16,7 +16,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "paths": {
       "@/*": ["./src/*"],
       "@shadcn/*": ["shadcn/components/*"],
