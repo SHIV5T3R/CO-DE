@@ -21,6 +21,7 @@ def register_endpoints(_app):
     
 def register_sockets(_app):
     import events
+    _app.logger.info(f"Websockets registered")
     
 def create_app():
     app = Flask(__name__)

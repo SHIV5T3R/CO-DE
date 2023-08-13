@@ -3,6 +3,7 @@ import LoadingPage from "./components/loading";
 
 import { ModeToggle } from "./shadcn/components/ui/mode-toggle";
 import { ThemeProvider } from "@shadcn/ui/theme-provider";
+import TestSocketConnectionComponent from "./tests/events/TestSocketConnectionComponent";
 
 const LOADING_MESSAGE = [
   "Load environment variables",
@@ -41,6 +42,7 @@ function App() {
         <div className="absolute right-3 top-3">
           <ModeToggle />
         </div>
+        <TestSocketConnectionComponent /> {/* Just for testing socket connection from client-side, can remove when more pages are made */}
         <LoadingPage progress={progress} message={message} />
       </main>
     </ThemeProvider>
