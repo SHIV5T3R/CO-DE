@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-
-
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
@@ -16,27 +14,23 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@shadcn/*": ["shadcn/components/*"],
-      "@lib/*": ["lib/*"],
-      "@/components/*": ["./src/components/*"],
-      "@/components/ui/*": ["./src/components/ui/*"],
-      "@/components/layout/*": ["./src/components/layout/*"],
-      "@/lib/*": ["./src/lib/*"],
-      "@/hooks/*": ["./src/hooks/*"],
-      "@/pages/*": ["./src/pages/*"],
-      "@/types/*": ["./types/*"],
-      "@/config/*": ["./src/config/*"],
-      "@/styles/*": ["./src/styles/*"],
-      "@/utils/*": ["./src/utils/*"],
-      "@/assets/*": ["./src/assets/*"],
-      "@/public/*": ["./public/*"],
-      "@/store/*": ["./src/store/*"],
-      "@/services/*": ["./src/services/*"],
+      "@/*": ["./src/*", "./dist/*", ""],
+      "components/*": ["./src/components/*"],
+      "hooks/*": ["./src/hooks/*"],
+      "types/*": ["./src/types/*"],
+      "config/*": ["./src/config/*"],
+      "pages/*": ["./src/pages/*"],
+      "assets/*": ["./src/assets/*"],
+      "public/*": ["./public/*"],
+      "styles/*": ["./src/styles/*"],
+      "store/*": ["./src/store/*"],
+      "services/*": ["./src/services/*"],
+      "shadcn/*": ["./src/shadcn/components/*"],
+      "lib/*": ["./src/lib/*"]
     }
   },
-  "include": ["src", "@/components/ui", "@/components/ui","*.ts", "*.tsx", "src/**/*.ts", "src/**/*.d.ts"],
+  "include": ["src", "*.ts", "*.tsx", "src/**/*.ts", "src/**/*.d.ts"],
   "exclude": ["node_modules", "dist"]
 }
