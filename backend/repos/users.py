@@ -22,15 +22,20 @@ class UsersRepo:
         try:
             new_user.save()
             app.logger.info("User successfully saved!")
-            return user
+            return new_user
         except ValidationError as e:
             # Exception raised for invalid fields
             app.logger.error("Failed User Creation: Validation Error")
-            abort(400, status=400, message=e._format_errors())
+            abort(400, status=False, error=e._format_errors())
         except NotUniqueError as e:
             # Exception raised for duplicating field values
             app.logger.error("Failed User Creation: Email or Username already exists")
-            abort(400, message="A user with that email or username already exists")
+            abort(
+                400,
+                status=False,
+                message="Unable to register user",
+                error="A user with that email or username already exists"
+            )
 
     @classmethod
     def login_user(cls, user_data):
@@ -46,4 +51,9 @@ class UsersRepo:
             return user
         except (DoesNotExist, ValueError) as e:
             app.logger.error("Authentication Failed: User doesnt exist")
-            abort(401, message="Login failed; Invalid email or password")
+            abort(
+                401,
+                status=False,
+                message="Unable to login user",
+                error="Invalid email or password"
+            )
