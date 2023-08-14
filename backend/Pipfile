@@ -12,6 +12,7 @@ flask-limiter = "*"
 flask-restful = "*"
 pyjwt = "*"
 mongoengine = "*"
+marshmallow-mongoengine = "*"
 
 [dev-packages]
 
