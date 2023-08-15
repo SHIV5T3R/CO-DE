@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { describe, test } from "vitest";
+import { describe, test, expect } from "vitest";
 
 import ProgressBar from "../../../components/ui/progress-bar";
 

@@ -1,8 +1,7 @@
 import React from "react";
 import LoadingPage from "./components/loading";
-
-import { ModeToggle } from "./shadcn/components/ui/mode-toggle";
-import { ThemeProvider } from "@shadcn/ui/theme-provider";
+import { ThemeProvider } from "shadcn/ui/theme-provider";
+import { ModeToggle } from "shadcn/ui/mode-toggle";
 import TestSocketConnectionComponent from "./tests/events/TestSocketConnectionComponent";
 
 const LOADING_MESSAGE = [
