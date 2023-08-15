@@ -1,3 +1,6 @@
+/**
+ * All socket logic testing could be added here
+ */
 import io from 'socket.io-client';
 
 export const setupSocketConnection = () => {

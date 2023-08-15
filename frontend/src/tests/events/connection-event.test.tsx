@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { setupSocketConnection } from './socketLogic';
+import { setupSocketConnection } from './socket-logic';
 
 // Mock the socket methods 
 vi.mock('socket.io-client', () => {
