@@ -19,6 +19,10 @@ def register_endpoints(_app):
     def status():
         return jsonify({'status': 'OK'})
     
+def register_sockets(_app):
+    import events
+    _app.logger.info(f"Websockets registered")
+    
 def create_app():
     app = Flask(__name__)
     app.config.from_object(get_config())
@@ -28,6 +32,7 @@ def create_app():
     app.url_map.strict_slashes = False # more forgiving with trailing slashes in url
     config_mongodb(app)
     config_socketio(app)
+    register_sockets(app)
     register_endpoints(app)
     return app
 
