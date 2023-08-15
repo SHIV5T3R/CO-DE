@@ -1,32 +1,51 @@
-from flask import current_app as app
-from flask_restful import Resource, Api, fields, marshal_with, reqparse
+from flask_restful import Resource, Api, request
+from marshmallow import ValidationError, fields
 
 from views.blueprints import users_bp
 from repos.users import UsersRepo
+from models.users import User
+from services.serialization import BaseModelSchema
 
 users_api = Api(users_bp)
 
-user_api_model = {
-    "username": fields.String,
-    "fullName": fields.String(attribute='full_name'),
-    "email": fields.String,
-    "password": fields.String,
-    "avatar": fields.String  
-}
 
-# NOTE: just an examplefor those new with flask restful
-create_user_parser = reqparse.RequestParser()
-create_user_parser.add_argument('username', location='json', required=True)
-create_user_parser.add_argument('full_name', location='json', required=True)
-create_user_parser.add_argument('email', location='json', required=True)
-create_user_parser.add_argument('password', location='json', required=True)
+class UserSchema(BaseModelSchema):
+    class Meta:
+        model = User
+        load_only = ["password"]
+        exclude = ["is_deleted"]
 
-# NOTE: Will need more modification just for exmaple purposes 
-# Postman request url: 
+
+class LoginUserSchema(BaseModelSchema):
+    class Meta:
+        model = User
+        load_only = ["password"]
+        dump_only = ["username", "full_name"]
+        exclude = ["is_deleted"]
+
+    access_token = fields.Str(dump_only=True)
+    refresh_token = fields.Str(dump_only=True)
+
+
 class Users(Resource):
     def post(self):
-        user = create_user_parser.parse_args()
-        return UsersRepo.create_user(user)
-        
+        try:
+            user_serializer = UserSchema()
+            user = user_serializer.load(request.get_json())
+            return user_serializer.dump(UsersRepo.create_user(user))
+        except ValidationError as e:
+            return e.messages, 422
+
+
+class LoginUsers(Resource):
+    def post(self):
+        try:
+            user_serializer = LoginUserSchema()
+            user = user_serializer.load(request.get_json())
+            return user_serializer.dump(UsersRepo.login_user(user))
+        except ValidationError as e:
+            return e.messages, 422
+
 
 users_api.add_resource(Users, '/')
+users_api.add_resource(LoginUsers, '/login')
