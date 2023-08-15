@@ -22,7 +22,13 @@ class Config:
     
     # rate limiting requests config
     RATELIMIT_GLOBAL = os.getenv('RATELIMIT_GLOBAL')
-    
+
+    # jwt config
+    ACCESS_TOKEN_SECRET = os.getenv('ACCESS_TOKEN_SECRET')
+    ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv('ACCESS_TOKEN_EXPIRE_MINUTES'))
+    REFRESH_TOKEN_SECRET = os.getenv('REFRESH_TOKEN_SECRET')
+    REFRESH_TOKEN_EXPIRE_MINUTES = int(os.getenv('REFRESH_TOKEN_EXPIRE_MINUTES'))
+
 
 def get_config():
     return Config
