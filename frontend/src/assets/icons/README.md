@@ -1,0 +1,1 @@
+When adding a new image please make sure they come from this pack: https://github.com/vscode-icons/vscode-icons/tree/master/icons
