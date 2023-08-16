@@ -1,24 +1,24 @@
 # Getting Set Up
 
-To set up the development environment, first clone the repo.
+To set up the development environment, first fork the repo, then clone it to your local machine.
 
 ## Frontend
 
-Change into the frontend directory and run the following commands:
+CD into the frontend directory and run the following commands:
 
 `npm install`
 `npm run dev`
 
 ## Backend
 
-First, you'll need to install pipenv and the project dependencies:
+CD into the backend directory, then install pipenv and the project dependencies:
 
 `pip install pipenv`
 `pipenv install`
 
 Enable the virtual environment and run the flask application (defaults to port 5000):
 
-`flask run`
+`pipenv run py app.py`
 
 # What is CO-DE?
 
@@ -38,7 +38,7 @@ CO-DE uses React with TypeScript (Vite) for the frontend website and uses Flask 
 
 ### Workflow
 
-This project uses a 3 legged branching strategy with `main` being the production version of the code; the main branch reflects the current version that is currently live to the public. The `development` branch contains the active changes that are made by the engineers to implement new features or fixes; pull requests are needed to contribute to `development` with 2 approvals from other engineers.
+This project uses a 3 legged branching strategy with `main` being the production version of the code; the main branch reflects the current version that is currently live to the public. The `development` branch contains the active changes that are made by the engineers to implement new features or fixes; pull requests are needed to contribute to `development` with approvals from other engineers.
 
 When you are contributing to the project, you will need to create a new branch based on the `development` branch. Please format the branch with a prefix and a name that best describes the type of change being implemented these contain:
 
