@@ -5,6 +5,7 @@ from views.blueprints import users_bp
 from repos.users import UsersRepo
 from models.users import User
 from services.serialization import BaseModelSchema
+from services.auth import require_auth
 
 users_api = Api(users_bp)
 
@@ -36,6 +37,12 @@ class Users(Resource):
         except ValidationError as e:
             return e.messages, 422
 
+    @require_auth(load_user=True)
+    def get(self):
+        user_serializer = UserSchema()
+        user = getattr(request, "user")
+        return user_serializer.dump(user)
+    
 
 class LoginUsers(Resource):
     def post(self):
