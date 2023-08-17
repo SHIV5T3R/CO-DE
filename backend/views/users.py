@@ -47,5 +47,5 @@ class LoginUsers(Resource):
             return e.messages, 422
 
 
-users_api.add_resource(Users, '/')
-users_api.add_resource(LoginUsers, '/login')
+users_api.add_resource(Users, "/")
+users_api.add_resource(LoginUsers, "/login")

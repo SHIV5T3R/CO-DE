@@ -1,6 +1,7 @@
 import os
 import logging
 from flask import Flask, jsonify
+from flask_cors import CORS
 from argparse import ArgumentParser
 from flask_limiter import Limiter
 
@@ -25,6 +26,7 @@ def register_sockets(_app):
     
 def create_app():
     app = Flask(__name__)
+    CORS(app) # Enable CORS
     app.config.from_object(get_config())
     Limiter(app)
     app.logger.setLevel(logging.INFO)
@@ -43,7 +45,6 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--port', default = 5000, type = int, help = 'port to listen on')
     args = parser.parse_args()
     port = args.port
-
     app = create_app()
     app.logger.info(f"Debug Mode: {app.debug}")
     app.logger.info("Server configured")

@@ -13,10 +13,10 @@ class UsersRepo:
         app.logger.info("Creating user")
         # create user object
         new_user = User(
-            username=user['username'],
-            full_name=user['full_name'],
-            email=user['email'],
-            password=user['password']
+            username=user["username"],
+            full_name=user["full_name"],
+            email=user["email"],
+            password=user["password"],
         )
 
         try:
@@ -29,12 +29,14 @@ class UsersRepo:
             abort(400, status=False, error=e._format_errors())
         except NotUniqueError as e:
             # Exception raised for duplicating field values
-            app.logger.error("Failed User Creation: Email or Username already exists")
+            app.logger.error(
+                "Failed User Creation: Email or Username already exists"
+            )
             abort(
                 400,
                 status=False,
                 message="Unable to register user",
-                error="A user with that email or username already exists"
+                error="A user with that email or username already exists",
             )
 
     @classmethod
@@ -55,5 +57,5 @@ class UsersRepo:
                 401,
                 status=False,
                 message="Unable to login user",
-                error="Invalid email or password"
+                error="Invalid email or password",
             )
