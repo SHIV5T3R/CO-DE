@@ -13,6 +13,7 @@ flask-restful = "==0.3.10"
 pyjwt = "==2.8.0"
 mongoengine = "==0.27.0"
 marshmallow-mongoengine = "==0.31.2"
+flask-cors = "==4.0.0"
 
 [dev-packages]
 
