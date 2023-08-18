@@ -1,23 +1,78 @@
-import { AlignCenter } from 'lucide-react';
-import React, { useEffect } from 'react';
-import io from 'socket.io-client';
+import React, { useState, useEffect } from 'react';
+import io, { Socket } from 'socket.io-client';
 
 const TestSocketConnectionComponent: React.FC = () => {
-  useEffect(() => {
-    const socket = io('http://localhost:5000');
+  
+    const [socket, setSocket] = useState<Socket | null>(null);
 
-    socket.on('connect', () => {
-      console.log('Connected to the server!');
-    });
+    useEffect(() => {
+        if (socket) {
+            socket.on('connect', () => {
+                console.log('Connected to the server!');
+            });
 
-    return () => {
-      socket.disconnect();
+            socket.on('disconnect', () => {
+                console.log('Disconnected from the server!');
+            });
+
+            // Cleanup the effects when component is unmounted or when the socket object changes.
+            return () => {
+                socket.off('connect');
+                socket.off('disconnect');
+            };
+        }
+    }, [socket]);
+
+    const handleConnectClick = () => {
+        const newSocket = io('http://localhost:5000');
+        setSocket(newSocket);
     };
-  }, []);
 
-  return <div style={{paddingBottom : '50px'}}>
-    <p><b>Backend server needs to be running, if you want to test socket connection.</b></p>
-  </div>;
+    const handleDisconnectClick = () => {
+        if (socket) {
+            socket.disconnect();
+        }
+    };
+
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '90px', 'paddingBottom': '40px' }}>
+      <button 
+          style={{ 
+              padding: '10px 20px', 
+              fontSize: '16px', 
+              border: '2px solid black', 
+              cursor: 'pointer',
+              transition: 'background-color 0.3s'
+          }}
+          onClick={handleConnectClick}
+          onMouseOver={e => e.currentTarget.style.backgroundColor = "#f0f0f0"}
+          onMouseOut={e => e.currentTarget.style.backgroundColor = ""}
+      >
+          Connect
+      </button>
+      <button 
+          style={{ 
+              padding: '10px 20px', 
+              fontSize: '16px', 
+              border: socket ? '2px solid black' : '2px solid gray', 
+              cursor: socket ? 'pointer' : 'not-allowed'
+          }}
+          onClick={handleDisconnectClick}
+          disabled={!socket}
+          onMouseOver={e => {
+              if (socket) {
+                  e.currentTarget.style.backgroundColor = "#f0f0f0";
+              }
+          }}
+          onMouseOut={e => e.currentTarget.style.backgroundColor = ""}
+      >
+          Disconnect
+      </button>
+  </div>
+  
+    );
 }
+
+
 
 export default TestSocketConnectionComponent;
