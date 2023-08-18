@@ -27,7 +27,7 @@
       "public/*": ["./public/*"],
       "styles/*": ["./src/styles/*"],
       "store/*": ["./src/store/*"],
-      "services/*": ["src/services/*"],
+      "services/*": ["./src/services/*"],
       "shadcn/*": ["./src/shadcn/components/*"],
       "lib/*": ["./src/lib/*"]
     }
