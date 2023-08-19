@@ -1,3 +1,4 @@
+from flask import after_this_request
 from flask_restful import Resource, Api, request
 from marshmallow import ValidationError, fields
 
@@ -39,6 +40,13 @@ class Users(Resource):
 
 class LoginUsers(Resource):
     def post(self):
+        @after_this_request
+        def set_cookies(res):
+            if res.status_code == 200:
+                res.set_cookie("access_token", res.json["data"]['access_token'], httponly=True)
+                res.set_cookie("refresh_token", res.json["data"]['refresh_token'], httponly=True)
+            return res
+        
         try:
             user_serializer = LoginUserSchema()
             user = user_serializer.load(request.get_json())
