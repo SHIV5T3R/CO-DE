@@ -18,11 +18,11 @@ const validationSchema: ZodType<SignInRequest> = z.object({
     .email("Invalid Email Address: Please enter a valid email address"),
   password: z
     .string()
+    .min(8, "Password must be at least 8 characters long")
     .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+      /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.*\W)|(?=.*_))/,
       "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special symbol."
-    )
-    .min(8, "Password must be at least 8 characters long"),
+    ),
 });
 
 function SignIn() {
