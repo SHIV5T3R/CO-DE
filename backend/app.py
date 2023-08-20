@@ -31,7 +31,9 @@ def register_sockets(_app):
 
 def create_app(testing=False):
     app = Flask(__name__)
-    CORS(app)  # Enable CORS
+    CORS(
+        app, origins=["http://localhost:15173"], supports_credentials=True
+    )  # Enable CORS
     if testing:
         app.config.from_object(get_testing_config())
     else:
