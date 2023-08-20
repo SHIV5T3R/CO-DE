@@ -30,5 +30,15 @@ class Config:
     REFRESH_TOKEN_EXPIRE_MINUTES = int(os.getenv('REFRESH_TOKEN_EXPIRE_MINUTES'))
 
 
+class TestingConfig(Config):
+    TESTING = True
+    FLASK_ENV = 'testing'
+    DB_NAME = os.getenv('TEST_DB_NAME')
+    DB_HOST = os.getenv('TEST_DB_HOST')
+
+
 def get_config():
     return Config
+
+def get_testing_config():
+    return TestingConfig
