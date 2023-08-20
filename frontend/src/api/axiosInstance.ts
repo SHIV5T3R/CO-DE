@@ -4,7 +4,7 @@ import { camelCase, isPlainObject, mapKeys, snakeCase } from "lodash";
 import config from "@/config";
 
 const axiosInstance = axios.create({
-  baseURL: config.BASE_URL,
+  baseURL: config.VITE_BASE_URL,
   withCredentials: true,
 });
 

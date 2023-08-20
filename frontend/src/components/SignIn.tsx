@@ -7,17 +7,22 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/shadcn/components/ui/button";
 import { Input } from "@/shadcn/components/ui/input";
 
+import { SignInRequest } from "@/api/auth/types";
+import { signIn } from "@/api/auth/auth";
 import Logo from "./ui/logo";
 import DiscordLogo from "./ui/DiscordLogo";
 
-interface SignInForm {
-  username: string;
-  password: string;
-}
-
-const validationSchema: ZodType<SignInForm> = z.object({
-  username: z.string().min(5, "Username must be at least 5 characters long"),
-  password: z.string().min(8, "Password must be at least 8 characters long"),
+const validationSchema: ZodType<SignInRequest> = z.object({
+  email: z
+    .string()
+    .email("Invalid Email Address: Please enter a valid email address"),
+  password: z
+    .string()
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+      "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special symbol."
+    )
+    .min(8, "Password must be at least 8 characters long"),
 });
 
 function SignIn() {
@@ -25,13 +30,15 @@ function SignIn() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignInForm>({
+  } = useForm<SignInRequest>({
     resolver: zodResolver(validationSchema),
+    mode: "onBlur",
   });
 
-  const handleClick = (data: SignInForm) => {
-    // TOOD: connect to backend;
-    console.log(data);
+  const handleClick = (data: SignInRequest) => {
+    const result = signIn(data);
+    console.log(result);
+    // TODO: handle navigation
   };
 
   return (
@@ -46,26 +53,22 @@ function SignIn() {
           Login with your email
         </p>
         <div className="mt-4">
-          <label htmlFor="username" className="block">
-            <span className="text-sm">Username</span>
+          <label htmlFor="email" className="block">
+            <span className="text-sm">Email</span>
             <Input
               type="text"
-              placeholder="Enter your username"
-              id="username"
+              placeholder="Enter your email"
+              id="email"
               className={cn(
                 "mt-1",
-                `${
-                  errors.username?.message
-                    ? "focus-visible:ring-ring-error"
-                    : ""
-                }`
+                errors.email?.message && "focus-visible:ring-ring-error"
               )}
-              {...register("username")}
-              aria-invalid={!!errors.username?.message}
+              {...register("email")}
+              aria-invalid={!!errors.email?.message}
             />
-            {errors.username?.message && (
+            {errors.email?.message && (
               <p className="pt-1 text-sm text-destructive">
-                {errors.username.message}
+                {errors.email.message}
               </p>
             )}
           </label>
@@ -79,11 +82,7 @@ function SignIn() {
               id="password"
               className={cn(
                 "mt-1",
-                `${
-                  errors.password?.message
-                    ? "focus-visible:ring-ring-error"
-                    : ""
-                }`
+                errors.password?.message && "focus-visible:ring-ring-error"
               )}
               {...register("password")}
               aria-invalid={!!errors.password?.message}

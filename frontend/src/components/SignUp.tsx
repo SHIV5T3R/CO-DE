@@ -7,18 +7,12 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/shadcn/components/ui/button";
 import { Input } from "@/shadcn/components/ui/input";
 
+import { SignUpRequest } from "@/api/auth/types";
+import { signUp } from "@/api/auth/auth";
 import Logo from "./ui/logo";
 import DiscordLogo from "./ui/DiscordLogo";
 
-interface SignUpForm {
-  username: string;
-  fullName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
-
-const validationSchema: ZodType<SignUpForm> = z
+const validationSchema: ZodType<SignUpRequest> = z
   .object({
     username: z.string().min(5, "Username must be at least 5 characters long"),
     fullName: z
@@ -28,9 +22,19 @@ const validationSchema: ZodType<SignUpForm> = z
     email: z
       .string()
       .email("Invalid Email Address: Please enter a valid email address"),
-    password: z.string().min(8, "Password must be at least 8 characters long"),
+    password: z
+      .string()
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+        "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special symbol."
+      )
+      .min(8, "Password must be at least 8 characters long"),
     confirmPassword: z
       .string()
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+        "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special symbol."
+      )
       .min(8, "Password must be at least 8 characters long"),
   })
   .refine(({ confirmPassword, password }) => confirmPassword === password, {
@@ -43,13 +47,15 @@ function SignUp() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignUpForm>({
+  } = useForm<SignUpRequest>({
     resolver: zodResolver(validationSchema),
+    mode: "onBlur",
   });
 
-  const handleClick = (data: SignUpForm) => {
-    // TOOD: connect to backend;
-    console.log(data);
+  const handleClick = async (data: SignUpRequest) => {
+    const result = signUp(data);
+    console.log(result);
+    // TODO: handle navigation
   };
 
   return (
@@ -72,11 +78,7 @@ function SignUp() {
               id="username"
               className={cn(
                 "mt-1",
-                `${
-                  errors.username?.message
-                    ? "focus-visible:ring-ring-error"
-                    : ""
-                }`
+                errors.username?.message && "focus-visible:ring-ring-error"
               )}
               {...register("username")}
               aria-invalid={!!errors.username?.message}
@@ -97,11 +99,7 @@ function SignUp() {
               id="fullName"
               className={cn(
                 "mt-1",
-                `${
-                  errors.fullName?.message
-                    ? "focus-visible:ring-ring-error"
-                    : ""
-                }`
+                errors.fullName?.message && "focus-visible:ring-ring-error"
               )}
               {...register("fullName")}
               aria-invalid={!!errors.fullName?.message}
@@ -122,9 +120,7 @@ function SignUp() {
               id="email"
               className={cn(
                 "mt-1",
-                `${
-                  errors.email?.message ? "focus-visible:ring-ring-error" : ""
-                }`
+                errors.email?.message && "focus-visible:ring-ring-error"
               )}
               {...register("email")}
               aria-invalid={!!errors.email?.message}
@@ -145,11 +141,7 @@ function SignUp() {
               id="password"
               className={cn(
                 "mt-1",
-                `${
-                  errors.password?.message
-                    ? "focus-visible:ring-ring-error"
-                    : ""
-                }`
+                errors.password?.message && "focus-visible:ring-ring-error"
               )}
               {...register("password")}
               aria-invalid={!!errors.password?.message}
@@ -170,11 +162,8 @@ function SignUp() {
               id="confirmPassword"
               className={cn(
                 "mt-1",
-                `${
-                  errors.confirmPassword?.message
-                    ? "focus-visible:ring-ring-error"
-                    : ""
-                }`
+                errors.confirmPassword?.message &&
+                  "focus-visible:ring-ring-error"
               )}
               {...register("confirmPassword")}
               aria-invalid={!!errors.confirmPassword?.message}
