@@ -29,9 +29,7 @@ class UsersRepo:
             abort(400, status=False, error=e._format_errors())
         except NotUniqueError as e:
             # Exception raised for duplicating field values
-            app.logger.error(
-                "Failed User Creation: Email or Username already exists"
-            )
+            app.logger.error("Failed User Creation: Email or Username already exists")
             abort(
                 400,
                 status=False,
