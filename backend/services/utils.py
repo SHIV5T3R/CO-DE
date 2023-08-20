@@ -22,9 +22,12 @@ def config_mongodb(_app: Flask):
 
 def config_socketio(_app: Flask):
     global socketio
-    _app.logger.info("Start websocket config")
-    socketio = SocketIO(_app, cors_allowed_origins="*")
-    _app.logger.info(f"End websocket config {socketio}")
+    try:
+        _app.logger.info("Start websocket config")
+        socketio = SocketIO(_app, cors_allowed_origins="*")
+        _app.logger.info(f"End websocket config {socketio}")
+    except Exception as e:
+        _app.logger.error(f"Error during websocket config: {e}")
 
 
 def generate_invite_token() -> str:
