@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { setupSocketConnection } from './socket-logic';
+import { setupSocketConnection, setupSocketDisconnection } from './socket-logic';
 
 // Mock the socket methods 
 vi.mock('socket.io-client', () => {
@@ -18,8 +18,13 @@ import io from 'socket.io-client';
 const mockSocket = io();
 
 describe('Socket Logic', () => {
-  it('should initiate socket connection on setup', () => {
+  it('should initiate socket connection', () => {
     setupSocketConnection();
     expect(mockSocket.on).toHaveBeenCalledWith('connect', expect.any(Function));
+  });
+
+  it('should initiate socket disconnection', () => {
+    setupSocketDisconnection();
+    expect(mockSocket.on).toHaveBeenCalledWith('disconnect', expect.any(Function));
   });
 });
