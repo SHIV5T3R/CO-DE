@@ -29,7 +29,7 @@ class LoginUserSchema(BaseModelSchema):
     refresh_token = fields.Str(dump_only=True)
 
 
-class Users(Resource):
+class RegisterUsers(Resource):
     def post(self):
         try:
             user_serializer = UserSchema()
@@ -70,7 +70,7 @@ class SelfUser(Resource):
         return user_serializer.dump(user)
 
 
-users_api.add_resource(Users, '/')
+users_api.add_resource(RegisterUsers, '/register')
 users_api.add_resource(SelfUser, '/self')
 users_api.add_resource(LoginUsers, '/login')
 users_api.add_resource(SingleUser, '/<string:user_id>')
