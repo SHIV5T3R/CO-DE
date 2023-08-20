@@ -4,7 +4,8 @@ from flask import Flask
 from flask_socketio import SocketIO
 from mongoengine import connect
 
-def config_mongodb(_app):
+
+def config_mongodb(_app: Flask):
     global db
     if not _app or not isinstance(_app, Flask):
         raise TypeError("Invalid Flask application instance")
@@ -14,11 +15,12 @@ def config_mongodb(_app):
         db=_app.config["DB_NAME"],
         port=_app.config["DB_PORT"],
         host=_app.config["DB_HOST"],
+        uuidRepresentation="standard",
     )
     _app.logger.info(f"End mongoengine config {db}")
 
 
-def config_socketio(_app):
+def config_socketio(_app: Flask):
     global socketio
     _app.logger.info("Start websocket config")
     socketio = SocketIO(_app, cors_allowed_origins="*")
@@ -29,6 +31,5 @@ def generate_invite_token() -> str:
     # Generate unique ID
     uid = uuid.uuid4()
     # Convert to hyphenated string
-    hyphenated_hex = '-'.join([uid.hex[i:i+4] for i in range(0, len(uid.hex), 4)])
+    hyphenated_hex = "-".join([uid.hex[i : i + 4] for i in range(0, len(uid.hex), 4)])
     return hyphenated_hex
-
