@@ -57,3 +57,7 @@ class UsersRepo:
                 message="Unable to login user",
                 error="Invalid email or password"
             )
+
+    @classmethod
+    def get_user(cls, user_id):
+        return User.objects(id=user_id).get()

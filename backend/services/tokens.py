@@ -38,3 +38,28 @@ class JWTGenerator:
             secret,
             **kwargs
         )
+
+    @classmethod
+    def decode_access_token(cls, token, **kwarg): 
+        return cls.decode_token(
+            token,
+            cls.ACCESS_TOKEN_SECRET,
+            **kwarg
+        )
+
+    @classmethod
+    def decode_refresh_token(cls, token, **kwarg): 
+        return cls.decode_token(
+            token,
+            cls.REFRESH_TOKEN_SECRET,
+            **kwarg
+        )
+
+    @classmethod
+    def decode_token(cls, token, secret, **kwargs):
+        return jwt.decode(
+            token,
+            secret,
+            algorithms="HS256",
+            **kwargs
+        )
