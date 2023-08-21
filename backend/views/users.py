@@ -3,7 +3,7 @@ from marshmallow import ValidationError
 
 from views.blueprints import users_bp
 from repos.users import UsersRepo
-from schemas.user_schema import UserSchema, LoginUserSchema
+from schemas.users import UserSchema, LoginUserSchema
 
 users_api = Api(users_bp)
 

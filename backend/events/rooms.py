@@ -3,7 +3,7 @@ import json
 from flask_socketio import emit
 from mongoengine import ValidationError
 from repos.rooms import RoomsRepo
-from schemas.room_schema import CreateRoomSchema
+from schemas.rooms import CreateRoomSchema
 from services.utils import socketio
 
 
