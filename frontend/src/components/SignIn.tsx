@@ -35,8 +35,8 @@ function SignIn() {
     mode: "onBlur",
   });
 
-  const handleClick = (data: SignInRequest) => {
-    const result = signIn(data);
+  const handleClick = async (data: SignInRequest) => {
+    const result = await signIn(data);
     console.log(result);
     // TODO: handle navigation
   };

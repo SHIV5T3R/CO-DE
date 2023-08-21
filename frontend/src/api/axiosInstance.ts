@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { camelCase, isPlainObject, mapKeys, snakeCase } from "lodash";
+import { camelCase, isArray, isObject, snakeCase } from "lodash";
 
 import config from "@/config";
 
@@ -12,18 +12,23 @@ const axiosInstance = axios.create({
     from snake_case to camelCase
 */
 const transformKeys = (
-  obj: Record<string, any>,
-  request: boolean = true
-): any => {
-  return mapKeys(obj, (value, key) => {
-    if (isPlainObject(value)) {
-      return transformKeys(value);
-    }
-    if (request) {
-      return snakeCase(key);
-    }
-    return camelCase(key);
+  obj: Record<string, unknown>,
+  isRequest: boolean = true
+) => {
+  const transformFunction = isRequest ? snakeCase : camelCase;
+
+  // Create a new object to store the transformed keys and values
+  const transformedResult: Record<string, unknown> = {};
+
+  // Iterate through the original object and transform keys and values
+  Object.entries(obj).forEach(([key, value]) => {
+    const transformedKey = isArray(obj) ? key : transformFunction(key);
+    transformedResult[transformedKey] = isObject(value)
+      ? transformKeys(value as Record<string, unknown>, isRequest)
+      : value;
   });
+
+  return transformedResult;
 };
 
 axiosInstance.interceptors.request.use((req) => {
@@ -36,7 +41,7 @@ axiosInstance.interceptors.request.use((req) => {
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    response.data = transformKeys(response.data);
+    response.data = transformKeys(response.data, false);
     return response;
   },
   (error: AxiosError) => {

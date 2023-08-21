@@ -53,7 +53,7 @@ function SignUp() {
   });
 
   const handleClick = async (data: SignUpRequest) => {
-    const result = signUp(data);
+    const result = await signUp(data);
     console.log(result);
     // TODO: handle navigation
   };
