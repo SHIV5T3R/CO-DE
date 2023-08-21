@@ -1,4 +1,4 @@
-import uuid
+import secrets
 
 from flask import Flask
 from flask_socketio import SocketIO
@@ -31,8 +31,4 @@ def config_socketio(_app: Flask):
 
 
 def generate_invite_token() -> str:
-    # Generate unique ID
-    uid = uuid.uuid4()
-    # Convert to hyphenated string
-    hyphenated_hex = "-".join([uid.hex[i : i + 4] for i in range(0, len(uid.hex), 4)])
-    return hyphenated_hex
+    return "code-" + secrets.token_urlsafe(16)
