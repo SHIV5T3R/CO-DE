@@ -13,9 +13,7 @@ import Logo from "./ui/logo";
 import DiscordLogo from "./ui/DiscordLogo";
 
 const validationSchema: ZodType<SignInRequest> = z.object({
-  email: z
-    .string()
-    .email("Invalid Email Address: Please enter a valid email address."),
+  email: z.string().email("Please enter a valid email address."),
   password: z
     .string()
     .min(8, "Password must be at least 8 characters long.")

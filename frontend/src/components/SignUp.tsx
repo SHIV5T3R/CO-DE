@@ -19,9 +19,7 @@ const validationSchema: ZodType<SignUpRequest> = z
       .string()
       .min(2, "Full name must be at least 2 characters long.")
       .max(150, "Full name must be up to 150 characters long."),
-    email: z
-      .string()
-      .email("Invalid email address: Please enter a valid email address."),
+    email: z.string().email("Please enter a valid email address."),
     password: z
       .string()
       .min(8, "Password must be at least 8 characters long.")
@@ -29,16 +27,10 @@ const validationSchema: ZodType<SignUpRequest> = z
         /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.*\W)|(?=.*_))/,
         "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special symbol."
       ),
-    confirmPassword: z
-      .string()
-      .min(8, "Password must be at least 8 characters long.")
-      .regex(
-        /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.*\W)|(?=.*_))/,
-        "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special symbol."
-      ),
+    confirmPassword: z.string(),
   })
   .refine(({ confirmPassword, password }) => confirmPassword === password, {
-    message: "Passwords do not match",
+    message: "Passwords do not match.",
     path: ["confirmPassword"],
   });
 
