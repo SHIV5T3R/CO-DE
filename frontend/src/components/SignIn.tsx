@@ -15,10 +15,10 @@ import DiscordLogo from "./ui/DiscordLogo";
 const validationSchema: ZodType<SignInRequest> = z.object({
   email: z
     .string()
-    .email("Invalid Email Address: Please enter a valid email address"),
+    .email("Invalid Email Address: Please enter a valid email address."),
   password: z
     .string()
-    .min(8, "Password must be at least 8 characters long")
+    .min(8, "Password must be at least 8 characters long.")
     .regex(
       /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.*\W)|(?=.*_))/,
       "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special symbol."
@@ -46,7 +46,7 @@ function SignIn() {
       <Logo />
       <form
         onSubmit={handleSubmit(handleClick)}
-        className="min-w-[27rem] rounded-lg border-[1px] p-6"
+        className="w-96 rounded-lg border-[1px] p-6"
       >
         <h2 className="text-center text-2xl font-semibold">Welcome</h2>
         <p className="mt-2 text-center text-base text-secondary">
@@ -67,7 +67,7 @@ function SignIn() {
               aria-invalid={!!errors.email?.message}
             />
             {errors.email?.message && (
-              <p className="pt-1 text-sm text-destructive">
+              <p className="pt-1 text-xs text-destructive">
                 {errors.email.message}
               </p>
             )}
@@ -88,7 +88,7 @@ function SignIn() {
               aria-invalid={!!errors.password?.message}
             />
             {errors.password?.message && (
-              <p className="pt-1 text-sm text-destructive">
+              <p className="pt-1 text-xs text-destructive">
                 {errors.password.message}
               </p>
             )}

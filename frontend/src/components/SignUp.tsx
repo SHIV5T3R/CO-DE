@@ -14,24 +14,24 @@ import DiscordLogo from "./ui/DiscordLogo";
 
 const validationSchema: ZodType<SignUpRequest> = z
   .object({
-    username: z.string().min(5, "Username must be at least 5 characters long"),
+    username: z.string().min(5, "Username must be at least 5 characters long."),
     fullName: z
       .string()
-      .min(2, "Full name should be at least 2 characters long")
-      .max(150, "Full name should be up to 150 characters long"),
+      .min(2, "Full name must be at least 2 characters long.")
+      .max(150, "Full name must be up to 150 characters long."),
     email: z
       .string()
-      .email("Invalid Email Address: Please enter a valid email address"),
+      .email("Invalid email address: Please enter a valid email address."),
     password: z
       .string()
-      .min(8, "Password must be at least 8 characters long")
+      .min(8, "Password must be at least 8 characters long.")
       .regex(
         /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.*\W)|(?=.*_))/,
         "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special symbol."
       ),
     confirmPassword: z
       .string()
-      .min(8, "Password must be at least 8 characters long")
+      .min(8, "Password must be at least 8 characters long.")
       .regex(
         /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.*\W)|(?=.*_))/,
         "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special symbol."
@@ -63,7 +63,7 @@ function SignUp() {
       <Logo />
       <form
         onSubmit={handleSubmit(handleClick)}
-        className="min-w-[27rem] rounded-lg border-[1px] p-6"
+        className="w-96 rounded-lg border-[1px] p-6"
       >
         <h2 className="text-center text-2xl font-semibold">Welcome</h2>
         <p className="mt-2 text-center text-base text-secondary">
@@ -84,7 +84,7 @@ function SignUp() {
               aria-invalid={!!errors.username?.message}
             />
             {errors.username?.message && (
-              <p className="pt-1 text-sm text-destructive">
+              <p className="pt-1 text-xs text-destructive">
                 {errors.username.message}
               </p>
             )}
@@ -105,7 +105,7 @@ function SignUp() {
               aria-invalid={!!errors.fullName?.message}
             />
             {errors.fullName?.message && (
-              <p className="pt-1 text-sm text-destructive">
+              <p className="pt-1 text-xs text-destructive">
                 {errors.fullName.message}
               </p>
             )}
@@ -126,7 +126,7 @@ function SignUp() {
               aria-invalid={!!errors.email?.message}
             />
             {errors.email?.message && (
-              <p className="pt-1 text-sm text-destructive">
+              <p className="pt-1 text-xs text-destructive">
                 {errors.email.message}
               </p>
             )}
@@ -147,7 +147,7 @@ function SignUp() {
               aria-invalid={!!errors.password?.message}
             />
             {errors.password?.message && (
-              <p className="pt-1 text-sm text-destructive">
+              <p className="pt-1 text-xs text-destructive">
                 {errors.password.message}
               </p>
             )}
@@ -169,7 +169,7 @@ function SignUp() {
               aria-invalid={!!errors.confirmPassword?.message}
             />
             {errors.confirmPassword?.message && (
-              <p className="pt-1 text-sm text-destructive">
+              <p className="pt-1 text-xs text-destructive">
                 {errors.confirmPassword.message}
               </p>
             )}
