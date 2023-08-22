@@ -5,12 +5,14 @@ import { SignInRequest, SignUpRequest } from "./types";
 
 // TODO: add axios return types
 
-export const signUp = (data: SignUpRequest) => {
+export const signUp = async (data: SignUpRequest) => {
   // the server doesn't expect the confirmPassword field
   const filteredObj = removeField(data, ["confirmPassword"]);
-  return axiosInstance.post("/users", filteredObj).then((res) => res.data);
+  const res = await axiosInstance.post("/users", filteredObj);
+  return res.data;
 };
 
-export const signIn = (data: SignInRequest) => {
-  return axiosInstance.post("/users/login", data).then((res) => res.data);
+export const signIn = async (data: SignInRequest) => {
+  const res = await axiosInstance.post("/users/login", data);
+  return res.data;
 };

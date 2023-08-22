@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/shadcn/components/ui/button";
 import { Input } from "@/shadcn/components/ui/input";
 
-import { SignUpRequest } from "@/api/auth/types";
-import { signUp } from "@/api/auth/auth";
+import { SignUpRequest } from "@/services/auth/types";
+import { signUp } from "@/services/auth/auth";
 import Logo from "./ui/logo";
 import DiscordLogo from "./ui/DiscordLogo";
 
