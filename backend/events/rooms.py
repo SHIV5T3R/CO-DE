@@ -11,8 +11,8 @@ from services.utils import socketio
 def handle_create_room(data):
     try:
         schema = CreateRoomSchema()
-        deserialized_data = schema.load(data)
+        deserialized_data = schema.loads(data)
         res = RoomsRepo.create_room(deserialized_data)
-        emit("create_room", json.dump(res))
+        emit("create_room", schema.dumps(res))
     except ValidationError as e:
-        emit("create_room", json.dump(e.message))
+        emit("create_room", json.dumps(e.message))
