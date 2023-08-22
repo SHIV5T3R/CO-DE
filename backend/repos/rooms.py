@@ -1,7 +1,7 @@
 from flask import current_app as app
 from flask_restful import abort
-from mongoengine import ValidationError, NotUniqueError
 from models.rooms import Room
+from mongoengine import NotUniqueError, ValidationError
 
 
 class RoomsRepo:
