@@ -1,7 +1,11 @@
+from typing import Iterable
 import pytest
 from flask import Flask
 from mongoengine import disconnect
 from app import create_app
+from constants import ImportType
+from models.projects import Project
+from models.rooms import Room
 from models.users import User
 
 
@@ -19,8 +23,10 @@ def app():
 
     yield app
 
-    # Delete all user documents
+    # Clear documents in database
     User.objects().delete()
+    Room.objects().delete()
+    Project.objects.delete()
 
     # Close database connection
     disconnect()
@@ -36,3 +42,36 @@ def socket_client(app: Flask):
     from services.utils import socketio
 
     return socketio.test_client(app)
+
+
+params = [
+    {
+        "name": "Test project",
+        "import_type": ImportType.GITHUB,
+        "is_directory": True,
+    },
+    {
+        "name": "Test project 2",
+        "import_type": ImportType.LOCAL,
+        "is_directory": True,
+    },
+    {
+        "name": "Test project 3",
+        "import_type": ImportType.LOCAL,
+        "is_directory": False,
+    },
+]
+
+
+@pytest.fixture(params=params)
+def project(request: Iterable[object]):
+    user = User.objects(email="test@email.com").get()
+    project = Project(
+        owner=user.id,
+        name=request.param["name"],
+        import_type=request.param["import_type"],
+        is_directory=request.param["is_directory"],
+        link="https://github.com/SHIV5T3R/CO-DE",
+    )
+    project.save()
+    return project
