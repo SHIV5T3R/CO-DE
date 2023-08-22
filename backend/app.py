@@ -6,7 +6,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_limiter import Limiter
 from config import get_config, get_testing_config
-from services.utils import config_mongodb, config_socketio
+from services.utils import config_mongodb, config_socketio, resolve_origins
 
 
 def register_endpoints(_app):
@@ -31,13 +31,13 @@ def register_sockets(_app):
 
 def create_app(testing=False):
     app = Flask(__name__)
-    CORS(
-        app, origins=["http://localhost:15173"], supports_credentials=True
-    )  # Enable CORS
+
     if testing:
         app.config.from_object(get_testing_config())
     else:
         app.config.from_object(get_config())
+    origins = resolve_origins(app.config["CORS_ALLOWED_ORIGINS"])
+    CORS(app, origins=origins, supports_credentials=True)  # Enable CORS
     Limiter(app)
     app.logger.setLevel(logging.INFO)
     app.logger.info(f"Flask env: {app.config['FLASK_ENV']}")
