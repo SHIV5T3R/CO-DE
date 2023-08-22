@@ -5,4 +5,4 @@ from services.serialization import BaseModelSchema
 class CreateRoomSchema(BaseModelSchema):
     class Meta:
         model = Room
-        load_only = ["name", "description", "project"]
+        model_build_obj = False
