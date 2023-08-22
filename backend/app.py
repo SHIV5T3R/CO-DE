@@ -36,6 +36,7 @@ def create_app(testing=False):
         app.config.from_object(get_testing_config())
     else:
         app.config.from_object(get_config())
+
     origins = resolve_origins(app.config["CORS_ALLOWED_ORIGINS"])
     CORS(app, origins=origins, supports_credentials=True)  # Enable CORS
     Limiter(app)
