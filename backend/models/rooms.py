@@ -18,7 +18,9 @@ from .users import User
 class Room(Document):
     name = StringField(min_length=1, max_length=256, required=True)
     description = StringField(max_length=256)
-    owner = LazyReferenceField(User, dbref=False, reverse_delete_rule=CASCADE)
+    owner = LazyReferenceField(
+        User, dbref=False, reverse_delete_rule=CASCADE, required=True
+    )
     members = ListField(LazyReferenceField(User, dbref=False, reverse_delete_rule=PULL))
     project = LazyReferenceField(Project, dbref=False)
     invite_token = StringField(
