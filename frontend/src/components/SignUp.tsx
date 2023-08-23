@@ -7,34 +7,30 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/shadcn/components/ui/button";
 import { Input } from "@/shadcn/components/ui/input";
 
+import { SignUpRequest } from "@/services/auth/types";
+import { signUp } from "@/services/auth/auth";
 import Logo from "./ui/logo";
 import DiscordLogo from "./ui/DiscordLogo";
 
-interface SignUpForm {
-  username: string;
-  fullName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
-
-const validationSchema: ZodType<SignUpForm> = z
+const validationSchema: ZodType<SignUpRequest> = z
   .object({
-    username: z.string().min(5, "Username must be at least 5 characters long"),
+    username: z.string().min(5, "Username must be at least 5 characters long."),
     fullName: z
       .string()
-      .min(2, "Full name should be at least 2 characters long")
-      .max(150, "Full name should be up to 150 characters long"),
-    email: z
+      .min(2, "Full name must be at least 2 characters long.")
+      .max(150, "Full name must be up to 150 characters long."),
+    email: z.string().email("Please enter a valid email address."),
+    password: z
       .string()
-      .email("Invalid Email Address: Please enter a valid email address"),
-    password: z.string().min(8, "Password must be at least 8 characters long"),
-    confirmPassword: z
-      .string()
-      .min(8, "Password must be at least 8 characters long"),
+      .min(8, "Password must be at least 8 characters long.")
+      .regex(
+        /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.*\W)|(?=.*_))/,
+        "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special symbol."
+      ),
+    confirmPassword: z.string(),
   })
   .refine(({ confirmPassword, password }) => confirmPassword === password, {
-    message: "Passwords do not match",
+    message: "Passwords do not match.",
     path: ["confirmPassword"],
   });
 
@@ -43,13 +39,15 @@ function SignUp() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignUpForm>({
+  } = useForm<SignUpRequest>({
     resolver: zodResolver(validationSchema),
+    mode: "onBlur",
   });
 
-  const handleClick = (data: SignUpForm) => {
-    // TOOD: connect to backend;
-    console.log(data);
+  const handleClick = async (data: SignUpRequest) => {
+    const result = await signUp(data);
+    console.log(result);
+    // TODO: handle navigation
   };
 
   return (
@@ -57,7 +55,7 @@ function SignUp() {
       <Logo />
       <form
         onSubmit={handleSubmit(handleClick)}
-        className="min-w-[27rem] rounded-lg border-[1px] p-6"
+        className="w-96 rounded-lg border-[1px] p-6"
       >
         <h2 className="text-center text-2xl font-semibold">Welcome</h2>
         <p className="mt-2 text-center text-base text-secondary">
@@ -72,17 +70,13 @@ function SignUp() {
               id="username"
               className={cn(
                 "mt-1",
-                `${
-                  errors.username?.message
-                    ? "focus-visible:ring-ring-error"
-                    : ""
-                }`
+                errors.username?.message && "focus-visible:ring-ring-error"
               )}
               {...register("username")}
               aria-invalid={!!errors.username?.message}
             />
             {errors.username?.message && (
-              <p className="pt-1 text-sm text-destructive">
+              <p className="pt-1 text-xs text-destructive">
                 {errors.username.message}
               </p>
             )}
@@ -97,17 +91,13 @@ function SignUp() {
               id="fullName"
               className={cn(
                 "mt-1",
-                `${
-                  errors.fullName?.message
-                    ? "focus-visible:ring-ring-error"
-                    : ""
-                }`
+                errors.fullName?.message && "focus-visible:ring-ring-error"
               )}
               {...register("fullName")}
               aria-invalid={!!errors.fullName?.message}
             />
             {errors.fullName?.message && (
-              <p className="pt-1 text-sm text-destructive">
+              <p className="pt-1 text-xs text-destructive">
                 {errors.fullName.message}
               </p>
             )}
@@ -122,15 +112,13 @@ function SignUp() {
               id="email"
               className={cn(
                 "mt-1",
-                `${
-                  errors.email?.message ? "focus-visible:ring-ring-error" : ""
-                }`
+                errors.email?.message && "focus-visible:ring-ring-error"
               )}
               {...register("email")}
               aria-invalid={!!errors.email?.message}
             />
             {errors.email?.message && (
-              <p className="pt-1 text-sm text-destructive">
+              <p className="pt-1 text-xs text-destructive">
                 {errors.email.message}
               </p>
             )}
@@ -145,17 +133,13 @@ function SignUp() {
               id="password"
               className={cn(
                 "mt-1",
-                `${
-                  errors.password?.message
-                    ? "focus-visible:ring-ring-error"
-                    : ""
-                }`
+                errors.password?.message && "focus-visible:ring-ring-error"
               )}
               {...register("password")}
               aria-invalid={!!errors.password?.message}
             />
             {errors.password?.message && (
-              <p className="pt-1 text-sm text-destructive">
+              <p className="pt-1 text-xs text-destructive">
                 {errors.password.message}
               </p>
             )}
@@ -170,17 +154,14 @@ function SignUp() {
               id="confirmPassword"
               className={cn(
                 "mt-1",
-                `${
-                  errors.confirmPassword?.message
-                    ? "focus-visible:ring-ring-error"
-                    : ""
-                }`
+                errors.confirmPassword?.message &&
+                  "focus-visible:ring-ring-error"
               )}
               {...register("confirmPassword")}
               aria-invalid={!!errors.confirmPassword?.message}
             />
             {errors.confirmPassword?.message && (
-              <p className="pt-1 text-sm text-destructive">
+              <p className="pt-1 text-xs text-destructive">
                 {errors.confirmPassword.message}
               </p>
             )}
