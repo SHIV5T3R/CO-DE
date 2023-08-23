@@ -3,7 +3,8 @@ from marshmallow import ValidationError, post_dump
 
 
 class BaseModelSchema(ModelSchema):
-    """ Base Serialization Model Schema"""
+    """Base Serialization Model Schema"""
+
     def handle_error(self, error: ValidationError, data, **kwargs):
         """
         Overwrites the default error handling on loading of data.
@@ -15,10 +16,10 @@ class BaseModelSchema(ModelSchema):
         :param kwargs: kwargs
         """
         error.messages = {
-                "status": False,
-                "message": "Invalid Input",
-                "errors": error.messages
-            }
+            "status": False,
+            "message": "Invalid Input",
+            "errors": error.messages,
+        }
 
     @post_dump(pass_many=True)
     def envelope_dump(self, data, many):
@@ -29,7 +30,4 @@ class BaseModelSchema(ModelSchema):
         :param many: Boolean that indicates multiple data instances
         :return: Enveloped data and status
         """
-        return {
-            "status": True,
-            "data": data
-        }
+        return {"status": True, "data": data}

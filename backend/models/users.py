@@ -1,4 +1,11 @@
-from mongoengine import Document, StringField, DateTimeField, BooleanField, ValidationError, signals
+from mongoengine import (
+    Document,
+    StringField,
+    DateTimeField,
+    BooleanField,
+    ValidationError,
+    signals,
+)
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
 
@@ -33,9 +40,16 @@ class User(Document):
     full_name = StringField(required=True, max_length=150)
     deleted_at = DateTimeField()
     is_deleted = BooleanField(default=False)
-    email = StringField(required=True, unique=True, max_length=100, validation=is_email)
+    email = StringField(
+        required=True, unique=True, max_length=100, validation=is_email
+    )
     # will store hashed password
-    password = StringField(required=True, min_length=6, max_length=255, validation=is_secure_password)
+    password = StringField(
+        required=True,
+        min_length=6,
+        max_length=255,
+        validation=is_secure_password,
+    )
     gh_access_key = StringField(max_length=255)
     gh_refresh_key = StringField(max_length=255)
     avatar = StringField()
@@ -66,4 +80,6 @@ class User(Document):
 
 
 # Attach pre-save event handler to user document
-signals.pre_save_post_validation.connect(User.pre_save_post_validation, sender=User)
+signals.pre_save_post_validation.connect(
+    User.pre_save_post_validation, sender=User
+)

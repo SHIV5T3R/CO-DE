@@ -33,7 +33,8 @@ class JWTGenerator:
         return jwt.encode(
             {
                 **payload,
-                "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=expire_delta)
+                "exp": datetime.datetime.utcnow()
+                + datetime.timedelta(minutes=expire_delta),
             },
             secret,
             **kwargs
