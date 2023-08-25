@@ -1,8 +1,9 @@
 // eslint-disable-next-line simple-import-sort/imports
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Github } from "lucide-react";
+import { Github, AlertOctagon } from "lucide-react";
 import { z, ZodType } from "zod";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/shadcn/components/ui/button";
 import { Input } from "@/shadcn/components/ui/input";
@@ -38,15 +39,31 @@ function SignUp() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<SignUpRequest>({
     resolver: zodResolver(validationSchema),
     mode: "onBlur",
   });
+  const [message, setMessage] = useState<string | undefined>();
 
   const handleClick = async (data: SignUpRequest) => {
     const result = await signUp(data);
-    console.log(result);
+    if (!result.status) {
+      if (result.errors) {
+        Object.keys(result.errors).forEach((fieldName) => {
+          setError(fieldName as keyof SignUpRequest, {
+            type: "manual",
+            message: result.errors![fieldName as keyof SignUpRequest][0],
+          });
+        });
+      } else {
+        setMessage(result.error);
+        setTimeout(() => {
+          setMessage(undefined);
+        }, 3000);
+      }
+    }
     // TODO: handle navigation
   };
 
@@ -61,6 +78,12 @@ function SignUp() {
         <p className="mt-2 text-center text-base text-secondary">
           Create your account and start coding right away
         </p>
+        {message && (
+          <div className="mt-2 flex items-center gap-2">
+            <AlertOctagon color="hsl(var(--destructive))" size={24} />
+            <span className="text-xs text-destructive">{message}</span>
+          </div>
+        )}
         <div className="mt-4">
           <label htmlFor="username" className="block">
             <span className="text-sm">Username</span>
