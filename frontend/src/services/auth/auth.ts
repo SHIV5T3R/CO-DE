@@ -44,6 +44,6 @@ export const signIn = async (
 };
 
 export const getUser = async () => {
-  const res = await axiosInstance.post<SignInResponse>("/users/");
+  const res = await axiosInstance.get<SignInResponse>("/users/");
   return res.data;
 };
