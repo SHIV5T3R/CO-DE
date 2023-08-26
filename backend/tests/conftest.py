@@ -1,12 +1,13 @@
 from typing import Iterable
+
 import pytest
-from flask import Flask
-from mongoengine import disconnect
 from app import create_app
 from constants import ImportType
+from flask import Flask
 from models.projects import Project
 from models.rooms import Room
 from models.users import User
+from mongoengine import disconnect
 
 
 @pytest.fixture(scope="session")
@@ -44,6 +45,7 @@ def socket_client(app: Flask):
     return socketio.test_client(app)
 
 
+# For parameterized testing
 params = [
     {
         "name": "Test project",
