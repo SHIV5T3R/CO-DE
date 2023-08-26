@@ -7,17 +7,20 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/shadcn/components/ui/button";
 import { Input } from "@/shadcn/components/ui/input";
 
+import { SignInRequest } from "@/services/auth/types";
+import { signIn } from "@/services/auth/auth";
 import Logo from "./ui/logo";
 import DiscordLogo from "./ui/DiscordLogo";
 
-interface SignInForm {
-  username: string;
-  password: string;
-}
-
-const validationSchema: ZodType<SignInForm> = z.object({
-  username: z.string().min(5, "Username must be at least 5 characters long"),
-  password: z.string().min(8, "Password must be at least 8 characters long"),
+const validationSchema: ZodType<SignInRequest> = z.object({
+  email: z.string().email("Please enter a valid email address."),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters long.")
+    .regex(
+      /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.*\W)|(?=.*_))/,
+      "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special symbol."
+    ),
 });
 
 function SignIn() {
@@ -25,13 +28,15 @@ function SignIn() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignInForm>({
+  } = useForm<SignInRequest>({
     resolver: zodResolver(validationSchema),
+    mode: "onBlur",
   });
 
-  const handleClick = (data: SignInForm) => {
-    // TOOD: connect to backend;
-    console.log(data);
+  const handleClick = async (data: SignInRequest) => {
+    const result = await signIn(data);
+    console.log(result);
+    // TODO: handle navigation
   };
 
   return (
@@ -39,33 +44,29 @@ function SignIn() {
       <Logo />
       <form
         onSubmit={handleSubmit(handleClick)}
-        className="min-w-[27rem] rounded-lg border-[1px] p-6"
+        className="w-96 rounded-lg border-[1px] p-6"
       >
         <h2 className="text-center text-2xl font-semibold">Welcome</h2>
         <p className="mt-2 text-center text-base text-secondary">
           Login with your email
         </p>
         <div className="mt-4">
-          <label htmlFor="username" className="block">
-            <span className="text-sm">Username</span>
+          <label htmlFor="email" className="block">
+            <span className="text-sm">Email</span>
             <Input
               type="text"
-              placeholder="Enter your username"
-              id="username"
+              placeholder="Enter your email"
+              id="email"
               className={cn(
                 "mt-1",
-                `${
-                  errors.username?.message
-                    ? "focus-visible:ring-ring-error"
-                    : ""
-                }`
+                errors.email?.message && "focus-visible:ring-ring-error"
               )}
-              {...register("username")}
-              aria-invalid={!!errors.username?.message}
+              {...register("email")}
+              aria-invalid={!!errors.email?.message}
             />
-            {errors.username?.message && (
-              <p className="pt-1 text-sm text-destructive">
-                {errors.username.message}
+            {errors.email?.message && (
+              <p className="pt-1 text-xs text-destructive">
+                {errors.email.message}
               </p>
             )}
           </label>
@@ -79,17 +80,13 @@ function SignIn() {
               id="password"
               className={cn(
                 "mt-1",
-                `${
-                  errors.password?.message
-                    ? "focus-visible:ring-ring-error"
-                    : ""
-                }`
+                errors.password?.message && "focus-visible:ring-ring-error"
               )}
               {...register("password")}
               aria-invalid={!!errors.password?.message}
             />
             {errors.password?.message && (
-              <p className="pt-1 text-sm text-destructive">
+              <p className="pt-1 text-xs text-destructive">
                 {errors.password.message}
               </p>
             )}

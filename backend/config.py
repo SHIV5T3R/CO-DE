@@ -30,6 +30,9 @@ class Config:
     REFRESH_TOKEN_SECRET = os.getenv("REFRESH_TOKEN_SECRET")
     REFRESH_TOKEN_EXPIRE_MINUTES = int(os.getenv("REFRESH_TOKEN_EXPIRE_MINUTES"))
 
+    # CORS
+    CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS")
+
 
 class TestingConfig(Config):
     TESTING = True

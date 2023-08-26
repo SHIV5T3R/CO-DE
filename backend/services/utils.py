@@ -32,3 +32,7 @@ def config_socketio(_app: Flask):
 
 def generate_invite_token() -> str:
     return "code-" + secrets.token_urlsafe(16)
+
+
+def resolve_origins(config: str) -> list:
+    return config.split(",")
