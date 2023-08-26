@@ -27,7 +27,7 @@ def app():
     # Clear documents in database
     User.objects().delete()
     Room.objects().delete()
-    Project.objects.delete()
+    Project.objects().delete()
 
     # Close database connection
     disconnect()
