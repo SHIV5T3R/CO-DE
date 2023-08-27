@@ -51,7 +51,7 @@ function CodeEditor({ width, height, fileExtension, editorTheme, initialCode, se
     }, [editorTheme]);
 
     const handleEditorChange = (value: string | undefined) => {
-        if (setCode) setCode(value === undefined ? "" : value);
+        if (setCode) setCode(prevState => value === undefined ? prevState : value);
     }
 
     let renderedTheme: string | undefined;
