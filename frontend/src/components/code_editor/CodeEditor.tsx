@@ -77,18 +77,18 @@ export default CodeEditor;
 
 // copied from "node_modules/monaco-editor/esm/vs/editor/editor.api.d.ts" to not use ts-ignore,
 // and also maybe we will want to have a custom editor theme in the future
-type BuiltinTheme = "vs" | "vs-dark" | "hc-black" | "hc-light";
-interface IStandaloneThemeData {
+export type BuiltinTheme = "vs" | "vs-dark" | "hc-black" | "hc-light";
+export interface IStandaloneThemeData {
     base: BuiltinTheme;
     inherit: boolean;
     rules: ITokenThemeRule[];
     encodedTokensColors?: string[];
     colors: IColors;
 }
-type IColors = {
+export type IColors = {
     [colorId: string]: string;
 };
-interface ITokenThemeRule {
+export interface ITokenThemeRule {
     token: string;
     foreground?: string;
     background?: string;
@@ -96,7 +96,7 @@ interface ITokenThemeRule {
 }
 
 // console.log(Object.keys(themeList))
-const monacoThemes = [
+export const monacoThemes = [
     "active4d",
     "all-hallows-eve",
     "amy",
@@ -152,10 +152,10 @@ const monacoThemes = [
     "monoindustrial"
 ] as const;
 
-type MonacoTheme = typeof monacoThemes[number];
+export type MonacoTheme = typeof monacoThemes[number];
 
 // copied from "monaco-themes" npm package
-const themeList: { [p: string]: string } = {
+export const themeList: { [p: string]: string } = {
     "active4d": "Active4D",
     "all-hallows-eve": "All Hallows Eve",
     "amy": "Amy",
