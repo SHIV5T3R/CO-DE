@@ -3,6 +3,7 @@ import LoadingPage from "./components/loading";
 import { ThemeProvider } from "shadcn/ui/theme-provider";
 import { ModeToggle } from "shadcn/ui/mode-toggle";
 import TestSocketConnectionComponent from "./tests/events/test-socket-connection-component";
+import CodeEditor from 'components/code_editor/CodeEditor';
 
 const LOADING_MESSAGE = [
   "Load environment variables",
@@ -43,6 +44,7 @@ function App() {
         </div>
         <TestSocketConnectionComponent /> {/* Just for testing socket connection from client-side, can remove when more pages are made */}
         <LoadingPage progress={progress} message={message} />
+        <CodeEditor fileExtension={'.jsx'} />
       </main>
     </ThemeProvider>
   );
