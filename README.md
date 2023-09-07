@@ -6,19 +6,34 @@ To set up the development environment, first fork the repo, then clone it to you
 
 CD into the frontend directory and run the following commands:
 
-`npm install`
-`npm run dev`
+```bash
+npm install
+npm run dev
+```
 
 ## Backend
 
 CD into the backend directory, then install pipenv and the project dependencies:
 
-`pip install pipenv`
-`pipenv install`
+```bash
+pip install pipenv
+pipenv install
+```
 
-Enable the virtual environment and run the flask application (defaults to port 5000):
+You will need a MongoDB instance - if you've got Docker installed, the Makefile can spin up a Docker container for you with `make dbup`. You can also run the app in another terminal tab or window and use `make dbseed` to seed the database. If you don't have Makefile installed, you can also of course run the commands manually.
 
-`pipenv run py app.py`
+Once your MongoDB instance is setup, make sure you go to config.py and change your database connection settings according to either your local database settings or the MongoDB container settings:
+```sh
+port: 8081
+database host: localhost
+username: mongo
+password: test
+database: mongo
+```
+To launch the backend, enable the virtual environment and run the flask application (defaults to port 5000):
+
+```bash
+pipenv run py app.py```
 
 # What is CO-DE?
 
