@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import axios, { AxiosError } from "axios";
 import { camelCase, isArray, isObject, snakeCase } from "lodash";
 
@@ -33,19 +34,31 @@ const transformKeys = (
 
 axiosInstance.interceptors.request.use((req) => {
   const { data } = req;
-
-  req.data = transformKeys(data, true);
+  if (data && typeof data === "object") {
+    req.data = transformKeys(data, true);
+  }
 
   return req;
 });
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    response.data = transformKeys(response.data, false);
+    if (response.data && typeof response.data === "object") {
+      response.data = transformKeys(response.data, false);
+    }
     return response;
   },
   (error: AxiosError) => {
-    if (error.response?.status === 401) {
+    if (error.response?.data && typeof error.response.data === "object") {
+      error.response.data = transformKeys(
+        error.response.data as Record<string, unknown>,
+        false
+      );
+    }
+    if (
+      error.response?.status === 401 &&
+      error.response.config.url !== "/users/login"
+    ) {
       // TODO: token expired and the user must login again. Handle it when we decide neavigation
     }
     return Promise.reject(error);
