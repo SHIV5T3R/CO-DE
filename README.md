@@ -20,7 +20,7 @@ pip install pipenv
 pipenv install
 ```
 
-You will need a MongoDB instance - if you've got Docker installed, the Makefile can spin up a Docker container for you with `make dbup`. You can also run the app in another terminal tab or window and use `make dbseed` to seed the database. If you don't have Makefile installed, you can also of course run the commands manually.
+You will need a MongoDB instance - if you've got Docker installed, the Makefile can spin up a Docker container for you with `make dbup`. You can also run the app in another terminal tab or window and use `make dbseed` to seed the database. If you don't have CMake installed, you can also of course run the commands manually.
 
 Once your MongoDB instance is setup, make sure you go to config.py and change your database connection settings according to either your local database settings or the MongoDB container settings:
 ```sh
