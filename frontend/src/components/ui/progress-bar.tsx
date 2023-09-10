@@ -1,6 +1,5 @@
-import { cva, VariantProps } from "class-variance-authority";
-
-import { cn } from "../../utils/lib";
+import { VariantProps, cva } from "class-variance-authority";
+import { cn } from "lib/utils";
 
 const ProgressBarVariants = cva("loading", {
   variants: {
@@ -13,8 +12,8 @@ const ProgressBarVariants = cva("loading", {
     variant: {
       primary: ["bg-green-500"],
       secondary: ["bg-emerald-600"],
-      success: ["bg-green-600"],
-      danger: ["bg-red-500"],
+      success: ["bg-success"],
+      danger: ["bg-danger"],
       warning: ["bg-yellow-500"],
       info: ["bg-sky-500"],
     },
@@ -40,7 +39,7 @@ function ProgressBar({
   return (
     <div
       className={cn(
-        "mb-4 h-1.5 w-full rounded-full bg-gray-300 dark:bg-gray-700",
+        "w-full bg-foreground rounded-full h-1.5 mb-4 dark:bg-foreground",
         ProgressBarVariants({ size }).replace(/\sbg-[a-z]+-\d+/, "")
         // remove the variant background-color from this div since that color is for the moving progress bar,
         // this div is just the background of it so we can see it move
@@ -51,11 +50,11 @@ function ProgressBar({
         title="progress-bar"
         className={cn(
           ProgressBarVariants({ size, variant }),
-          determinate && "animate-infinite animate-ease-in animate-pulse",
+          determinate && "animate-pulse animate-infinite animate-ease-in",
           "rounded-full transition-all ease-out",
           className
         )}
-        style={{ width: determinate ? "100%" : `${progress}%` }}
+        style={{ width: determinate ? '100%' : `${progress}%` }}
       />
     </div>
   );
