@@ -20,5 +20,5 @@ ENV NODE_ENV=production
 EXPOSE 3000
 
 # === RUN ===
-CMD ["npm", "run", "serve"]
+CMD ["npm", "run", "serve", "--", "--port=3000"]
 
