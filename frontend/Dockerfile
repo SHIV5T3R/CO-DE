@@ -2,17 +2,17 @@
 # use Node LTS (18.17.1)
 FROM node:18.17.1-alpine3.18 as build
 # set working directory
-WORKDIR /src
+WORKDIR /usr/src/app
 # copy package.json and package-lock.json
-COPY package*.json ./
+COPY package.json /usr/src/app/
+COPY package-lock.json /usr/src/app/
 
 # === BUILD ===
 # install dependencies (ci: clean install; only=production: only install dependencies for production)
 RUN npm ci 
 # copy source code
-COPY . .
+COPY . /usr/src/app
 # build app
-RUN npm run build
 
 # === DEPLOY ===
 ENV NODE_ENV=production
