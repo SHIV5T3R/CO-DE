@@ -19,6 +19,7 @@ module.exports = {
     "@typescript-eslint",
     "simple-import-sort",
     "import",
+    ["simple-import-sort"],
   ],
   parserOptions: {
     project: ["./tsconfig.node.json"],
@@ -59,6 +60,9 @@ module.exports = {
         aspects: ["invalidHref", "preferButton"],
       },
     ],
+    "react/function-component-definition": 0,
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
   },
   settings: {
     "import/parsers": {
