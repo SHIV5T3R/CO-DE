@@ -69,9 +69,12 @@ class User(Document):
         return check_password_hash(self.password, password)
 
     def generate_tokens(self):
-        payload = {"id": str(self.id)}
-        self.access_token = JWTGenerator.generate_access_token(payload)
-        self.refresh_token = JWTGenerator.generate_refresh_token(payload)
+        access_payload = {"id": str(self.id), "token_type": "access"}
+        refresh_payload = {"id": str(self.id), "token_type": "refresh"}
+        
+        self.access_token = JWTGenerator.generate_access_token(access_payload)
+        self.refresh_token = JWTGenerator.generate_refresh_token(refresh_payload)
+
 
     @classmethod
     def pre_save_post_validation(cls, sender, document, **kwargs):
