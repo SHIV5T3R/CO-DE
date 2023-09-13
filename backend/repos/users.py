@@ -1,7 +1,7 @@
 from flask import current_app as app
 from flask_restful import abort
 from mongoengine import ValidationError, NotUniqueError, DoesNotExist
-
+from services.utils import redis
 # model used to structure user in db
 from models.users import User
 
@@ -48,12 +48,25 @@ class UsersRepo:
 
             app.logger.info("User successfully logged in")
             user.generate_tokens()
-            return user
+
+            #store refresh token in Redis
+            cls.store_refresh_token_in_redis(user.id, user.refresh_token)
+            return user, user.access_token
         except (DoesNotExist, ValueError) as e:
-            app.logger.error("Authentication Failed: User doesnt exist")
+            app.logger.error(f"Authentication Failed: User doesnt exist {e}")
             abort(
                 401,
                 status=False,
                 message="Unable to login user",
                 error="Invalid email or password",
             )
+
+    @classmethod
+    def store_refresh_token_in_redis(cls, id, r_token):
+        try:
+            redis_key = f"refresh_token:{id}"
+            redis.set(redis_key, r_token)
+            redis.expire(redis_key, 3600) # 1hr exps
+        except Exception as e:
+            app.logger.error(f"Error storing refresh token in redis for user {id}: {e}")
+        
