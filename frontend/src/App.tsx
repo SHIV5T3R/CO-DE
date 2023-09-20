@@ -1,9 +1,6 @@
 import React from "react";
 import LoadingPage from "./components/loading";
-import { ThemeProvider } from "shadcn/ui/theme-provider";
-import { ModeToggle } from "shadcn/ui/mode-toggle";
 import TestSocketConnectionComponent from "./tests/events/test-socket-connection-component";
-import CodeEditor from "components/code_editor/CodeEditor";
 
 const LOADING_MESSAGE = [
   "Load environment variables",
@@ -37,16 +34,15 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="co-de-ui-theme">
-      <main className="flex h-screen w-full flex-col items-center justify-center bg-background px-40 dark:bg-background">
-        <div className="absolute right-3 top-3">
-          <ModeToggle />
-        </div>
-        <TestSocketConnectionComponent /> {/* Just for testing socket connection from client-side, can remove when more pages are made */}
-        <LoadingPage progress={progress} message={message} />
-        <CodeEditor fileExtension={".jsx"} />
-      </main>
-    </ThemeProvider>
+    <div className="m-auto w-full">
+      <TestSocketConnectionComponent />{" "}
+      {/* Just for testing socket connection from client-side, can remove when more pages are made */}
+      <LoadingPage progress={progress} message={message} />
+      {/* <CodeEditor height={"100%"} fileExtension={".jsx"} /> */}
+      <a href="/editor">Editor Page </a>
+      <a href="/sign-up">Sign up Page </a>
+      <a href="/sign-in">Sign in Page </a>
+    </div>
   );
 }
 

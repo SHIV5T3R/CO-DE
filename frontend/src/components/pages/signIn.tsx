@@ -10,15 +10,15 @@ import { Input } from "@/shadcn/components/ui/input";
 
 import { SignInRequest } from "@/services/auth/types";
 import { signIn } from "@/services/auth/auth";
-import Logo from "./ui/logo";
-import DiscordLogo from "./ui/DiscordLogo";
+import Logo from "../ui/logo";
+import DiscordLogo from "@/components/ui/discordLogo";
 
 const validationSchema: ZodType<SignInRequest> = z.object({
   email: z.string().email("Please enter a valid email address."),
   password: z.string(),
 });
 
-function SignIn() {
+function SignInPage() {
   const {
     register,
     handleSubmit,
@@ -51,7 +51,7 @@ function SignIn() {
   };
 
   return (
-    <div className="flex min-h-full w-max flex-col items-center justify-around">
+    <div className="m-auto flex min-h-full w-max flex-col items-center justify-around">
       <Logo />
       <form
         onSubmit={handleSubmit(handleClick)}
@@ -127,4 +127,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignInPage;
