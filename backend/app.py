@@ -1,5 +1,4 @@
 import logging
-import os
 from argparse import ArgumentParser
 
 from flask import Flask, jsonify
