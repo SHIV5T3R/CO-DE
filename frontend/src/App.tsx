@@ -4,6 +4,9 @@ import { ThemeProvider } from "shadcn/ui/theme-provider";
 import { ModeToggle } from "shadcn/ui/mode-toggle";
 import TestSocketConnectionComponent from "./tests/events/test-socket-connection-component";
 import CodeEditor from "components/code_editor/CodeEditor";
+// Imported the Login & Register here for testing purposes
+import Login from "./components/User/Login";
+import Register from "./components/User/Register";
 
 const LOADING_MESSAGE = [
   "Load environment variables",
@@ -42,7 +45,12 @@ function App() {
         <div className="absolute right-3 top-3">
           <ModeToggle />
         </div>
-        <TestSocketConnectionComponent /> {/* Just for testing socket connection from client-side, can remove when more pages are made */}
+        {/* The Login component should be removed and inserted into its own route [http://.../login] */}
+        {/* <Login /> */}
+        {/* The Register component should be removed and inserted into its own route [http://.../register] */}
+        {/* <Register /> */}
+        <TestSocketConnectionComponent />{" "}
+        {/* Just for testing socket connection from client-side, can remove when more pages are made */}
         <LoadingPage progress={progress} message={message} />
         <CodeEditor fileExtension={".jsx"} />
       </main>

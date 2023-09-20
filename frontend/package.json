@@ -24,7 +24,8 @@
     "react-hook-form": "7.45.4",
     "socket.io-client": "4.7.2",
     "tailwindcss-animate": "1.0.6",
-    "zod": "3.22.0"
+    "zod": "3.22.0",
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "5.17.0",
