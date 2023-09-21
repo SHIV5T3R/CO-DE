@@ -6,6 +6,15 @@ import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    port: 3000,
+    host: true,
+    strictPort: true,
+    watch: {
+      usePolling: true,
+      interval: 100,
+    },
+  },
   test: {
     globals: true,
     environment: "jsdom",
