@@ -10,8 +10,8 @@ import { Input } from "@/shadcn/components/ui/input";
 
 import { SignUpRequest } from "@/services/auth/types";
 import { signUp } from "@/services/auth/auth";
-import Logo from "./ui/logo";
-import DiscordLogo from "./ui/DiscordLogo";
+import Logo from "../ui/logo";
+import DiscordLogo from "@/components/ui/discordLogo";
 
 const validationSchema: ZodType<SignUpRequest> = z
   .object({
@@ -35,7 +35,7 @@ const validationSchema: ZodType<SignUpRequest> = z
     path: ["confirmPassword"],
   });
 
-function SignUp() {
+function SignUpPage() {
   const {
     register,
     handleSubmit,
@@ -68,7 +68,7 @@ function SignUp() {
   };
 
   return (
-    <div className="flex min-h-full w-max flex-col items-center justify-around">
+    <div className="m-auto flex min-h-full w-max flex-col items-center justify-around">
       <Logo />
       <form
         onSubmit={handleSubmit(handleClick)}
@@ -208,4 +208,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUpPage;

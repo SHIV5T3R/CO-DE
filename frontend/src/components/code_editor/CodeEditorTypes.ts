@@ -62,6 +62,8 @@ export const monacoThemes = [
   "spacecadet",
   "sunburst",
   "textmate--mac-classic-",
+  "tokyo-night-storm",
+  "tokyo-night-light",
   "tomorrow-night-blue",
   "tomorrow-night-bright",
   "tomorrow-night-eighties",
@@ -121,6 +123,8 @@ export const themeList: { [p: string]: string } = {
   spacecadet: "SpaceCadet",
   sunburst: "Sunburst",
   "textmate--mac-classic-": "Textmate (Mac Classic)",
+  "tokyo-night-storm": "Tokyo-Night-Storm",
+  "tokyo-night-light": "Tokyo-Night-Light",
   "tomorrow-night-blue": "Tomorrow-Night-Blue",
   "tomorrow-night-bright": "Tomorrow-Night-Bright",
   "tomorrow-night-eighties": "Tomorrow-Night-Eighties",
@@ -136,3 +140,18 @@ export const themeList: { [p: string]: string } = {
   krtheme: "krTheme",
   monoindustrial: "monoindustrial",
 };
+
+//This is a map of extensions to the icon file names in /src/components/code_editor/editor_icons
+export const fileTypeIconsList = {
+  ".js": "file_type_js",
+  ".gitignore": "file_type_git",
+  ".ts": "file_type_typescript",
+  ".txt": "file_type_text",
+  ".tsx": "file_type_typescript",
+  ".json": "file_type_json",
+  ".css": "file_type_css",
+  ".html": "file_type_html",
+  ".favicon": "file_type_favicon",
+  ".eslint": "file_type_eslint",
+};
+export type FileTypeExtensions = typeof fileTypeIconsList;

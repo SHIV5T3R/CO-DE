@@ -1,6 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@supports (scrollbar-width: red blue) {
+  * {
+    scrollbar-width: thin !important;
+  }
+}
+/* .tray::-webkit-scrollbar {
+  height: 4px;
+}
+
+.tray::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+.tray::-webkit-scrollbar-track {
+  background: transparent;
+}
+.tray::-webkit-scrollbar-thumb:hover {
+  background: red;
+}
+.tray::-webkit-scrollbar-track:hover {
+  background: blue;
+} */
 
 @layer base {
   :root {
@@ -58,16 +79,17 @@
     --muted: 229 73% 86%;
     --muted-foreground: 220 13% 47%;
 
-    --accent: 229 73% 86%;
+    --accent: 223 45% 44%;
     --accent-foreground: 233 27% 94%;
     --destructive: 349 89% 64%;
     --destructive-cancel: 229 24% 34%;
     --destructive-foreground: 233 27% 94%;
 
     --border: 229 73% 86%;
+    --border-secondary: 231 26% 14%;
     --input: 229 73% 86%;
-    --success: 349 89% 72%;
-    --error: 89 51% 61%;
+    --success: 89 51% 61%;
+    --error: 349 89% 72%;
     --ring: 212.7 26.8% 83.9%;
     --ring-error: var(--danger);
     --ring-success: var(--success);
