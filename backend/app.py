@@ -5,8 +5,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_limiter import Limiter
 from config import get_config, get_testing_config
-from services.utils import config_mongodb, config_socketio, resolve_origins
-
+from services.utils import config_mongodb, config_socketio, resolve_origins, config_redis
 
 def register_endpoints(_app):
     from views.blueprints import blueprints
@@ -43,8 +42,10 @@ def create_app(testing=False):
     app.logger.info(f"Flask env: {app.config['FLASK_ENV']}")
     app.url_map.strict_slashes = False  # more forgiving with trailing slashes in url
     config_mongodb(app)
+    config_redis(app)
     config_socketio(app)
     register_sockets(app)
+    
     register_endpoints(app)
     return app
 

@@ -1,9 +1,11 @@
 from flask_restful import Resource, Api, request
 from marshmallow import ValidationError
+from flask import make_response
 
 from views.blueprints import users_bp
 from repos.users import UsersRepo
 from schemas.users import UserSchema, LoginUserSchema
+from services.decorators import validate
 
 users_api = Api(users_bp)
 
@@ -15,7 +17,7 @@ class Users(Resource):
             user = user_serializer.load(request.get_json())
             return user_serializer.dump(UsersRepo.create_user(user))
         except ValidationError as e:
-            return e.messages, 422
+            return {"error": "Validation failed", "messages": e.messages}, 400
 
 
 class LoginUsers(Resource):
@@ -23,10 +25,26 @@ class LoginUsers(Resource):
         try:
             user_serializer = LoginUserSchema()
             user = user_serializer.load(request.get_json())
-            return user_serializer.dump(UsersRepo.login_user(user))
+            logged_user, access_token = UsersRepo.login_user(user)
+
+            response_data = user_serializer.dump(logged_user)
+            response = make_response(response_data, 200)
+
+            response.set_cookie('user_id', str(logged_user.id), httponly=True)
+            response.set_cookie('access_token', access_token, httponly=True)
+
+            return response
         except ValidationError as e:
-            return e.messages, 422
+            return {"error": "Validation failed", "messages": e.messages}, 400
+
+
+# can delete later
+class TestAuthGuard(Resource):
+    @validate
+    def get(self):
+        return {"message": "Authorized by guard"}
 
 
 users_api.add_resource(Users, "/")
 users_api.add_resource(LoginUsers, "/login")
+users_api.add_resource(TestAuthGuard, "/test")

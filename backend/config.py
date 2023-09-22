@@ -17,6 +17,10 @@ class Config:
     DB_HOST = os.getenv("DB_HOST")
     DB_PORT = int(os.getenv("DB_PORT"))
 
+    # redis config
+    REDIS_HOST = os.getenv("REDIS_HOST")
+    REDIS_PORT = int(os.getenv("REDIS_PORT"))
+
     # Caching Config
     CACHE_TYPE = os.getenv("CACHE_TYPE")
     CACHE_DEFAULT_TIMEOUT = os.getenv("CACHE_DEFAULT_TIMEOUT")
