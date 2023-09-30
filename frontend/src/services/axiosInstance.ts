@@ -60,7 +60,7 @@ axiosInstance.interceptors.response.use(
       error.response?.status === 401 &&
       error.response.config.url !== "/users/login"
     ) {
-      useAuthStore.getState().resetuser();
+      useAuthStore.getState().resetUser();
     }
     return Promise.reject(error);
   }

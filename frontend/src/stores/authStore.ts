@@ -9,7 +9,7 @@ interface UserState {
 
 interface Actions {
   setUser: (user: User) => void;
-  resetuser: () => void;
+  resetUser: () => void;
 }
 
 const useAuthStore = create<UserState & Actions>()(
@@ -17,7 +17,7 @@ const useAuthStore = create<UserState & Actions>()(
     (set) => ({
       user: null,
       setUser: (user) => set({ user }),
-      resetuser: () => set({ user: null }),
+      resetUser: () => set({ user: null }),
     }),
     {
       name: "code_auth_store",
