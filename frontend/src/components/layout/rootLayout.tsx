@@ -36,9 +36,8 @@ function RootLayout(props: Props) {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="co-de-ui-theme">
-      <main className="h-screen w-screen bg-background dark:bg-background">
+      <main className="h-screen w-full bg-background dark:bg-background">
         <div className="absolute bottom-5 right-3 z-50">
-          <ModeToggle />
         </div>
         <Outlet />
       </main>

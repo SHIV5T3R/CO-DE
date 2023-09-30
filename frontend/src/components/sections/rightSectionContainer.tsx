@@ -47,7 +47,7 @@ const RightSectionContainer = (props: Props) => {
     [selectedNode]
   );
   return (
-    <div className=" flex h-full w-full  shrink flex-col">
+    <div className=" flex h-full w-full shrink flex-col">
       <TabTray />
 
       {selectedNode.node === null ||
