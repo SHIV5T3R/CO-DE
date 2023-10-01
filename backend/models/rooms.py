@@ -3,6 +3,7 @@ from datetime import datetime
 from mongoengine import (
     CASCADE,
     PULL,
+    BooleanField,
     DateTimeField,
     Document,
     LazyReferenceField,
@@ -26,6 +27,7 @@ class Room(Document):
     invite_token = StringField(
         default=generate_invite_token, unique=True, required=True
     )
+    has_ended = BooleanField(default=False)
     created = DateTimeField(default=datetime.utcnow, required=True)
     modified = DateTimeField(default=datetime.utcnow, required=True)
 
