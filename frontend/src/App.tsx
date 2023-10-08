@@ -2,6 +2,11 @@ import React from "react";
 import LoadingPage from "./components/loading";
 import TestSocketConnectionComponent from "./tests/events/test-socket-connection-component";
 
+import CreateProject from "./components/ui/dialogs/createProject";
+import CreateRoom from "./components/ui/dialogs/createRoom";
+import JoinRoom from "./components/ui/dialogs/joinExistingRoom";
+import DeleteProject from "./components/ui/dialogs/alerts/deleteProject";
+
 const LOADING_MESSAGE = [
   "Load environment variables",
   "Load configuration",
@@ -42,6 +47,66 @@ function App() {
       <a href="/editor">Editor Page </a>
       <a href="/sign-up">Sign up Page </a>
       <a href="/sign-in">Sign in Page </a>
+      <br></br>
+      <CreateProject>
+        <button style={{ 
+                padding: '10px 20px', 
+                fontSize: '16px', 
+                border: '2px solid black', 
+                cursor: 'pointer',
+                transition: 'background-color 0.3s'
+            }}>
+          Create project dialog
+        </button>
+      </CreateProject>
+      &nbsp;
+      <CreateRoom>
+        <button style={{ 
+                  padding: '10px 20px', 
+                  fontSize: '16px', 
+                  border: '2px solid black', 
+                  cursor: 'pointer',
+                  transition: 'background-color 0.3s'
+              }}>
+            Create room dialog
+        </button>
+      </CreateRoom>
+      &nbsp;
+      <JoinRoom>
+        <button style={{ 
+                  padding: '10px 20px', 
+                  fontSize: '16px', 
+                  border: '2px solid black', 
+                  cursor: 'pointer',
+                  transition: 'background-color 0.3s'
+              }}>
+              Join room dialog
+        </button>
+      </JoinRoom>
+      &nbsp;
+      <DeleteProject roomActive={false}>
+        <button style={{ 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    border: '2px solid black', 
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                }}>
+                Delete Project Dialog
+        </button>
+      </DeleteProject>
+      &nbsp;
+      <DeleteProject roomActive={true}>
+        <button style={{ 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    border: '2px solid black', 
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                }}>
+                Delete Project Dialog (Room Active)
+        </button>
+      </DeleteProject>
     </div>
   );
 }
