@@ -11,7 +11,7 @@ import {
 } from "@/shadcn/components/ui/alert-dialog"
   
 
-export default function DeleteProject({ roomActive, children }) {
+export default function LeaveRoom({ master, children }) {
     return (
         <AlertDialog>
             <AlertDialogTrigger>{children}</AlertDialogTrigger>
@@ -19,13 +19,13 @@ export default function DeleteProject({ roomActive, children }) {
                 <AlertDialogHeader>
                 <AlertDialogTitle style={{ color: "#2AC3DE" }}>Are you sure?</AlertDialogTitle>
                 <AlertDialogDescription>
-                    {roomActive ? (
+                    {master ? (
                         <p>
-                            This will permanently delete the project from the server and close the current room.
+                            This will delete the room.
                         </p>
                     ) : (
                         <p>
-                            This will permanently delete the project from the server.
+                            You will leave the room and you will not be able to come back in unless someone invites you.
                         </p>
                     )}
                 </AlertDialogDescription>

@@ -6,6 +6,8 @@ import CreateProject from "./components/ui/dialogs/createProject";
 import CreateRoom from "./components/ui/dialogs/createRoom";
 import JoinRoom from "./components/ui/dialogs/joinExistingRoom";
 import DeleteProject from "./components/ui/dialogs/alerts/deleteProject";
+import DeleteRoom from "./components/ui/dialogs/alerts/deleteRoom";
+import LeaveRoom from "./components/ui/dialogs/alerts/leaveRoom";
 
 const LOADING_MESSAGE = [
   "Load environment variables",
@@ -107,6 +109,42 @@ function App() {
                 Delete Project Dialog (Room Active)
         </button>
       </DeleteProject>
+      &nbsp;
+      <DeleteRoom>
+        <button style={{ 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    border: '2px solid black', 
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                }}>
+                Delete Room Dialog
+        </button>
+      </DeleteRoom>
+      &nbsp;
+      <LeaveRoom master={false}>
+        <button style={{ 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    border: '2px solid black', 
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                }}>
+                Leave Room Dialog
+        </button>
+      </LeaveRoom>
+      &nbsp;
+      <LeaveRoom master={true}>
+        <button style={{ 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    border: '2px solid black', 
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                }}>
+                Leave Room Dialog (Room Master)
+        </button>
+      </LeaveRoom>
     </div>
   );
 }
