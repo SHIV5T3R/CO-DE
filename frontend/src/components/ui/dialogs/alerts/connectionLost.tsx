@@ -9,30 +9,22 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/shadcn/components/ui/alert-dialog"
+import { Button } from "@/shadcn/components/ui/button"
   
 
-export default function ConnectionLost({ master, children }) {
+export default function LeaveRoom({ children }) {
     return (
         <AlertDialog>
             <AlertDialogTrigger>{children}</AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                <AlertDialogTitle style={{ color: "#2AC3DE" }}>Are you sure?</AlertDialogTitle>
+                <AlertDialogTitle style={{ color: "#F7768E" }}>Connection lost</AlertDialogTitle>
                 <AlertDialogDescription>
-                    {master ? (
-                        <p>
-                            This will delete the room.
-                        </p>
-                    ) : (
-                        <p>
-                            You will leave the room and you will not be able to come back in unless someone invites you.
-                        </p>
-                    )}
+                    Your connection the the server has been lost. You may attempt to reconnect.
                 </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction>Continue</AlertDialogAction>
+                    <Button className="w-full" style={{ backgroundColor : "#2AC3DE", color : "#1F2335" }}>Try again</Button>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

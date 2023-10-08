@@ -8,6 +8,9 @@ import JoinRoom from "./components/ui/dialogs/joinExistingRoom";
 import DeleteProject from "./components/ui/dialogs/alerts/deleteProject";
 import DeleteRoom from "./components/ui/dialogs/alerts/deleteRoom";
 import LeaveRoom from "./components/ui/dialogs/alerts/leaveRoom";
+import ConnectionLost from "./components/ui/dialogs/alerts/connectionLost";
+import FailedCreateProject from "./components/ui/dialogs/alerts/failedToCreateProject";
+import FailedCreateRoom from "./components/ui/dialogs/alerts/failedCreateRoom";
 
 const LOADING_MESSAGE = [
   "Load environment variables",
@@ -145,6 +148,42 @@ function App() {
                 Leave Room Dialog (Room Master)
         </button>
       </LeaveRoom>
+      &nbsp;
+      <ConnectionLost>
+        <button style={{ 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    border: '2px solid black', 
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                }}>
+                Connection Lost Dialog
+        </button>
+      </ConnectionLost>
+      &nbsp;
+      <FailedCreateProject>
+        <button style={{ 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    border: '2px solid black', 
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                }}>
+                Failed to create project
+        </button>
+      </FailedCreateProject>
+      &nbsp;
+      <FailedCreateRoom>
+        <button style={{ 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    border: '2px solid black', 
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                }}>
+                Failed to create project
+        </button>
+      </FailedCreateRoom>
     </div>
   );
 }
