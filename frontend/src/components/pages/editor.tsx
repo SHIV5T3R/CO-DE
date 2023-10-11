@@ -4,7 +4,6 @@ import RightSectionContainer from "@/components/sections/rightSectionContainer";
 import { useTheme } from "@/shadcn/components/ui/theme-provider";
 import { Split, SplitProps } from "@geoffcox/react-splitter";
 import Footer from "@/components/sections/footer";
-import RightSidebar from "../sections/rightSidebar";
 type Props = {};
 
 const splitterConfig: SplitProps = {
@@ -17,7 +16,6 @@ const EditorPage = (props: Props) => {
   const { theme } = useTheme();
 
   return (
-    // w-screen
     <div className="h-screen text-muted-foreground">
       <section className=" flex h-[97%] w-full items-center ">
         <ActivityBar />
@@ -32,7 +30,6 @@ const EditorPage = (props: Props) => {
           <FileExplorerBar />
           <RightSectionContainer />
         </Split>
-        <RightSidebar />
       </section>
       <Footer />
     </div>

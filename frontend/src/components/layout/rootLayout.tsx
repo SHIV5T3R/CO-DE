@@ -1,6 +1,5 @@
 import React from "react";
 import { ThemeProvider } from "shadcn/ui/theme-provider";
-import { ModeToggle } from "shadcn/ui/mode-toggle";
 import { Outlet } from "react-router-dom";
 const LOADING_MESSAGE = [
   "Load environment variables",

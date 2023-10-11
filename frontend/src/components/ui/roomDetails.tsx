@@ -118,7 +118,7 @@ const ROOM_DETAILS: Room = {
 
 export default function RoomDetails() {
   return (
-    <ScrollArea className="h-[40vh] bg-border-secondary text-muted rounded-md p-4 border border-border/60 scroll-smooth">
+    <ScrollArea className="h-[34vh] bg-border-secondary text-muted rounded-md p-4 border border-border/60 scroll-smooth">
       <h2 className="mb-3 text-lg font-semibold">Display Name: <span className="text-highlighted">{ROOM_DETAILS.title}</span></h2>
       <h2 className="mb-3 text-lg font-semibold">Project</h2>
       <p className="text-xs mb-1 font-semibold">Type: <span>GitHub repository</span></p>
