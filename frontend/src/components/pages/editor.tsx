@@ -15,6 +15,8 @@ const splitterConfig: SplitProps = {
 const EditorPage = (props: Props) => {
   const { theme } = useTheme();
 
+  document.title = "CO-DE - Editor";
+
   return (
     <div className="h-screen w-screen  text-muted-foreground">
       <section className=" flex  h-[97%] w-full items-center ">

@@ -8,6 +8,10 @@ import {
   Users,
 } from "lucide-react";
 
+import CreateProject from "./dialogs/createProject";
+import CreateRoom from "./dialogs/createRoom";
+import JoinRoom from "./dialogs/joinExistingRoom";
+
 type Props = {};
 
 const WelcomeScreen = (props: Props) => {
@@ -22,10 +26,12 @@ const WelcomeScreen = (props: Props) => {
         </h3>
         <Separator orientation="horizontal" />
         <div className="flex w-fit gap-4">
-          <Button className=" items-centerrounded-md flex w-fit  gap-2 border border-border/20 bg-muted-foreground/10 px-4 py-2 text-muted hover:bg-muted-foreground/30">
-            <PlusSquare className="h-auto w-4" />
-            New project
-          </Button>
+          <CreateProject>
+            <Button className=" items-centerrounded-md flex w-fit  gap-2 border border-border/20 bg-muted-foreground/10 px-4 py-2 text-muted hover:bg-muted-foreground/30">
+              <PlusSquare className="h-auto w-4" />
+              New project
+            </Button>
+          </CreateProject>
           <Button className=" flex w-fit items-center gap-2 rounded-md border border-border/20 bg-muted-foreground/10 px-4 py-2 text-muted hover:bg-muted-foreground/30">
             <GitBranchPlus className="h-auto w-4" />
             Open repository
@@ -47,14 +53,18 @@ const WelcomeScreen = (props: Props) => {
         </h3>
         <Separator orientation="horizontal" />
         <div className="flex w-fit gap-4">
-          <Button className=" items-centerrounded-md flex w-fit  gap-2 border border-border/20 bg-muted-foreground/10 px-4 py-2 text-muted hover:bg-muted-foreground/30">
-            <Users className="h-auto w-4" />
-            Create room
-          </Button>
-          <Button className=" flex w-fit items-center gap-2 rounded-md border border-border/20 bg-muted-foreground/10 px-4 py-2 text-muted hover:bg-muted-foreground/30">
-            <UserPlus className="h-auto w-4" />
-            Join an existing room
-          </Button>
+          <CreateRoom>
+            <Button className=" items-centerrounded-md flex w-fit  gap-2 border border-border/20 bg-muted-foreground/10 px-4 py-2 text-muted hover:bg-muted-foreground/30">
+              <Users className="h-auto w-4" />
+              Create room
+            </Button>
+          </CreateRoom>
+          <JoinRoom>
+            <Button className=" flex w-fit items-center gap-2 rounded-md border border-border/20 bg-muted-foreground/10 px-4 py-2 text-muted hover:bg-muted-foreground/30">
+              <UserPlus className="h-auto w-4" />
+              Join an existing room
+            </Button>
+          </JoinRoom>
         </div>
       </section>
     </section>

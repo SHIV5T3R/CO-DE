@@ -2,6 +2,16 @@ import React from "react";
 import LoadingPage from "./components/loading";
 import TestSocketConnectionComponent from "./tests/events/test-socket-connection-component";
 
+import CreateProject from "./components/ui/dialogs/createProject";
+import CreateRoom from "./components/ui/dialogs/createRoom";
+import JoinRoom from "./components/ui/dialogs/joinExistingRoom";
+import DeleteProject from "./components/ui/dialogs/alerts/deleteProject";
+import DeleteRoom from "./components/ui/dialogs/alerts/deleteRoom";
+import LeaveRoom from "./components/ui/dialogs/alerts/leaveRoom";
+import ConnectionLost from "./components/ui/dialogs/alerts/connectionLost";
+import FailedCreateProject from "./components/ui/dialogs/alerts/failedToCreateProject";
+import FailedCreateRoom from "./components/ui/dialogs/alerts/failedCreateRoom";
+
 const LOADING_MESSAGE = [
   "Load environment variables",
   "Load configuration",
@@ -42,6 +52,138 @@ function App() {
       <a href="/editor">Editor Page </a>
       <a href="/sign-up">Sign up Page </a>
       <a href="/sign-in">Sign in Page </a>
+      <br></br>
+      <CreateProject>
+        <button style={{ 
+                padding: '10px 20px', 
+                fontSize: '16px', 
+                border: '2px solid black', 
+                cursor: 'pointer',
+                transition: 'background-color 0.3s'
+            }}>
+          Create project dialog
+        </button>
+      </CreateProject>
+      &nbsp;
+      <CreateRoom>
+        <button style={{ 
+                  padding: '10px 20px', 
+                  fontSize: '16px', 
+                  border: '2px solid black', 
+                  cursor: 'pointer',
+                  transition: 'background-color 0.3s'
+              }}>
+            Create room dialog
+        </button>
+      </CreateRoom>
+      &nbsp;
+      <JoinRoom>
+        <button style={{ 
+                  padding: '10px 20px', 
+                  fontSize: '16px', 
+                  border: '2px solid black', 
+                  cursor: 'pointer',
+                  transition: 'background-color 0.3s'
+              }}>
+              Join room dialog
+        </button>
+      </JoinRoom>
+      &nbsp;
+      <DeleteProject roomActive={false}>
+        <button style={{ 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    border: '2px solid black', 
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                }}>
+                Delete Project Dialog
+        </button>
+      </DeleteProject>
+      &nbsp;
+      <DeleteProject roomActive={true}>
+        <button style={{ 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    border: '2px solid black', 
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                }}>
+                Delete Project Dialog (Room Active)
+        </button>
+      </DeleteProject>
+      &nbsp;
+      <DeleteRoom>
+        <button style={{ 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    border: '2px solid black', 
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                }}>
+                Delete Room Dialog
+        </button>
+      </DeleteRoom>
+      &nbsp;
+      <LeaveRoom master={false}>
+        <button style={{ 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    border: '2px solid black', 
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                }}>
+                Leave Room Dialog
+        </button>
+      </LeaveRoom>
+      &nbsp;
+      <LeaveRoom master={true}>
+        <button style={{ 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    border: '2px solid black', 
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                }}>
+                Leave Room Dialog (Room Master)
+        </button>
+      </LeaveRoom>
+      &nbsp;
+      <ConnectionLost>
+        <button style={{ 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    border: '2px solid black', 
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                }}>
+                Connection Lost Dialog
+        </button>
+      </ConnectionLost>
+      &nbsp;
+      <FailedCreateProject>
+        <button style={{ 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    border: '2px solid black', 
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                }}>
+                Failed to create project
+        </button>
+      </FailedCreateProject>
+      &nbsp;
+      <FailedCreateRoom>
+        <button style={{ 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    border: '2px solid black', 
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                }}>
+                Failed to create project
+        </button>
+      </FailedCreateRoom>
     </div>
   );
 }
