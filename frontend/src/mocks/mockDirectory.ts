@@ -227,7 +227,7 @@ enum NotificationType {
 }
 
 export {
-    type Notification,
+    type RoomNotification,
     NotificationType
 }`;
 export const mockDirectory: CODENodeModel[] = [

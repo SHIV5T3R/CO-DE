@@ -1,6 +1,5 @@
 import React from "react";
 import { ThemeProvider } from "shadcn/ui/theme-provider";
-import { ModeToggle } from "shadcn/ui/mode-toggle";
 import { Outlet } from "react-router-dom";
 const LOADING_MESSAGE = [
   "Load environment variables",
@@ -36,9 +35,8 @@ function RootLayout(props: Props) {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="co-de-ui-theme">
-      <main className="h-screen w-screen bg-background dark:bg-background">
+      <main className="h-screen w-full bg-background dark:bg-background">
         <div className="absolute bottom-5 right-3 z-50">
-          <ModeToggle />
         </div>
         <Outlet />
       </main>

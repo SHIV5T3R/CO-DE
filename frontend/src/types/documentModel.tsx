@@ -18,4 +18,6 @@ export type DocumentNodeStore = {
   setDocumentNodes: (incomingDocumentNodes: CODENodeModel[]) => void;
   selectedNode: { node: CODENodeModel | null };
   setSelectedNode: (node: CODENodeModel | null) => void;
+  isSidebarCollapsed: boolean;
+  collapseSidebar: () => void
 };

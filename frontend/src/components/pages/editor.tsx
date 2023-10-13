@@ -16,8 +16,8 @@ const EditorPage = (props: Props) => {
   const { theme } = useTheme();
 
   return (
-    <div className="h-screen w-screen  text-muted-foreground">
-      <section className=" flex  h-[97%] w-full items-center ">
+    <div className="h-screen text-muted-foreground">
+      <section className=" flex h-[97%] w-full items-center ">
         <ActivityBar />
         <Split
           defaultSplitterColors={{

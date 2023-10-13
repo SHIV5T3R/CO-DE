@@ -12,6 +12,8 @@ const useDocumentStore = create<DocumentNodeStore>()(
       setSelectedNode: (node) => set({ selectedNode: { node } }),
       setDocumentNodes: (incomingDocumentNodes) =>
         set({ documentNodes: incomingDocumentNodes }),
+      isSidebarCollapsed: true,
+      collapseSidebar: () => set((state) => ({isSidebarCollapsed: !state.isSidebarCollapsed}))
     }),
     {
       name: "code_docs_store", // unique name
