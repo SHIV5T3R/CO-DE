@@ -9,20 +9,22 @@ import { CODENodeModel } from "@/types/documentModel";
 import { getFileType } from "@/lib/utils";
 import WelcomeScreen from "../ui/welcomeScreen";
 import RightSidebar from "./rightSidebar";
+import useEditorConfigStore from "@/stores/useEditorConfigStore";
 type Props = {};
 
 const RightSectionContainer = (props: Props) => {
   const { theme } = useTheme();
   const editorRef = React.useRef<IStandaloneCodeEditor | null>(null);
-  const [documentNodes, setDocumentNodes, selectedNode, setSelectedNode, isCollapsed] =
+  const [documentNodes, setDocumentNodes, selectedNode, setSelectedNode] =
     useDocumentStore((state) => [
       state.documentNodes,
       state.setDocumentNodes,
       state.selectedNode,
       state.setSelectedNode,
-      state.isSidebarCollapsed,
     ]);
-
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useEditorConfigStore(
+    (state) => [state.isSidebarCollapsed, state.setIsSidebarCollapsed]
+  );
   React.useEffect(() => {
     if (!!selectedNode.node && !selectedNode.node.data?.isFolder) {
       if (editorRef && editorRef.current) {
@@ -32,8 +34,8 @@ const RightSectionContainer = (props: Props) => {
   }, [selectedNode.node]);
 
   const splitterConfig: SplitProps = {
-    minPrimarySize: isCollapsed ? "calc(100% - 5rem)" : "20%",
-    minSecondarySize: isCollapsed ? "5rem" : "340px",
+    minPrimarySize: isSidebarCollapsed ? "100%" : "60%",
+    minSecondarySize: "340px",
     initialPrimarySize: "70%",
   };
 
@@ -56,33 +58,34 @@ const RightSectionContainer = (props: Props) => {
     [selectedNode]
   );
   return (
-    <div className="flex h-full w-full shrink flex-col transition-all">
+    <div className="r-section-container flex h-full w-full shrink flex-col transition-all">
       <TabTray />
       <Split
         defaultSplitterColors={{
-          color: theme === "dark" ? "#1F2335" : "#ecedf4",
+          color: theme === "dark" ? "#c1cbf5" : "black",
           drag: "#c1cbf5",
-          hover: "#687387",
+          hover: "",
         }}
-        {...splitterConfig}>
-      {selectedNode.node === null ||
-      (selectedNode.node !== null &&
-        selectedNode.node.data?.isFolder === true) ? (
-        <WelcomeScreen />
-      ) : (
-        <CodeEditor
-          modifyDocumentNodeContent={handleSelectedNodeContent}
-          ref={editorRef}
-          path={selectedNode.node.text}
-          defaultLanguage={selectedNode.node.data?.language}
-          defaultValue={selectedNode.node.data?.codeContent}
-          width={"100%"}
-          height={"100%"}
-          editorTheme={
-            theme === "light" ? "tokyo-night-light" : "tokyo-night-storm"
-          }
-          fileExtension={getFileType(selectedNode.node.text)}
-        />
+        {...splitterConfig}
+      >
+        {selectedNode.node === null ||
+        (selectedNode.node !== null &&
+          selectedNode.node.data?.isFolder === true) ? (
+          <WelcomeScreen />
+        ) : (
+          <CodeEditor
+            modifyDocumentNodeContent={handleSelectedNodeContent}
+            ref={editorRef}
+            path={selectedNode.node.text}
+            defaultLanguage={selectedNode.node.data?.language}
+            defaultValue={selectedNode.node.data?.codeContent}
+            width={"100%"}
+            height={"100%"}
+            editorTheme={
+              theme === "light" ? "tokyo-night-light" : "tokyo-night-storm"
+            }
+            fileExtension={getFileType(selectedNode.node.text)}
+          />
         )}
         <RightSidebar />
       </Split>

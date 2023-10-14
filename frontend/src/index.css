@@ -98,7 +98,21 @@
     --radius: 0.5rem;
   }
 }
-
+.r-section-container .line {
+  width: 1px !important;
+  opacity: 0.4;
+}
+.editor-section .line {
+  width: 1px !important;
+  opacity: 0.3;
+}
+.default-splitter:hover {
+  width: 4px !important;
+  background-color: #687387;
+}
+.some-area {
+  mask: linear-gradient(90deg, transparent, white, 20%) !important;
+}
 @layer base {
   * {
     @apply border-border;

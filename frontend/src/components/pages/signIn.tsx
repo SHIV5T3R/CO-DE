@@ -13,7 +13,7 @@ import useAuthStore from "@/stores/authStore";
 
 import { SignInRequest } from "@/services/auth/types";
 import { signIn } from "@/services/auth/auth";
-import DiscordLogo from "@/components/ui/DiscordLogo";
+import DiscordLogo from "@/components/ui/discordLogo";
 import Logo from "../ui/logo";
 
 const validationSchema: ZodType<SignInRequest> = z.object({
