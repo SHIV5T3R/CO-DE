@@ -110,9 +110,7 @@
   width: 4px !important;
   background-color: #687387;
 }
-.some-area {
-  mask: linear-gradient(90deg, transparent, white, 20%) !important;
-}
+
 @layer base {
   * {
     @apply border-border;
