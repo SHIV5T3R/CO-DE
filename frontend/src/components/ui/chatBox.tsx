@@ -36,7 +36,7 @@ const MESSAGES: Message[] = [
     _id: "msg1",
     sender: "KingXP-Pythoner" as string,
     content:
-      "Hey everyone, I’ve been looking into the bug where the app crashes when trying to run the code. Any ideas?",
+      "Hey everyone, I've been looking into the bug where the app crashes when trying to run the code. Any ideas?",
     sentAt: new Date(),
     readBy: [{ _id: "readby1", reader: "reader", readAt: new Date() }],
     url: "msg_url",
@@ -45,7 +45,7 @@ const MESSAGES: Message[] = [
     _id: "msg2",
     sender: "Manasseh" as string,
     content:
-      "Hey everyone, I’ve been looking into the bug where the app crashes when trying to run the code. Any ideas?",
+      "Hey everyone, I've been looking into the bug where the app crashes when trying to run the code. Any ideas?",
     sentAt: new Date(),
     readBy: [{ _id: "readby1", reader: "reader", readAt: new Date() }],
     url: "msg_url",
@@ -54,7 +54,7 @@ const MESSAGES: Message[] = [
     _id: "msg1",
     sender: "Shivster" as string,
     content:
-      "Hey everyone, I’ve been looking into the bug where the app crashes when trying to run the code. Any ideas?",
+      "Hey everyone, I've been looking into the bug where the app crashes when trying to run the code. Any ideas?",
     sentAt: new Date(),
     readBy: [{ _id: "readby1", reader: "reader", readAt: new Date() }],
     url: "msg_url",
@@ -63,7 +63,7 @@ const MESSAGES: Message[] = [
     _id: "msg1",
     sender: "Shivster" as string,
     content:
-      "Hey everyone, I’ve been looking into the bug where the app crashes when trying to run the code. Any ideas?",
+      "Hey everyone, I've been looking into the bug where the app crashes when trying to run the code. Any ideas?",
     sentAt: new Date(),
     readBy: [{ _id: "readby1", reader: "reader", readAt: new Date() }],
     url: "msg_url",
@@ -72,7 +72,7 @@ const MESSAGES: Message[] = [
     _id: "msg1",
     sender: "Shivster" as string,
     content:
-      "Hey everyone, I’ve been looking into the bug where the app crashes when trying to run the code. Any ideas?",
+      "Hey everyone, I've been looking into the bug where the app crashes when trying to run the code. Any ideas?",
     sentAt: new Date(),
     readBy: [{ _id: "readby1", reader: "reader", readAt: new Date() }],
     url: "msg_url",
@@ -88,8 +88,8 @@ export default function ChatBox() {
   }
 
   return (
-    <section className="h-[60%] ">
-      <div className="mt-3 flex justify-between">
+    <section className="flex h-full flex-col">
+      <div className="flex h-[4%] justify-between">
         <p className="font-semibold">CO-DE Router Team</p>
         <div className="flex gap-2">
           <TooltipProvider delayDuration={50}>
@@ -121,7 +121,7 @@ export default function ChatBox() {
           </TooltipProvider>
         </div>
       </div>
-      <ScrollAreaWithMask className="mt-4 h-[39vh] p-1">
+      <ScrollAreaWithMask className="mt-4 h-[84%] p-1">
         <div>
           {MESSAGES.map((msg, index) => {
             return (
@@ -146,7 +146,7 @@ export default function ChatBox() {
         </div>
       </ScrollAreaWithMask>
       {/* chat input */}
-      <div className="relative">
+      <div className="relative h-[10%]">
         {/* <div className="relative mt-5 max-h-[50px] min-h-[40px] w-full overflow-hidden rounded-full border-2 border-border/60 p-3"> */}
         <div className="relative h-fit ">
           <Textarea

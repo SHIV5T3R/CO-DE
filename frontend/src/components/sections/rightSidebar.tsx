@@ -22,9 +22,12 @@ export default function RightSidebar() {
   }, [notifStore]);
 
   return (
-    <section className="flex h-full flex-col items-center  p-2">
-      <Tabs className="flex w-full flex-col items-center  " defaultValue="room">
-        <TabsList className="bg-muted-foreground/10">
+    <section className="h-full  p-2">
+      <Tabs
+        className="flex  h-[calc(100vh-128px)] w-full flex-col items-center    "
+        defaultValue="room"
+      >
+        <TabsList className="h-fit  bg-muted-foreground/10">
           <TabsTrigger
             className="font-semibold data-[state=active]:bg-muted data-[state=active]:text-background"
             value="room"
@@ -45,14 +48,22 @@ export default function RightSidebar() {
             )}
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="room">
-          <div className="flex h-full w-full flex-col justify-between">
+        <TabsContent
+          className="flex h-full  flex-col justify-between data-[state=inactive]:hidden  "
+          value="room"
+        >
+          <div className="h-[40%] w-full ">
             <RoomDetails />
+          </div>
+          <div className="h-[59%] w-full ">
+            {/* <RoomDetails /> */}
             <ChatBox />
           </div>
         </TabsContent>
-        <TabsContent className="w-full" value="notifications">
-          {/* <div className="h-[400px] w-full  bg-yellow-200"></div> */}
+        <TabsContent
+          className="flex  w-full data-[state=inactive]:hidden"
+          value="notifications"
+        >
           <NotificationTab />
         </TabsContent>
       </Tabs>
