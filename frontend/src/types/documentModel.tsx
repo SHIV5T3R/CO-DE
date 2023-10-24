@@ -14,10 +14,12 @@ export type FileAttributes = {
 };
 export type CODENodeModel = NodeModel<FileAttributes>;
 export type DocumentNodeStore = {
-  documentNodes: CODENodeModel[];
-  setDocumentNodes: (incomingDocumentNodes: CODENodeModel[]) => void;
+  documentNodes: Array<CODENodeModel>;
+  setDocumentNodes: (incomingDocumentNodes: Array<CODENodeModel>) => void;
   selectedNode: { node: CODENodeModel | null };
   setSelectedNode: (node: CODENodeModel | null) => void;
+};
+export type EditorConfigStore = {
   isSidebarCollapsed: boolean;
-  collapseSidebar: () => void
+  setIsSidebarCollapsed: () => void;
 };

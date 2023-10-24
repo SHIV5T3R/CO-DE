@@ -8,7 +8,7 @@ import EditorPage from "@/components/pages/editor";
 import App from "./App";
 import SignInPage from "@/components/pages/signIn";
 import SignUpPage from "@/components/pages/signUp";
-import AuthGate from "@/components/auth/AuthGate";
+import AuthGate from "./components/auth/AuthGate";
 const router = createBrowserRouter([
   {
     element: <RootLayout />,

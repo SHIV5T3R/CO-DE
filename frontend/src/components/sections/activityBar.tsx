@@ -44,7 +44,7 @@ const ActivityBar = (props: Props) => {
                 <PopoverTrigger className="rounded-lg p-2 ">
                   <Icon.element className="text-muted-foreground hover:text-muted" />
                 </PopoverTrigger>
-                <PopoverContent>This is a popover</PopoverContent>
+                <PopoverContent side="right">This is a popover</PopoverContent>
               </Popover>
             );
           })}
@@ -58,7 +58,7 @@ const ActivityBar = (props: Props) => {
                 <PopoverTrigger className="rounded-lg p-2">
                   <Icon.element className="text-muted-foreground hover:text-muted" />
                 </PopoverTrigger>
-                <PopoverContent>This is a popover</PopoverContent>
+                <PopoverContent side="right">This is a popover</PopoverContent>
               </Popover>
             );
           })}

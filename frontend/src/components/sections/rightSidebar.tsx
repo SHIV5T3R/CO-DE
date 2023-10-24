@@ -1,56 +1,72 @@
-import React, { useEffect, useState } from 'react';
-import useNotificationStore from '@/stores/useNotificationStore';
+import { useEffect, useState } from "react";
+import useNotificationStore from "@/stores/useNotificationStore";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shadcn/components/ui/tabs";
-import RoomDetails from '../ui/roomDetails';
-import ChatBox from '../ui/chatBox';
-import NotificationTab from '../ui/notificationTab';
-import { PanelRightClose, PanelRightOpen } from "lucide-react";
-import useDocumentStore from '@/stores/useDocumentStore';
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/shadcn/components/ui/tabs";
+import RoomDetails from "../ui/roomDetails";
+import ChatBox from "../ui/chatBox";
+import NotificationTab from "../ui/notificationTab";
 
 export default function RightSidebar() {
-  const notifStore = useNotificationStore(state => state.notifications);
-  const [unreadNotifs, setUnreadNotifs] = useState(notifStore.filter(n => n.isRead == false));
-  const [isCollapsed, setIsCollapsed] = useDocumentStore(state => [
-    state.isSidebarCollapsed,
-    state.collapseSidebar
-  ])
+  const notifStore = useNotificationStore((state) => state.notifications);
+  const [unreadNotifs, setUnreadNotifs] = useState(
+    notifStore.filter((n) => n.isRead == false)
+  );
 
   useEffect(() => {
-    setUnreadNotifs(notifStore.filter(n => n.isRead === false));
-  }, [notifStore])
+    setUnreadNotifs(notifStore.filter((n) => n.isRead === false));
+  }, [notifStore]);
 
   return (
-    <section className="flex flex-col items-center h-full p-2 border-l border-border/60 transition-all">
-      {isCollapsed ? (
-          <button className="text-muted-foreground hover:text-muted" onClick={setIsCollapsed}>
-            <PanelRightOpen />
-          </button> 
-        ) : (
-          <Tabs className="w-full h-full flex flex-col items-center" defaultValue="room">
-            <div className="w-full">
-              <button className="text-muted-foreground hover:text-muted" onClick={setIsCollapsed}>
-                <PanelRightClose />
-              </button>
-            </div>
-            <TabsList className="bg-muted-foreground/10">
-              <TabsTrigger className="font-semibold data-[state=active]:bg-muted data-[state=active]:text-background" value="room">Room Details</TabsTrigger>
-              <TabsTrigger className="font-semibold data-[state=active]:bg-muted data-[state=active]:text-background flex items-center gap-1" value="notifications">Notifications  
-                {unreadNotifs.length > 0 
-                  ? <span className="bg-rose-600 text-white px-1 rounded">{unreadNotifs.length > 9 ? '9+' : unreadNotifs.length}</span>
-                  : ''}
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent className="flex flex-col h-full justify-between" value="room">
-              <RoomDetails />
-              <ChatBox />
-            </TabsContent>
-
-            <TabsContent className="w-full" value="notifications">
-              <NotificationTab />
-            </TabsContent>
-          </Tabs>
-        )}
+    <section className="h-full  p-2">
+      <Tabs
+        className="flex  h-[calc(100vh-128px)] w-full flex-col items-center    "
+        defaultValue="room"
+      >
+        <TabsList className="h-fit  bg-muted-foreground/10">
+          <TabsTrigger
+            className="font-semibold data-[state=active]:bg-muted data-[state=active]:text-background"
+            value="room"
+          >
+            Room Details
+          </TabsTrigger>
+          <TabsTrigger
+            className="flex items-center gap-1 font-semibold data-[state=active]:bg-muted data-[state=active]:text-background"
+            value="notifications"
+          >
+            Notifications
+            {unreadNotifs.length > 0 ? (
+              <span className="rounded bg-rose-600 px-1 text-white">
+                {unreadNotifs.length > 9 ? "9+" : unreadNotifs.length}
+              </span>
+            ) : (
+              ""
+            )}
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent
+          className="flex h-full  flex-col justify-between data-[state=inactive]:hidden  "
+          value="room"
+        >
+          <div className="h-[40%] w-full ">
+            <RoomDetails />
+          </div>
+          <div className="h-[59%] w-full ">
+            {/* <RoomDetails /> */}
+            <ChatBox />
+          </div>
+        </TabsContent>
+        <TabsContent
+          className="flex  w-full data-[state=inactive]:hidden"
+          value="notifications"
+        >
+          <NotificationTab />
+        </TabsContent>
+      </Tabs>
     </section>
-  )
+  );
 }
