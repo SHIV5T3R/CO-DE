@@ -20,18 +20,26 @@ const router = createBrowserRouter([
       {
         path: "/editor",
         element: (
-          <AuthGate>
+          <AuthGate required>
             <EditorPage />
           </AuthGate>
         ),
       },
       {
         path: "/sign-in",
-        element: <SignInPage />,
+        element: (
+          <AuthGate notRequired>
+            <SignInPage />
+          </AuthGate>
+        ),
       },
       {
         path: "/sign-up",
-        element: <SignUpPage />,
+        element: (
+          <AuthGate notRequired>
+            <SignUpPage />
+          </AuthGate>
+        ),
       },
     ],
   },
