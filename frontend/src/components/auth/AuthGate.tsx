@@ -6,13 +6,9 @@ import useAuthStore from "@/stores/authStore";
 interface Props {
   children: ReactNode;
   required?: true;
-  notRequired?: true;
 }
 
-function AuthGate({ children, required, notRequired }: Props) {
-  if (!required && !notRequired) {
-    throw new Error("Reached invalid state, need required or not required.");
-  }
+function AuthGate({ children, required }: Props) {
   const location = useLocation();
   const user = useAuthStore((state) => state.user);
 
@@ -20,7 +16,7 @@ function AuthGate({ children, required, notRequired }: Props) {
     return (
       <Navigate to="/sign-in" state={{ from: location.pathname }} replace />
     );
-  } else if (user && notRequired) {
+  } else if (user && !required) {
     return <Navigate to="/" replace />;
   }
   return <>{children}</>;
