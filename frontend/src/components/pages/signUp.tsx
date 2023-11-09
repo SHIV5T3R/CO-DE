@@ -10,7 +10,7 @@ import { Input } from "@/shadcn/components/ui/input";
 
 import { SignUpRequest } from "@/services/auth/types";
 import { signUp } from "@/services/auth/auth";
-import DiscordLogo from "@/components/ui/discordLogo";
+import DiscordLogo from "@/components/ui/DiscordLogo";
 import Logo from "../ui/logo";
 
 const validationSchema: ZodType<SignUpRequest> = z
