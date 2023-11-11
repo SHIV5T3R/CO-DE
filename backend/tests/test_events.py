@@ -1,15 +1,14 @@
 import json
 
-from flask_socketio import SocketIOTestClient
 from constants import ImportType
-from models.projects import Project
-from models.rooms import Room
+from flask_socketio import SocketIOTestClient
+from models import Project, User
 
-ID: str
+INVITE_TOKEN: str
 
 
 def test_create_room(socket_client: SocketIOTestClient, project: Project):
-    global ID
+    global INVITE_TOKEN
     data = {
         "owner": str(project.owner.id),
         "name": "Test room",
@@ -32,20 +31,33 @@ def test_create_room(socket_client: SocketIOTestClient, project: Project):
         # Github projects should always be a directory
         assert project.is_directory == True
 
-    ID = str(response_data["id"])
+    INVITE_TOKEN = str(response_data["invite_token"])
 
 
-def test_end_room(socket_client: SocketIOTestClient):
-    data = {"id": ID}
-    socket_client.emit("end_room", json.dumps(data))
+def test_join_room(socket_client: SocketIOTestClient):
+    data = {"owner": {"username": "test_user"}, "invite_token": INVITE_TOKEN}
+    socket_client.emit("join_room", json.dumps(data))
     response = json.loads(
         list(
-            filter(
-                lambda dict: dict["name"] == "end_room", socket_client.get_received()
-            )
+            filter(lambda dict: dict["name"] == "join_room", socket_client.get_received())
         )[0]["args"][0]
     )
 
     assert response["status"] == True
 
+    # Check if user among room members
+    user = User.objects.get(username="test_user")
+    assert str(user.id) in response["data"]["members"]
+
+
+def test_end_room(socket_client: SocketIOTestClient):
+    data = {"owner": {"username": "test_user"}, "invite_token": INVITE_TOKEN}
+    socket_client.emit("end_room", json.dumps(data))
+    response = json.loads(
+        list(
+            filter(lambda dict: dict["name"] == "end_room", socket_client.get_received())
+        )[0]["args"][0]
+    )
+
+    assert response["status"] == True
     assert response["data"]["has_ended"] == True

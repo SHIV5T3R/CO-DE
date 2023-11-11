@@ -1,11 +1,10 @@
-from flask_restful import Resource, Api, request
-from marshmallow import ValidationError
 from flask import make_response
-
-from views.blueprints import users_bp
+from flask_restful import Api, Resource, request
+from marshmallow import ValidationError
 from repos.users import UsersRepo
-from schemas.users import UserSchema, LoginUserSchema
+from schemas.users import LoginUserSchema, UserSchema
 from services.decorators import validate
+from views.blueprints import users_bp
 
 users_api = Api(users_bp)
 
@@ -30,8 +29,8 @@ class LoginUsers(Resource):
             response_data = user_serializer.dump(logged_user)
             response = make_response(response_data, 200)
 
-            response.set_cookie('user_id', str(logged_user.id), httponly=True)
-            response.set_cookie('access_token', access_token, httponly=True)
+            response.set_cookie("user_id", str(logged_user.id), httponly=True)
+            response.set_cookie("access_token", access_token, httponly=True)
 
             return response
         except ValidationError as e:
