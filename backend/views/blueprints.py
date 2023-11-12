@@ -2,6 +2,6 @@ from flask import Blueprint
 
 blueprints = []
 
-users_bp = Blueprint(name="users", import_name=__name__, url_prefix="/users")
+main_bp = Blueprint(name="main", import_name=__name__, url_prefix="/v1")
 
-blueprints.append(users_bp)
+blueprints.append(main_bp)

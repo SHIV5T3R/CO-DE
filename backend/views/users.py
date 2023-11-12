@@ -4,12 +4,12 @@ from marshmallow import ValidationError
 from repos.users import UsersRepo
 from schemas.users import LoginUserSchema, UserSchema
 from services.decorators import validate
-from views.blueprints import users_bp
+from views.blueprints import main_bp
 
-users_api = Api(users_bp)
+main_api = Api(main_bp)
 
 
-class Users(Resource):
+class RegisterUser(Resource):
     def post(self):
         try:
             user_serializer = UserSchema()
@@ -19,7 +19,7 @@ class Users(Resource):
             return {"error": "Validation failed", "messages": e.messages}, 400
 
 
-class LoginUsers(Resource):
+class LoginUser(Resource):
     def post(self):
         try:
             user_serializer = LoginUserSchema()
@@ -44,6 +44,6 @@ class TestAuthGuard(Resource):
         return {"message": "Authorized by guard"}
 
 
-users_api.add_resource(Users, "/")
-users_api.add_resource(LoginUsers, "/login")
-users_api.add_resource(TestAuthGuard, "/test")
+main_api.add_resource(RegisterUser, "/register")
+main_api.add_resource(LoginUser, "/login")
+main_api.add_resource(TestAuthGuard, "/test")
