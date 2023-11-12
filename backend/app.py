@@ -35,12 +35,10 @@ def register_sockets(_app):
 
 def create_app(testing=False):
     app = Flask(__name__)
-
     if testing:
         app.config.from_object(get_testing_config())
     else:
         app.config.from_object(get_config())
-
     origins = resolve_origins(app.config["CORS_ALLOWED_ORIGINS"])
     CORS(app, origins=origins, supports_credentials=True)  # Enable CORS
     Limiter(app)
@@ -59,9 +57,7 @@ def create_app(testing=False):
 # NOTE: Use 'py app.py' to run or this gets ignored
 if __name__ == "__main__":
     parser = ArgumentParser()
-    parser.add_argument(
-        "-p", "--port", default=5000, type=int, help="port to listen on"
-    )
+    parser.add_argument("-p", "--port", default=5000, type=int, help="port to listen on")
     args = parser.parse_args()
     port = args.port
     app = create_app()
