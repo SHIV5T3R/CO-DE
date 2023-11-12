@@ -29,4 +29,3 @@ class Message(Document):
     category = StringField(max_length=10, required=True)
     read_by = ListField(LazyReferenceField(User, dbref=False, reverse_delete_rule=PULL))
     sent_at = DateTimeField(default=datetime.utcnow, required=True)
-    delivered_at = DateTimeField(default=datetime.utcnow, required=True)
