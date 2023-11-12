@@ -60,4 +60,4 @@ class TestAuthGuard(Resource):
 main_api.add_resource(RegisterUser, "/register")
 main_api.add_resource(LoginUser, "/login")
 main_api.add_resource(TestAuthGuard, "/test")
-main_api.add_resource(GenerateAccessToken, "/generate-access-token")
+main_api.add_resource(GenerateAccessToken, "/oauth/generate-access-token")
