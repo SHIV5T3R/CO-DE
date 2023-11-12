@@ -1,12 +1,14 @@
 import { User } from './user';
 
-interface Notification {
+// Had to rename because "Notification" is already a built-in global object and causes conflicts when trying to import "Notification" type
+interface RoomNotification {
     _id: string,
     title: string,
     content: string,
     receivers: string[]|User[],
     sender: string|User,
-    type: NotificationType
+    type: NotificationType,
+    isRead: boolean
 }
 
 enum NotificationType {
@@ -17,6 +19,6 @@ enum NotificationType {
 }
 
 export {
-    type Notification,
+    type RoomNotification,
     NotificationType
 }

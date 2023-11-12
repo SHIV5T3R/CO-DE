@@ -15,6 +15,7 @@ import {
   User,
 } from "lucide-react";
 import Logo from "@/components/ui/logo";
+import { ModeToggle } from "shadcn/ui/mode-toggle";
 
 type Props = {};
 
@@ -43,20 +44,21 @@ const ActivityBar = (props: Props) => {
                 <PopoverTrigger className="rounded-lg p-2 ">
                   <Icon.element className="text-muted-foreground hover:text-muted" />
                 </PopoverTrigger>
-                <PopoverContent>This is a popover</PopoverContent>
+                <PopoverContent side="right">This is a popover</PopoverContent>
               </Popover>
             );
           })}
         </div>
 
         <div className="flex h-fit w-full flex-col gap-6">
+          <ModeToggle />
           {BOTTOMSEGMENTICONS.map((Icon) => {
             return (
               <Popover key={Icon.id}>
-                <PopoverTrigger className="rounded-lg p-2 ">
+                <PopoverTrigger className="rounded-lg p-2">
                   <Icon.element className="text-muted-foreground hover:text-muted" />
                 </PopoverTrigger>
-                <PopoverContent>This is a popover</PopoverContent>
+                <PopoverContent side="right">This is a popover</PopoverContent>
               </Popover>
             );
           })}

@@ -4,14 +4,17 @@ import { useForm } from "react-hook-form";
 import { Github, AlertOctagon } from "lucide-react";
 import { z, ZodType } from "zod";
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Button } from "@/shadcn/components/ui/button";
 import { Input } from "@/shadcn/components/ui/input";
 
+import useAuthStore from "@/stores/authStore";
+
 import { SignInRequest } from "@/services/auth/types";
 import { signIn } from "@/services/auth/auth";
+import DiscordLogo from "@/components/ui/DiscordLogo";
 import Logo from "../ui/logo";
-import DiscordLogo from "@/components/ui/discordLogo";
 
 const validationSchema: ZodType<SignInRequest> = z.object({
   email: z.string().email("Please enter a valid email address."),
@@ -26,28 +29,33 @@ function SignInPage() {
     formState: { errors },
   } = useForm<SignInRequest>({
     resolver: zodResolver(validationSchema),
-    mode: "onBlur",
   });
   const [message, setMessage] = useState<string | undefined>();
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  const setUser = useAuthStore((store) => store.setUser);
 
   const handleClick = async (data: SignInRequest) => {
     const result = await signIn(data);
-    if (!result.status) {
-      if (result.errors) {
-        Object.keys(result.errors).forEach((fieldName) => {
-          setError(fieldName as keyof SignInRequest, {
-            type: "manual",
-            message: result.errors![fieldName as keyof SignInRequest][0],
-          });
-        });
-      } else {
-        setMessage(result.error);
-        setTimeout(() => {
-          setMessage(undefined);
-        }, 3000);
-      }
+    if (result.status) {
+      setUser(result.data);
+      navigate(state?.from || "/");
+      return;
     }
-    // TODO: handle navigation
+
+    if (result.errors) {
+      Object.keys(result.errors).forEach((fieldName) => {
+        setError(fieldName as keyof SignInRequest, {
+          type: "manual",
+          message: result.errors![fieldName as keyof SignInRequest][0],
+        });
+      });
+    } else {
+      setMessage(result.error);
+      setTimeout(() => {
+        setMessage(undefined);
+      }, 3000);
+    }
   };
 
   return (

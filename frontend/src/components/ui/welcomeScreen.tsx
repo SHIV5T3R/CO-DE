@@ -21,17 +21,17 @@ const WelcomeScreen = (props: Props) => {
           Start coding
         </h3>
         <Separator orientation="horizontal" />
-        <div className="flex w-fit gap-4">
-          <Button className=" items-centerrounded-md flex w-fit  gap-2 border border-border/20 bg-muted-foreground/10 px-4 py-2 text-muted hover:bg-muted-foreground/30">
-            <PlusSquare className="h-auto w-4" />
+        <div className="flex w-fit flex-wrap gap-4">
+          <Button variant={"secondary"}>
+            <PlusSquare className="mr-2 h-auto w-4" />
             New project
           </Button>
-          <Button className=" flex w-fit items-center gap-2 rounded-md border border-border/20 bg-muted-foreground/10 px-4 py-2 text-muted hover:bg-muted-foreground/30">
-            <GitBranchPlus className="h-auto w-4" />
+          <Button variant={"secondary"}>
+            <GitBranchPlus className="mr-2 h-auto w-4" />
             Open repository
           </Button>
-          <Button className=" flex w-fit items-center gap-2 rounded-md border border-border/20 bg-muted-foreground/10 px-4 py-2 text-muted hover:bg-muted-foreground/30">
-            <FolderOpen className="h-auto w-4" />
+          <Button variant={"secondary"}>
+            <FolderOpen className="mr-2 h-auto w-4" />
             Open local folder
           </Button>
         </div>
@@ -47,12 +47,12 @@ const WelcomeScreen = (props: Props) => {
         </h3>
         <Separator orientation="horizontal" />
         <div className="flex w-fit gap-4">
-          <Button className=" items-centerrounded-md flex w-fit  gap-2 border border-border/20 bg-muted-foreground/10 px-4 py-2 text-muted hover:bg-muted-foreground/30">
-            <Users className="h-auto w-4" />
+          <Button variant={"secondary"}>
+            <Users className="mr-2 h-auto w-4" />
             Create room
           </Button>
-          <Button className=" flex w-fit items-center gap-2 rounded-md border border-border/20 bg-muted-foreground/10 px-4 py-2 text-muted hover:bg-muted-foreground/30">
-            <UserPlus className="h-auto w-4" />
+          <Button variant={"secondary"}>
+            <UserPlus className="mr-2 h-auto w-4" />
             Join an existing room
           </Button>
         </div>

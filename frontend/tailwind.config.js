@@ -63,6 +63,7 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        highlighted: "hsl(var(--highlighted))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -93,5 +94,5 @@ module.exports = {
   plugins: [
     require("tailwindcss-animate"),
     require("tailwind-scrollbar")({ nocompatible: true }),
-    ],
+  ],
 };

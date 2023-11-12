@@ -4,10 +4,10 @@ type Props = {};
 
 const Footer = (props: Props) => {
   return (
-    <div className="flex h-[3%] w-full justify-end border border-border-secondary bg-background px-4 ">
+    <div className="flex h-[3%] w-full items-center justify-end gap-1 border border-border-secondary bg-background px-4 ">
       <Globe className="h-auto w-4" />{" "}
-      <span>
-        Server status <span className="text-success">Great</span>
+      <span className="text-sm">
+        Server status: <span className="text-sm text-success">Great</span>
       </span>
     </div>
   );

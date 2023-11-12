@@ -8,7 +8,7 @@ type Props = {};
 
 const splitterConfig: SplitProps = {
   minPrimarySize: "220px",
-  minSecondarySize: "340px",
+  minSecondarySize: "60%",
   initialPrimarySize: "20%",
 };
 
@@ -16,14 +16,14 @@ const EditorPage = (props: Props) => {
   const { theme } = useTheme();
 
   return (
-    <div className="h-screen w-screen  text-muted-foreground">
-      <section className=" flex  h-[97%] w-full items-center ">
+    <div className="h-screen text-muted-foreground">
+      <section className=" editor-section flex h-[97%] w-full items-center ">
         <ActivityBar />
         <Split
           defaultSplitterColors={{
-            color: theme === "dark" ? "#1F2335" : "#ecedf4",
+            color: theme === "dark" ? "#c1cbf5" : "black",
             drag: "#c1cbf5",
-            hover: "#687387",
+            hover: "",
           }}
           {...splitterConfig}
         >

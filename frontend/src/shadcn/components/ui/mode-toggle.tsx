@@ -7,9 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "./dropdown-menu";
 import { useTheme } from "shadcn/ui/theme-provider";
-import { Button } from "shadcn/ui/button"
-
-
+import { Button } from "shadcn/ui/button";
 
 export function ModeToggle() {
   const { setTheme } = useTheme();
@@ -18,23 +16,31 @@ export function ModeToggle() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="outline"
-          className="hover:bg-foreground hover:text-background"
+          className="bg-transparent text-muted-foreground hover:border-none hover:bg-transparent hover:text-muted"
           size="icon"
         >
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <Sun className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+      <DropdownMenuContent side="right" align="end">
+        <DropdownMenuItem
+          className="cursor-pointer hover:bg-muted-foreground/30"
+          onClick={() => setTheme("light")}
+        >
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem
+          className="cursor-pointer hover:bg-muted-foreground/30"
+          onClick={() => setTheme("dark")}
+        >
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem
+          className="cursor-pointer hover:bg-muted-foreground/30"
+          onClick={() => setTheme("system")}
+        >
           System
         </DropdownMenuItem>
       </DropdownMenuContent>
