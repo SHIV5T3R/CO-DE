@@ -1,57 +1,35 @@
-version: '1.0'
+version: "3"
+
 services:
-  db: #Mongodb
-    image: mongo:latest
-    container_name: CODE_MONGODB
-    restart: always
-    ports:
-      - 27017:27017
-    volumes:
-      - db:/data/db
-    environment:
-      - MONGO_INITDB_DATABASE=code
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=example
-    networks:
-      - mongo-net
-  cache: # Redis
-    image: redis:alpine
-    restart: always
-    ports:
-      - 6379:6379
-    command: redis-server --save 60 1 --loglevel verbose --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
-    volumes:
-      - cache:/data
-    networks:
-      - mongo-net
-  api:
-    container_name: CODE_BACKEND
+  server:
+    container_name: server
     build:
       context: ./backend
       dockerfile: Dockerfile
-    depends_on:
-      - db
-      - cache
+    env_file:
+      - ./backend/.env
+    environment:
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_PORT=${DB_PORT}
+    command: "start.sh"
     ports:
       - 5000:5000
-    environment:
-      - REDIS_HOST=cache
-      - REDIS_PORT=6379
-      - REDIS_PASSWORD=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
-      - DB_USERNAME=root
-      - DB_PASSWORD=example
-      - DB_HOST=mongodb://root:example@mongo:27017
-      - DB_NAME=mongodb
-      - DB_PORT=27017
     links:
       - db
-      - cache
+      - redis
     volumes:
-      - ./:/app
-    networks:
-      - mongo-net
-  web:
-    container_name: CODE_WEB
+      - ./backend:/app
+    depends_on:
+      - db
+      - redis
+
+  client:
+    container_name: client
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -59,13 +37,49 @@ services:
       - 3000:3000
     volumes:
       - ./frontend:/app
-    networks:
-      - mongo-net
+
+  db:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - db:/data/db
+    env_file:
+      - ./backend/.env
+    environment:
+      - MONGO_INITDB_DATABASE=${DB_NAME}
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
+
+  redis:
+    image: redis:alpine
+    restart: always
+    ports:
+      - 6379:6379
+    command: redis-server --save 60 1 --loglevel verbose --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes:
+      - redis:/data
+
+  daphne:
+    container_name: websocket-server
+    build:
+      context: ./backend
+    command: "start-daphne.sh"
+    env_file:
+      - ./backend/.env
+    environment:
+      - REDIS_HOST=${REDIS_HOST}
+    ports:
+      - 5001:5001
+    depends_on:
+      - server
+      - redis
+      - db
+
 volumes:
-  db: #Mongodb
+  db:
     driver: local
-  cache: # Redis
+  redis:
     driver: local
-networks:
-  mongo-net:
-    driver: bridge
