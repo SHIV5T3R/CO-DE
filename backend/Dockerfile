@@ -1,8 +1,7 @@
 FROM python:3.11-slim-buster
 
-WORKDIR /
+WORKDIR /app
 
-# == Set environment variables ==
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV FLASK_ENV=PRODUCTION
@@ -12,14 +11,9 @@ ENV RATELIMIT_GLOBAL=10000/hour
 ENV CACHE_TYPE=SimpleCache
 ENV CACHE_DEFAULT_TIMEOUT=300
 
-
-# == Install dependencies ==
 COPY Pipfile Pipfile.lock ./
-RUN python -m pip install --upgrade pip
+RUN python -m pip install --upgrade pip && apt-get install python3-dev -y
 RUN pip install pipenv && pipenv install --system --deploy
 
 
 COPY . .
-EXPOSE 5000
-
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5000"]
