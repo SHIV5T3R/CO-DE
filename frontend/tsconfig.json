@@ -22,14 +22,15 @@
       "hooks/*": ["./src/hooks/*"],
       "types/*": ["./src/types/*"],
       "config/*": ["./src/config/*"],
-      "pages/*": ["./src/pages/*"],
+      "pages/*": ["src/components/pages/*"],
       "assets/*": ["./src/assets/*"],
       "public/*": ["./public/*"],
       "styles/*": ["./src/styles/*"],
       "store/*": ["./src/store/*"],
       "services/*": ["./src/services/*"],
       "shadcn/*": ["./src/shadcn/components/*"],
-      "lib/*": ["./src/lib/*"]
+      "lib/*": ["./src/lib/*"],
+      "mocks/*": ["./src/mocks/*"]
     }
   },
   "include": ["src", "*.ts", "*.tsx", "src/**/*.ts", "src/**/*.d.ts"],

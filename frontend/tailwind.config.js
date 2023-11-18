@@ -18,7 +18,10 @@ module.exports = {
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
+        border: {
+          DEFAULT: "hsl(var(--border))",
+          secondary: "hsl(var(--border-secondary))",
+        },
         input: "hsl(var(--input))",
         ring: {
           DEFAULT: "hsl(var(--ring))",
@@ -60,6 +63,7 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        highlighted: "hsl(var(--highlighted))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -67,6 +71,10 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
         "accordion-down": {
           from: { height: 0 },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -77,10 +85,14 @@ module.exports = {
         },
       },
       animation: {
+        "fade-in": "fade-in 0.2s ease-in-out",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("tailwind-scrollbar")({ nocompatible: true }),
+  ],
 };

@@ -31,6 +31,8 @@ export interface SignInResponse {
   };
 }
 
+export type User = SignInResponse["data"];
+
 export interface AuthFormErrorResponse<T> {
   status: false;
   message: string;

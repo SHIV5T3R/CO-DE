@@ -20,9 +20,12 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "src/tests/setup.tsx",
   },
+  server: {
+    port: 3000,
+  },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src/"),
+      "@": `${path.resolve(__dirname, "./src/")}`,
       components: `${path.resolve(__dirname, "./src/components/")}`,
       hooks: `${path.resolve(__dirname, "./src/hooks/")}`,
       types: `${path.resolve(__dirname, "./src/types/")}`,
@@ -35,6 +38,7 @@ export default defineConfig({
       services: `${path.resolve(__dirname, "./src/services/")}`,
       shadcn: `${path.resolve(__dirname, "./src/shadcn/components/")}`,
       lib: `${path.resolve(__dirname, "./src/lib/")}`,
+      mocks: `${path.resolve(__dirname, "./src/mocks/")}`,
     },
   },
 });

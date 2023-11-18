@@ -1,5 +1,5 @@
 import secrets
-
+import redis
 from flask import Flask
 from flask_socketio import SocketIO
 from mongoengine import connect
@@ -18,6 +18,20 @@ def config_mongodb(_app: Flask):
         uuidRepresentation="standard",
     )
     _app.logger.info(f"End mongoengine config {db}")
+
+
+def config_redis(_app: Flask):
+    global redis
+    try:
+        _app.logger.info("Start Redis config")
+        redis = redis.StrictRedis(
+            host=_app.config["REDIS_HOST"],
+            port=_app.config["REDIS_PORT"],
+            decode_responses=True,  # decodes response to string
+        )
+        _app.logger.info(f"End Redis config {redis}")
+    except Exception as e:
+        _app.logger.error(f"Error during Redis config: {e}")
 
 
 def config_socketio(_app: Flask):

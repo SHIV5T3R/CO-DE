@@ -7,7 +7,7 @@ type LoadingPageProps = {
 };
 function LoadingPage({ message, progress }: LoadingPageProps) {
   return (
-    <div className="w-screen max-w-md">
+    <div className="m-auto w-screen max-w-md">
       <Logo className="mx-auto mb-8 rounded-md " />
       <ProgressBar progress={progress} />
       <p className="text-center text-sm text-muted-foreground">{message}...</p>
