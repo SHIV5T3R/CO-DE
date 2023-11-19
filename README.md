@@ -6,19 +6,32 @@ To set up the development environment, first fork the repo, then clone it to you
 
 CD into the frontend directory and run the following commands:
 
-`npm install`
-`npm run dev`
+```bash
+npm install
+npm run dev
+```
 
 ## Backend
 
 CD into the backend directory, then install pipenv and the project dependencies:
 
-`pip install pipenv`
-`pipenv install`
+```bash
+pip install pipenv
+pipenv install
+```
 
 Enable the virtual environment and run the flask application (defaults to port 5000):
 
-`pipenv run py app.py`
+```bash
+pipenv run py app.py
+```
+
+## Docker
+
+```bash
+docker-compose build
+docker-compose up -d --remove-orphans
+```
 
 # What is CO-DE?
 
@@ -69,9 +82,3 @@ You can also collaborate on a task with another contributor, just let the rest o
 ---
 
 ![alt text](https://images-ext-1.discordapp.net/external/ZodgpNW25bKMHly3yapNdxjUcH8s__4xR5pqVxXy1dA/https/cdn-longterm.mee6.xyz/plugins/embeds/images/368853404723707914/668c5398d4a84cfbd3475ae6d201c456e398f819dcbf513c719b6d00aac67756.png?width=848&height=676)
-
-**Docker:**
-
-```bash
-docker compose -f compose.yml up
-```
