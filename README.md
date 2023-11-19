@@ -28,8 +28,9 @@ pipenv run py app.py
 
 ## Docker
 
+Run command in the directory containing the compose.yml file
+
 ```bash
-docker-compose build
 docker-compose up -d --remove-orphans
 ```
 
