@@ -20,9 +20,6 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "src/tests/setup.tsx",
   },
-  server: {
-    port: 3000,
-  },
   resolve: {
     alias: {
       "@": `${path.resolve(__dirname, "./src/")}`,

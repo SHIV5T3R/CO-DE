@@ -1,13 +1,22 @@
 version: "3"
 
 services:
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    build:
+      context: .
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 8080:80
+
   server:
     container_name: server
     build:
       context: ./backend
       dockerfile: Dockerfile
-    env_file:
-      - ./backend/.env
+    env_file: ./backend/.env
     environment:
       - REDIS_HOST=${REDIS_HOST}
       - REDIS_PORT=${REDIS_PORT}
@@ -16,34 +25,29 @@ services:
       - DB_HOST=${DB_HOST}
       - DB_NAME=${DB_NAME}
       - DB_PORT=${DB_PORT}
-    command: "start.sh"
-    ports:
-      - 5000:5000
-    links:
-      - db
-      - redis
+    command: ./start.sh
     volumes:
       - ./backend:/app
     depends_on:
       - db
-      - redis
+      - nginx
 
   client:
     container_name: client
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    ports:
-      - 3000:3000
     volumes:
       - ./frontend:/app
+    depends_on:
+      - nginx
 
   db:
     image: mongo:latest
     container_name: mongodb
     restart: always
     ports:
-      - 27017:27017
+      - 27018:27017
     volumes:
       - db:/data/db
     env_file:
@@ -55,9 +59,10 @@ services:
 
   redis:
     image: redis:alpine
+    container_name: redis
     restart: always
     ports:
-      - 6379:6379
+      - 6380:6379
     command: redis-server --save 60 1 --loglevel verbose --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
     volumes:
       - redis:/data
@@ -66,17 +71,13 @@ services:
     container_name: websocket-server
     build:
       context: ./backend
-    command: "start-daphne.sh"
+    command: ./start-daphne.sh
     env_file:
       - ./backend/.env
     environment:
       - REDIS_HOST=${REDIS_HOST}
-    ports:
-      - 5001:5001
     depends_on:
       - server
-      - redis
-      - db
 
 volumes:
   db:

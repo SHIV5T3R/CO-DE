@@ -51,7 +51,6 @@ def create_app(testing=False):
     config_redis(app)
     config_socketio(app)
     register_sockets(app)
-
     register_endpoints(app)
 
 
@@ -65,3 +64,5 @@ if __name__ == "__main__":
     app.logger.info(f"Debug Mode: {app.debug}")
     app.logger.info("Server configured")
     app.run(host="0.0.0.0", port=port, use_reloader=True)
+else:
+    create_app()

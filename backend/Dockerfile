@@ -11,9 +11,12 @@ ENV RATELIMIT_GLOBAL=10000/hour
 ENV CACHE_TYPE=SimpleCache
 ENV CACHE_DEFAULT_TIMEOUT=300
 
-COPY Pipfile Pipfile.lock ./
-RUN python -m pip install --upgrade pip && apt-get install python3-dev -y
+COPY Pipfile Pipfile.lock .env ./
+RUN python -m pip install --upgrade pip
 RUN pip install pipenv && pipenv install --system --deploy
 
 
 COPY . .
+
+RUN chmod +x start.sh
+RUN chmod +x start-daphne.sh

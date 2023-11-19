@@ -1,24 +1,21 @@
-# === CONFIGURE ===
-# use Node LTS (18.17.1)
-FROM node:18.17.1-alpine3.18 as build
-# set working directory
-WORKDIR /usr/src/app
-# copy package.json and package-lock.json
-COPY package.json /usr/src/app/
-COPY package-lock.json /usr/src/app/
+FROM node:18.17.1-alpine3.18 as builder
 
-# === BUILD ===
-# install dependencies (ci: clean install; only=production: only install dependencies for production)
-RUN npm ci 
-# copy source code
-COPY . /usr/src/app
-# build app
+WORKDIR /app
 
-# === DEPLOY ===
+COPY package.json .
+COPY package-lock.json .
+
+RUN npm ci
+
+COPY . .
+
 ENV NODE_ENV=production
-# expose port 3000
-EXPOSE 3000
 
-# === RUN ===
-CMD ["npm", "run", "serve", "--", "--port=3000"]
+RUN npm run build
+
+FROM nginx:stable-alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+CMD ["nginx", "-g", "daemon off;"]
 
