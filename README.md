@@ -38,7 +38,7 @@ docker-compose up -d --remove-orphans
 
 CO-DE is an open-source real-time collaborative code editor.
 
-CO-DE is the current ongoing project for the Ship-In-30 project from [David's Developer Safeplace](https://discord.gg/devsafeplace) Discord server.
+CO-DE is the current ongoing project for the Ship-In-30 project from [The Developer Safe Place](https://discord.gg/devsafeplace) Discord server.
 
 ## Features
 
