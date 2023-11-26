@@ -67,18 +67,6 @@ services:
     volumes:
       - redis:/data
 
-  daphne:
-    container_name: websocket-server
-    build:
-      context: ./backend
-    command: ./start-daphne.sh
-    env_file:
-      - ./backend/.env
-    environment:
-      - REDIS_HOST=${REDIS_HOST}
-    depends_on:
-      - server
-
 volumes:
   db:
     driver: local

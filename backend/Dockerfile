@@ -13,4 +13,3 @@ RUN pip install pipenv && pipenv install --system --deploy
 COPY . .
 
 RUN chmod +x start.sh
-RUN chmod +x start-daphne.sh

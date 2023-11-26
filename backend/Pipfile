@@ -18,7 +18,7 @@ pytest = "==7.4.0"
 colorama = "==0.4.6"
 redis = "==5.0.0"
 gunicorn = "==21.2.0"
-daphne = "==4.0.0"
+uvicorn = "==0.24.0.post1"
 
 [dev-packages]
 
