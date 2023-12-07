@@ -1,6 +1,7 @@
 import json
 
 from constants import ImportType
+from enums import MessageCategory
 from flask_socketio import SocketIOTestClient
 from models import Project, User
 
@@ -48,6 +49,32 @@ def test_join_room(socket_client: SocketIOTestClient):
     # Check if user among room members
     user = User.objects.get(username="test_user")
     assert str(user.id) in response["data"]["members"]
+
+
+def test_send_message(socket_client: SocketIOTestClient):
+    from bson import ObjectId
+    from models import Room
+
+    room = Room.objects.get(invite_token=INVITE_TOKEN)
+    user = User.objects.get(username="test_user")
+
+    data = {
+        "sender": str(ObjectId(user.id)),
+        "room": str(ObjectId(room.id)),
+        "content": "Test message",
+        "category": MessageCategory.TEXT.value,
+    }
+    socket_client.emit("send_message", json.dumps(data))
+    response = json.loads(
+        list(
+            filter(
+                lambda dict: dict["name"] == "send_message", socket_client.get_received()
+            )
+        )[0]["args"][0]
+    )
+    assert response["status"] == True
+    assert response["data"]["content"] == "Test message"
+    assert response["data"]["room"] == str(ObjectId(room.id))
 
 
 def test_end_room(socket_client: SocketIOTestClient):
