@@ -17,6 +17,7 @@ flask-cors = "==4.0.0"
 pytest = "==7.4.0"
 colorama = "==0.4.6"
 redis = "==5.0.0"
+requests = "==2.31.0"
 
 [dev-packages]
 
