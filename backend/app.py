@@ -20,7 +20,6 @@ def register_endpoints(_app):
 
     for bp in blueprints:
         _app.register_blueprint(bp)
-        # _app.logger.info(f"endpoints: {bp}")
 
     _app.logger.info(f"Endpoints registered")
 
@@ -42,7 +41,7 @@ def create_app(testing=False):
         app.config.from_object(get_config())
 
     origins = resolve_origins(app.config["CORS_ALLOWED_ORIGINS"])
-    CORS(app, origins=origins, supports_credentials=True)  # Enable CORS
+    CORS(app, origins=origins, supports_credentials=True)
     Limiter(app)
     app.logger.setLevel(logging.INFO)
     app.logger.info(f"Flask env: {app.config['FLASK_ENV']}")
