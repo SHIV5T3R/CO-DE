@@ -40,9 +40,7 @@ class User(Document):
     full_name = StringField(required=True, max_length=150)
     deleted_at = DateTimeField()
     is_deleted = BooleanField(default=False)
-    email = StringField(
-        required=True, unique=True, max_length=100, validation=is_email
-    )
+    email = StringField(required=True, unique=True, max_length=100, validation=is_email)
     # will store hashed password
     password = StringField(
         required=True,
@@ -71,10 +69,9 @@ class User(Document):
     def generate_tokens(self):
         access_payload = {"id": str(self.id), "token_type": "access"}
         refresh_payload = {"id": str(self.id), "token_type": "refresh"}
-        
+
         self.access_token = JWTGenerator.generate_access_token(access_payload)
         self.refresh_token = JWTGenerator.generate_refresh_token(refresh_payload)
-
 
     @classmethod
     def pre_save_post_validation(cls, sender, document, **kwargs):
@@ -83,6 +80,4 @@ class User(Document):
 
 
 # Attach pre-save event handler to user document
-signals.pre_save_post_validation.connect(
-    User.pre_save_post_validation, sender=User
-)
+signals.pre_save_post_validation.connect(User.pre_save_post_validation, sender=User)
