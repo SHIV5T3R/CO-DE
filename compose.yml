@@ -9,7 +9,7 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
-      - "8080:80"
+      - 8000:80
 
   server:
     container_name: server
@@ -46,8 +46,6 @@ services:
     image: mongo:latest
     container_name: mongodb
     restart: always
-    ports:
-      - "27018:27017"
     volumes:
       - db:/data/db
     env_file:
@@ -61,9 +59,7 @@ services:
     image: redis:alpine
     container_name: redis
     restart: always
-    ports:
-      - "6380:6379"
-    command: redis-server --save 60 1 --loglevel verbose --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    command: redis-server --save 60 1 --loglevel verbose
     volumes:
       - redis:/data
 

@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 function start_http_server() {
     touch ../access.log && touch ../error.log

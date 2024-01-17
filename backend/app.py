@@ -5,6 +5,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_limiter import Limiter
 from config import get_config, get_testing_config
+
 from services.utils import (
     config_mongodb,
     config_socketio,
@@ -28,12 +29,6 @@ def register_endpoints(_app):
         return jsonify({"status": "OK"})
 
 
-def register_sockets(_app):
-    import events
-
-    _app.logger.info(f"Websockets registered")
-
-
 def create_app(testing=False):
     if testing:
         app.config.from_object(get_testing_config())
@@ -48,7 +43,6 @@ def create_app(testing=False):
     config_mongodb(app)
     config_redis(app)
     config_socketio(app)
-    register_sockets(app)
     register_endpoints(app)
 
 
