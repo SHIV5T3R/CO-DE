@@ -4,6 +4,7 @@ services:
   nginx:
     image: nginx:stable-alpine
     container_name: nginx
+    restart: always
     build:
       context: .
     volumes:
@@ -13,6 +14,7 @@ services:
 
   server:
     container_name: server
+    restart: always
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -39,6 +41,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./frontend:/app
+    restart: always
     depends_on:
       - nginx
 
