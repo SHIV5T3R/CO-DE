@@ -17,7 +17,6 @@ def app():
         email="test@email.com",
         username="test_user",
         full_name="Testing User",
-        password="0iHXk!1X",
     )
     test_user.save()
 

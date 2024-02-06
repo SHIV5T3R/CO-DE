@@ -1,63 +1,63 @@
-from flask import make_response
-from flask_restful import Api, Resource, request
+from flask import make_response, request
+from flask_restx import fields, Resource
 from marshmallow import ValidationError
-from repos import AuthRepo, UsersRepo
-from schemas import GithubAuthSchema, LoginUserSchema, UserSchema
+from app import api
+from repos import AuthRepo
+from schemas import GithubAuthSchema, GithubAuthResponseSchema
 from services.decorators import validate
-from views.blueprints import main_bp
-
-main_api = Api(main_bp)
+from services.github import Github
 
 
-class RegisterUser(Resource):
+ns = api.namespace("Auth", path="/v1")
+
+
+@ns.route("/oauth/generate-access-token")
+class GenerateAccessToken(Resource):
+    @ns.doc("generate_token")
+    @ns.marshal_with(
+        api.model(
+            "token_response",
+            {
+                "data": fields.Nested(
+                    api.model("nested", {"access_token": fields.String})
+                ),
+                "status": fields.Boolean,
+            },
+        )
+    )
+    @ns.expect(api.model("token_payload", {"code": fields.String}))
     def post(self):
         try:
-            user_serializer = UserSchema()
-            user = user_serializer.load(request.get_json())
-            return user_serializer.dump(UsersRepo.create_user(user))
-        except ValidationError as e:
-            return {"error": "Validation failed", "messages": e.messages}, 400
+            auth_serializer = GithubAuthSchema()
+            auth_data = auth_serializer.load(request.form)
+            res = AuthRepo.get_access_token(auth_data["code"])
 
+            if res.get("error"):
+                return res, 400
 
-class LoginUser(Resource):
-    def post(self):
-        try:
-            user_serializer = LoginUserSchema()
-            user = user_serializer.load(request.get_json())
-            logged_user, access_token = UsersRepo.login_user(user)
+            auth_response_serializer = GithubAuthResponseSchema()
+            response = make_response(auth_response_serializer.dump(res), 200)
 
-            response_data = user_serializer.dump(logged_user)
-            response = make_response(response_data, 200)
-
-            response.set_cookie("user_id", str(logged_user.id), httponly=True)
+            access_token = res["access_token"]
+            github = Github(access_token)
+            user_res = github.get_user_info()
+            response.set_cookie("email", user_res["email"], httponly=True)
             response.set_cookie("access_token", access_token, httponly=True)
+
+            AuthRepo.create_user_if_not_exist(access_token, user_res)
 
             return response
         except ValidationError as e:
             return {"error": "Validation failed", "messages": e.messages}, 400
 
 
-class GenerateAccessToken(Resource):
-    def post(self):
-        try:
-            auth_serializer = GithubAuthSchema()
-            auth_data = auth_serializer.load(request.get_json())
-            res = AuthRepo.get_access_token(auth_data["code"])
-            if res["error"]:
-                return res, 400
-            return auth_serializer.dump(res), 200
-        except ValidationError as e:
-            return {"error": "Validation failed", "messages": e.messages}, 400
-
-
-# can delete later
+@ns.route("/test")
 class TestAuthGuard(Resource):
     @validate
+    @ns.marshal_with(
+        api.model("guard_response", {"message": fields.String}),
+        description="Unauthorised",
+        code=401,
+    )
     def get(self):
         return {"message": "Authorized by guard"}
-
-
-main_api.add_resource(RegisterUser, "/register")
-main_api.add_resource(LoginUser, "/login")
-main_api.add_resource(TestAuthGuard, "/test")
-main_api.add_resource(GenerateAccessToken, "/oauth/generate-access-token")

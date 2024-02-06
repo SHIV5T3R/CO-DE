@@ -8,7 +8,7 @@ ENV FLASK_APP=app.py
 
 COPY Pipfile Pipfile.lock .env ./
 RUN python -m pip install --upgrade pip
-RUN pip install pipenv && pipenv install --system --deploy
+RUN pip install pipenv && pipenv install --system --deploy --ignore-pipfile
 
 COPY . .
 

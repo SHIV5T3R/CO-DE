@@ -1,7 +1,7 @@
 import logging
 from argparse import ArgumentParser
 
-from flask import Flask, jsonify
+from flask import Flask
 from flask_cors import CORS
 from flask_limiter import Limiter
 from config import get_config, get_testing_config
@@ -14,19 +14,18 @@ from services.utils import (
 )
 
 app = Flask(__name__)
+api = None
 
 
 def register_endpoints(_app):
-    from views.blueprints import blueprints
+    from flask_restx import Api
 
-    for bp in blueprints:
-        _app.register_blueprint(bp)
+    global api
+    api = Api(_app, version="1", title="CO-DE API", description="Backend for CO-DE")
+
+    from views import auth
 
     _app.logger.info(f"Endpoints registered")
-
-    @_app.route("/")
-    def status():
-        return jsonify({"status": "OK"})
 
 
 def create_app(testing=False):

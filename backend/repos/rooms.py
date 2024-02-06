@@ -1,6 +1,5 @@
-import bson
 from flask import current_app as app
-from flask_restful import abort
+from flask_restx import abort
 from flask_socketio import join_room, leave_room
 from models import Room, User, Message
 from mongoengine import NotUniqueError, ValidationError
