@@ -6,25 +6,39 @@ To set up the development environment, first fork the repo, then clone it to you
 
 CD into the frontend directory and run the following commands:
 
-`npm install`
-`npm run dev`
+```bash
+npm install
+npm run dev
+```
 
 ## Backend
 
 CD into the backend directory, then install pipenv and the project dependencies:
 
-`pip install pipenv`
-`pipenv install`
+```bash
+pip install pipenv
+pipenv install
+```
 
 Enable the virtual environment and run the flask application (defaults to port 5000):
 
-`pipenv run py app.py`
+```bash
+pipenv run py app.py
+```
+
+## Docker
+
+Run command in the directory containing the compose.yml file
+
+```bash
+docker-compose up -d --remove-orphans
+```
 
 # What is CO-DE?
 
 CO-DE is an open-source real-time collaborative code editor.
 
-CO-DE is the current ongoing project for the Ship-In-30 project from [David's Developer Safeplace](https://discord.gg/devsafeplace) Discord server.
+CO-DE is the current ongoing project for the Ship-In-30 project from [The Developer Safe Place](https://discord.gg/devsafeplace) Discord server.
 
 ## Features
 
