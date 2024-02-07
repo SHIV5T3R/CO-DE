@@ -74,8 +74,8 @@ class GenerateAccessToken(Resource):
 
             github = Github(response["data"]["access_token"])
             user_res = github.get_user_info()
-            response.set_cookie("username", user_res["login"], httponly=True)
-            response.set_cookie(
+            api_response.set_cookie("username", user_res["login"], httponly=True)
+            api_response.set_cookie(
                 "access_token", response["data"]["access_token"], httponly=True
             )
 
