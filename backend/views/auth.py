@@ -1,12 +1,11 @@
-from flask import make_response, request
-from flask_restx import fields, Resource
-from marshmallow import ValidationError
 from app import api
+from flask import make_response, request
+from flask_restx import Resource, fields
+from marshmallow import ValidationError
 from repos import AuthRepo
-from schemas import GithubAuthSchema, GithubAuthResponseSchema
+from schemas import GithubAuthResponseSchema, GithubAuthSchema
 from services.decorators import validate
 from services.github import Github
-
 
 ns = api.namespace("Auth", path="/v1")
 
@@ -14,50 +13,88 @@ ns = api.namespace("Auth", path="/v1")
 @ns.route("/oauth/generate-access-token")
 class GenerateAccessToken(Resource):
     @ns.doc("generate_token")
-    @ns.marshal_with(
+    @ns.response(
+        200,
+        "Success",
         api.model(
-            "token_response",
+            "success",
             {
+                "status": fields.Boolean,
+                "message": fields.String,
                 "data": fields.Nested(
                     api.model("nested", {"access_token": fields.String})
                 ),
-                "status": fields.Boolean,
             },
-        )
+        ),
+    )
+    @ns.response(
+        400,
+        "Error",
+        api.model(
+            "validation_error",
+            {
+                "status": fields.Boolean(default=False),
+                "message": fields.String,
+                "errors": fields.String,
+            },
+        ),
+    )
+    @ns.response(
+        401,
+        "Error (Github)",
+        api.model(
+            "github_error",
+            {
+                "status": fields.Boolean(default=False),
+                "error": fields.String,
+                "error_description": fields.String,
+                "error_uri": fields.Url,
+            },
+        ),
     )
     @ns.expect(api.model("token_payload", {"code": fields.String}))
     def post(self):
         try:
             auth_serializer = GithubAuthSchema()
-            auth_data = auth_serializer.load(request.form)
+            auth_data = auth_serializer.load(request.json)
             res = AuthRepo.get_access_token(auth_data["code"])
-
             if res.get("error"):
-                return res, 400
+                error_res = {"status": False}
+                error_res.update(res)
+                return error_res, 401
 
+            response = {
+                "status": True,
+                "message": "Oauth successful!",
+                "data": {"access_token": res["access_token"]},
+            }
             auth_response_serializer = GithubAuthResponseSchema()
-            response = make_response(auth_response_serializer.dump(res), 200)
+            auth_response_serializer.dump(response["data"])
+            api_response = make_response(response, 200)
 
-            access_token = res["access_token"]
-            github = Github(access_token)
+            github = Github(response["data"]["access_token"])
             user_res = github.get_user_info()
-            response.set_cookie("email", user_res["email"], httponly=True)
-            response.set_cookie("access_token", access_token, httponly=True)
+            response.set_cookie("username", user_res["login"], httponly=True)
+            response.set_cookie(
+                "access_token", response["data"]["access_token"], httponly=True
+            )
 
-            AuthRepo.create_user_if_not_exist(access_token, user_res)
+            AuthRepo.create_user_if_not_exist(
+                response["data"]["access_token"], user_res
+            )
 
-            return response
+            return api_response
         except ValidationError as e:
-            return {"error": "Validation failed", "messages": e.messages}, 400
+            return e.messages, 400
 
 
 @ns.route("/test")
 class TestAuthGuard(Resource):
     @validate
-    @ns.marshal_with(
+    @ns.response(
+        401,
+        "Unauthorised",
         api.model("guard_response", {"message": fields.String}),
-        description="Unauthorised",
-        code=401,
     )
     def get(self):
         return {"message": "Authorized by guard"}
