@@ -1,11 +1,10 @@
 import requests
-
-from requests.exceptions import RequestException
-from flask_restx import abort
-from mongoengine import DoesNotExist, ValidationError
 from app import app
 from config import Config
+from flask_restx import abort
 from models import User
+from mongoengine import DoesNotExist, ValidationError
+from requests.exceptions import RequestException
 
 
 class AuthRepo:
@@ -36,6 +35,7 @@ class AuthRepo:
                 new_user = User(
                     email=user_data["email"],
                     username=user_data["login"],
+                    full_name=user_data["name"],
                     gh_access_token=access_token,
                 )
                 new_user.save()
