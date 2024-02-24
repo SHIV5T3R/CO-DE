@@ -30,7 +30,9 @@ export interface SignInResponse {
     avatar: string;
   };
 }
-
+export interface GitHubAccessTokenRequest {
+  code: string;
+}
 export type User = SignInResponse["data"];
 
 export interface AuthFormErrorResponse<T> {

@@ -1,6 +1,8 @@
 import React from "react";
 import { ThemeProvider } from "shadcn/ui/theme-provider";
 import { Outlet } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 const LOADING_MESSAGE = [
   "Load environment variables",
   "Load configuration",
@@ -9,6 +11,8 @@ const LOADING_MESSAGE = [
   "Load logger",
 ];
 type Props = {};
+export const queryClient = new QueryClient();
+
 function RootLayout(props: Props) {
   const [progress, setProgress] = React.useState<number>(0);
   const [message, setMessage] = React.useState<string>(LOADING_MESSAGE[0]);
@@ -34,13 +38,15 @@ function RootLayout(props: Props) {
   }, []);
 
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="co-de-ui-theme">
-      <main className="h-screen w-full bg-background dark:bg-background">
-        <div className="absolute bottom-5 right-3 z-50">
-        </div>
-        <Outlet />
-      </main>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider defaultTheme="dark" storageKey="co-de-ui-theme">
+        <main className="h-screen w-full bg-background dark:bg-background">
+          <div className="absolute bottom-5 right-3 z-50"></div>
+          <Outlet />
+        </main>
+      </ThemeProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 
