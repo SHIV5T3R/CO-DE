@@ -25,7 +25,9 @@
 
 @layer base {
   :root {
-    --background: 233 27% 94%;
+    /* --background: 233 27% 94%; */
+    --background: 230 6% 81%;
+    --activity-background: 230 8% 85%;
     --foreground: 260 27% 4%;
 
     --card: 233 27% 94%;
@@ -52,6 +54,8 @@
     --destructive-foreground: 233 27% 94%;
 
     --border: 228 12% 57%;
+    --border-secondary: 230 5% 77%;
+    --border-hover: 230 8% 55%;
     --input: 228 12% 57%;
     --success: 166 95% 32%;
     --danger: 0 89% 56%;
@@ -63,7 +67,9 @@
     --highlighted: 189 73% 52%;
   }
   .dark {
+    /* --background: 229 26% 16%; */
     --background: 229 26% 16%;
+    --activity-background: 230 24% 19%;
     --foreground: 233 27% 94%;
 
     --card: 229 26% 16%;
@@ -89,6 +95,7 @@
 
     --border: 229 73% 86%;
     --border-secondary: 231 26% 14%;
+    --border-hover: 228 72% 86%;
     --input: 229 73% 86%;
     --success: 89 51% 61%;
     --error: 349 89% 72%;
@@ -97,18 +104,6 @@
     --ring-success: var(--success);
     --radius: 0.5rem;
   }
-}
-.r-section-container .line {
-  width: 1px !important;
-  opacity: 0.4;
-}
-.editor-section .line {
-  width: 1px !important;
-  opacity: 0.3;
-}
-.default-splitter:hover {
-  width: 4px !important;
-  background-color: #687387;
 }
 
 @layer base {

@@ -20,9 +20,9 @@ const router = createBrowserRouter([
       {
         path: "/editor",
         element: (
-          <AuthGate required>
+          // <AuthGate required>
             <EditorPage />
-          </AuthGate>
+          // </AuthGate>
         ),
       },
       {

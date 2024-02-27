@@ -4,6 +4,7 @@ import RightSectionContainer from "@/components/sections/rightSectionContainer";
 import { useTheme } from "@/shadcn/components/ui/theme-provider";
 import { Split, SplitProps } from "@geoffcox/react-splitter";
 import Footer from "@/components/sections/footer";
+import { splitterColors } from "@/utils/utils";
 type Props = {};
 
 const splitterConfig: SplitProps = {
@@ -16,15 +17,11 @@ const EditorPage = (props: Props) => {
   const { theme } = useTheme();
 
   return (
-    <div className="h-screen text-muted-foreground">
+    <div className="h-screen text-muted-foreground transition-colors">
       <section className=" editor-section flex h-[97%] w-full items-center ">
         <ActivityBar />
         <Split
-          defaultSplitterColors={{
-            color: theme === "dark" ? "#c1cbf5" : "black",
-            drag: "#c1cbf5",
-            hover: "",
-          }}
+          defaultSplitterColors={splitterColors}
           {...splitterConfig}
         >
           <FileExplorerBar />

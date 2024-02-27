@@ -13,6 +13,18 @@ function App() {
   const [progress, setProgress] = React.useState<number>(0);
   const [message, setMessage] = React.useState<string>(LOADING_MESSAGE[0]);
 
+  // const commands = {
+  //   'npm': {
+  //     'install': async (baseUrl, package) => {
+  //       console.log('Running npm install...');
+  //       // Send post request to execute the command
+  //       const req = await fetch(`${baseUrl}/npm/install/${package}`)
+  //       const res = await req.json();
+  //       console.log(res);
+  //     },
+  //   }
+  // }
+
   React.useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prevProgress) => (prevProgress + 1) % 100);
@@ -37,7 +49,7 @@ function App() {
     <div className="m-auto w-full">
       <TestSocketConnectionComponent />{" "}
       {/* Just for testing socket connection from client-side, can remove when more pages are made */}
-      <LoadingPage progress={progress} message={message} />
+      {/* <LoadingPage progress={progress} message={message} /> */}
       {/* <CodeEditor height={"100%"} fileExtension={".jsx"} /> */}
       <a href="/editor">Editor Page </a>
       <a href="/sign-up">Sign up Page </a>

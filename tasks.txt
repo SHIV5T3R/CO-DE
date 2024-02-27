@@ -1,0 +1,8 @@
+- terminal font customization
+- terminal key shortcut
+- terminal close button
+- terminal commands 
+
+DONE:
++ add missing bg color to better match Tokyo Night theme;
++ terminal theme customization
