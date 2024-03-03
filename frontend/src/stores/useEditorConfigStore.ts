@@ -7,10 +7,13 @@ const useEditorConfigStore = create<EditorConfigStore>()(
     (set, get) => ({
       //states
       isSidebarCollapsed: true,
+      isTerminalVisible: false,
       //state setters
 
       setIsSidebarCollapsed: () =>
         set((state) => ({ isSidebarCollapsed: !state.isSidebarCollapsed })),
+      setIsTerminalVisible: (isVisible: boolean) => 
+        set(() => ({ isTerminalVisible: isVisible })),
     }),
     {
       name: "code_editor_config", // unique name

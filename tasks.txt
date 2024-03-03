@@ -1,8 +1,12 @@
-- terminal font customization
-- terminal key shortcut
-- terminal close button
 - terminal commands 
+- prevent terminal input from rerendering the other components
+- replace theme popover with switch button
+- write tests
 
 DONE:
 + add missing bg color to better match Tokyo Night theme;
 + terminal theme customization
++ terminal font customization
++ terminal close button
++ terminal key shortcut
++ save terminal height preferences

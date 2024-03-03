@@ -106,6 +106,17 @@
   }
 }
 
+/* terminal */
+.index_terminal__teubZ > .index_editor__JoDSg {
+  font-size: .9rem;
+  line-height: 1.3rem;
+  
+}
+/* terminal cursor */
+.index_editor__JoDSg .index_lineText__j6qNj .index_caret__VS4iV > .index_caretAfter__6aXPx {
+  height: 1.3rem;
+}
+
 @layer base {
   * {
     @apply border-border;
