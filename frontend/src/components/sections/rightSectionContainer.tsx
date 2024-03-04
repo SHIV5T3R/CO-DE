@@ -33,6 +33,7 @@ const RightSectionContainer = (props: Props) => {
     setIsSidebarCollapsed,
     setIsTerminalVisible
   } = useEditorConfigStore(state => state);
+
   React.useEffect(() => {
     if (!!selectedNode.node && !selectedNode.node.data?.isFolder) {
       if (editorRef && editorRef.current) {
@@ -75,9 +76,7 @@ const RightSectionContainer = (props: Props) => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.repeat) {
-        return;
-      } else {
+      if (!e.repeat && (e.key === 'Control' || e.key === '`')) {
         setKeysPressed(prev => [...prev, e.key]);
       }
     }
@@ -87,7 +86,10 @@ const RightSectionContainer = (props: Props) => {
       if (keysPressed[0] === 'Control' && keysPressed[1] === '`') {
         setIsTerminalVisible(true);
       }
-      setKeysPressed([]);
+      // reset after the correct combo
+      if (keysPressed.length > 0) {
+        setKeysPressed([]);
+      }
     }
 
     window.addEventListener('keydown', handleKeyDown);

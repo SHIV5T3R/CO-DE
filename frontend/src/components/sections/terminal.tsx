@@ -4,15 +4,15 @@ import { useTheme } from '@/shadcn/components/ui/theme-provider';
 
 const terminalThemes = {
   "tokyo-night-light": {
-    themeBGColor: "#cbccd1",
-    themeToolbarColor: "#cbccd1",
-    themeColor: "#FFFEFC",
+    themeBGColor: "hsl(var(--background))",
+    themeToolbarColor: "hsl(var(--background))",
+    themeColor: "hsl(var(--muted))",
     themePromptColor: "#a917a8"
   },
   "tokyo-night-storm": {
-    themeBGColor: "#1f2335",
-    themeToolbarColor: "#1f2335",
-    themeColor: "#FFFEFC",
+    themeBGColor: "hsl(var(--background))",
+    themeToolbarColor: "hsl(var(--background))",
+    themeColor: "hsl(var(--muted))",
     themePromptColor: "#a917a8"
   }
 }
@@ -30,10 +30,12 @@ interface TerminalType {
   defaultHandler: null
 }
 
+// None of the following commands are implemented yet! (aside from "help" and "clear")
 const commands = {
   help: (
     <span>
       <strong>clear</strong> - clear the console. <br />
+      <strong>None of the following commands are implemented yet!</strong>
       <strong>git_clone &lt;URL&gt;</strong> - retrieve a repo from a hosted location via URL. <br />
       <strong>git_add &lt;FILE&gt;</strong> - add a file as it looks now to next commit. <br />
       <strong>git_commit_m 'MESSAGE'</strong> - commit a change to repo with the MESSAGE. <br />

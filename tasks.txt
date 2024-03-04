@@ -1,6 +1,5 @@
 - terminal commands 
-- prevent terminal input from rerendering the other components
-- replace theme popover with switch button
+? replace theme popover with switch button
 - write tests
 
 DONE:
@@ -10,3 +9,4 @@ DONE:
 + terminal close button
 + terminal key shortcut
 + save terminal height preferences
++ prevent terminal input from rerendering the other components

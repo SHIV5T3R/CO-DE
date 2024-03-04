@@ -52,7 +52,7 @@ const ActivityBar = (props: Props) => {
             if (Icon.element === Menu) {
               return (
                 <DropdownMenu key={Icon.id}>
-                  <DropdownMenuTrigger className="rounded-lg p-2">
+                  <DropdownMenuTrigger className="rounded-lg p-2" name="menu">
                     <Icon.element className="text-muted-foreground hover:text-muted" />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent side="right">
