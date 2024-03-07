@@ -6,16 +6,18 @@ import {
   PanelRightOpen,
   SplitSquareHorizontal,
 } from "lucide-react";
+
 import FileTab from "@/components/ui/fileTab";
-import useDocumentStore from "@/stores/useDocumentStore";
-import PlaceholderFileTab from "../ui/placeholderFileTab";
-import useEditorConfigStore from "@/stores/useEditorConfigStore";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/shadcn/components/ui/tooltip";
+import useDocumentStore from "@/stores/useDocumentStore";
+import useEditorConfigStore from "@/stores/useEditorConfigStore";
+
+import PlaceholderFileTab from "../ui/placeholderFileTab";
 
 type TabTrayProps = {};
 
@@ -26,7 +28,7 @@ const TABTRAYICONS: Array<{ id: number; element: LucideIcon }> = [
   { id: 4, element: PanelRightClose },
 ];
 
-const TabTray = ({}: TabTrayProps) => {
+function TabTray({}: TabTrayProps) {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useEditorConfigStore(
     (state) => [state.isSidebarCollapsed, state.setIsSidebarCollapsed]
   );
@@ -89,6 +91,6 @@ const TabTray = ({}: TabTrayProps) => {
       </div>
     </nav>
   );
-};
+}
 
 export default TabTray;

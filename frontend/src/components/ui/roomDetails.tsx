@@ -1,12 +1,11 @@
-import { User } from "@/types/user";
-
-import { ScrollArea } from "@/shadcn/components/ui/scroll-area";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/shadcn/components/ui/avatar";
+import { ScrollArea } from "@/shadcn/components/ui/scroll-area";
 import { Room } from "@/types/room";
+import { User } from "@/types/user";
 
 // Placeholder data. To be replaced with backend data
 const ROOM_MEMBERS: User[] = [

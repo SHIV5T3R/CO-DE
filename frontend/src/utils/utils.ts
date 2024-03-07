@@ -17,4 +17,4 @@ export const splitterColors: SplitterColors = {
   color: "hsl(var(--border-secondary))",
   drag: "hsl(var(--border-hover))",
   hover: "hsl(var(--border-hover))",
-}
+};

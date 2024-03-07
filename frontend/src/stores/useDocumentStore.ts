@@ -1,18 +1,18 @@
-import { persist, createJSONStorage } from "zustand/middleware";
-import { DocumentNodeStore } from "@/types/documentModel";
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
+
+import { DocumentNodeStore } from "@/types/documentModel";
 
 const useDocumentStore = create<DocumentNodeStore>()(
   persist(
     (set, get) => ({
-      //states
+      // states
       documentNodes: [],
       selectedNode: { node: null },
-      //state setters
+      // state setters
       setSelectedNode: (node) => set({ selectedNode: { node } }),
       setDocumentNodes: (incomingDocumentNodes) =>
         set({ documentNodes: incomingDocumentNodes }),
-
     }),
     {
       name: "code_docs_store", // unique name

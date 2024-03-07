@@ -1,9 +1,11 @@
-import React from "react";
 import { X } from "lucide-react";
+import React from "react";
+
 import { getFileType } from "@/lib/utils";
-import { CODENodeModel } from "@/types/documentModel";
-import { fileTypeIconsList } from "../code_editor/CodeEditorTypes";
 import useDocumentStore from "@/stores/useDocumentStore";
+import { CODENodeModel } from "@/types/documentModel";
+
+import { fileTypeIconsList } from "../code_editor/CodeEditorTypes";
 
 type Props = {
   active: boolean;
@@ -11,7 +13,7 @@ type Props = {
   fileName: string;
 };
 
-const FileTab = ({ fileName, active, tabId, ...props }: Props) => {
+function FileTab({ fileName, active, tabId, ...props }: Props) {
   const [documentNodes, setDocumentNodes, selectedNode, setSelectedNode] =
     useDocumentStore((state) => [
       state.documentNodes,
@@ -24,7 +26,7 @@ const FileTab = ({ fileName, active, tabId, ...props }: Props) => {
   const fileTypeIconSourcePath = `/src/components/code_editor/editor_icons/${fileTypeIconsList[fileType]}.svg`;
 
   const handleOnTabClick = (tabId: string | number) => {
-    //on clicking a file tab, set the active state to true based on its tabId and others to false.
+    // on clicking a file tab, set the active state to true based on its tabId and others to false.
     const updateDocumentNodes = documentNodes.map((node) => {
       return node.id === tabId
         ? {
@@ -50,9 +52,9 @@ const FileTab = ({ fileName, active, tabId, ...props }: Props) => {
     tabId: string | number
   ) => {
     e.stopPropagation();
-    /**if the tab to close is not the currently active/focused node but is on the tab tray, simply modify it's activity attributes to false.
+    /** if the tab to close is not the currently active/focused node but is on the tab tray, simply modify it's activity attributes to false.
      *
-     *  **/
+     *  * */
     if (selectedNode.node?.id !== tabId) {
       setDocumentNodes(
         documentNodes.map((node) => {
@@ -77,7 +79,7 @@ const FileTab = ({ fileName, active, tabId, ...props }: Props) => {
       .filter((node) => node.data !== undefined)
       .sort((a, b) => (b.data?.opened || 0) - (a.data?.opened || 0));
     if (openedNodeStack.length > 1) {
-      const lastOpenedIndex = 1; //if there are 2 nodes in the stack, the latest one is current node at index of 0 and second latest would be at index of 1
+      const lastOpenedIndex = 1; // if there are 2 nodes in the stack, the latest one is current node at index of 0 and second latest would be at index of 1
       const lastOpenedNode = {
         ...openedNodeStack[lastOpenedIndex],
         data: {
@@ -100,7 +102,7 @@ const FileTab = ({ fileName, active, tabId, ...props }: Props) => {
                 data: {
                   ...node.data,
                   isActive: false,
-                  opened: 0, //send to bottom of the time stack trace
+                  opened: 0, // send to bottom of the time stack trace
                   focus: false,
                   onTab: false,
                 },
@@ -112,7 +114,7 @@ const FileTab = ({ fileName, active, tabId, ...props }: Props) => {
         }) as CODENodeModel[]
       );
     } else {
-      //this means tab being clicked is the last tab so that means there is no more nodes in the tray or tree that is opened so we set it to null
+      // this means tab being clicked is the last tab so that means there is no more nodes in the tray or tree that is opened so we set it to null
       setSelectedNode(null);
       setDocumentNodes(
         documentNodes.map((node) => {
@@ -138,10 +140,10 @@ const FileTab = ({ fileName, active, tabId, ...props }: Props) => {
         <span className="text-muted/70">{fileName}</span>
       </div>
       <button onClick={(e) => onTabClose(e, tabId)} aria-label="Close this tab">
-        <X size={"18px"} className="hidden  group-hover:inline-block" />
+        <X size="18px" className="hidden  group-hover:inline-block" />
       </button>
     </div>
   );
-};
+}
 
 export default FileTab;
