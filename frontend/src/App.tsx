@@ -1,7 +1,6 @@
 import React from "react";
 import LoadingPage from "./components/loading";
 import TestSocketConnectionComponent from "./tests/events/test-socket-connection-component";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const LOADING_MESSAGE = [
   "Load environment variables",
   "Load configuration",
