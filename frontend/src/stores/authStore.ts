@@ -27,7 +27,7 @@ const useAuthStore = create<UserState & Actions>()(
       githubOauth: {},
       setGithubOauth: () => {
         const antiCSRF = crypto.randomUUID();
-        const expiresAt = Date.now() + 1000 * 60 * 15; // 10 minutes
+        const expiresAt = Date.now() + 1000 * 60 * 15; // 15 minutes
         const ghLoginUrl = import.meta.env.VITE_GITHUB_AUTHORIZE_URL;
         const ghClientId = import.meta.env.VITE_GITHUB_OAUTH_CLIENT_ID;
         // create url with query params of client_id and state using urlSearchParams
