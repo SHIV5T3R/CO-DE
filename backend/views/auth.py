@@ -74,7 +74,8 @@ class GenerateAccessToken(Resource):
 
             github = Github(response["data"]["access_token"])
             user_res = github.get_user_info()
-            api_response.set_cookie("username", user_res["login"], httponly=True)
+            api_response.set_cookie(
+                "username", user_res["login"], httponly=True)
             api_response.set_cookie(
                 "access_token", response["data"]["access_token"], httponly=True
             )
@@ -88,13 +89,49 @@ class GenerateAccessToken(Resource):
             return e.messages, 400
 
 
+@ns.route("/get-session")
+class TestAuthGuard(Resource):
+    @validate
+    @ns.response(
+        401,
+        "Unauthorised",
+        api.model("auth_response", {
+                  "message": fields.String, "status": fields.Boolean, "username": fields.String}),
+    )
+    def get(self):
+        return {"message": "Authorised session", "status": True, "username": request.cookies.get("username")}
+
+
+@ns.route("/logout")
+class Logout(Resource):
+    @ns.response(
+        200,
+        "Success",
+        api.model(
+            "success",
+            {
+                "status": fields.Boolean,
+                "message": fields.String,
+            },
+        ),
+    )
+    def post(self):
+        api_response = make_response(
+            {"status": True, "message": "Logged out successfully!"}, 200
+        )
+        api_response.set_cookie("username", "", expires=0)
+        api_response.set_cookie("access_token", "", expires=0)
+        return api_response
+
+
 @ns.route("/test")
 class TestAuthGuard(Resource):
     @validate
     @ns.response(
         401,
         "Unauthorised",
-        api.model("guard_response", {"message": fields.String}),
+        api.model("guard_response", {
+                  "message": fields.String, "status": fields.Boolean}),
     )
     def get(self):
-        return {"message": "Authorized by guard"}
+        return {"message": "Authorized by guard", "status": True}

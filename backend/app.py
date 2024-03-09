@@ -21,7 +21,8 @@ def register_endpoints(_app):
     from flask_restx import Api
 
     global api
-    api = Api(_app, version="1", title="CO-DE API", description="Backend for CO-DE")
+    api = Api(_app, version="1", title="CO-DE API",
+              description="Backend for CO-DE")
 
     from views import auth
 
@@ -48,7 +49,8 @@ def create_app(testing=False):
 # NOTE: Use 'py app.py' to run or this gets ignored
 if __name__ == "__main__":
     parser = ArgumentParser()
-    parser.add_argument("-p", "--port", default=5000, type=int, help="port to listen on")
+    parser.add_argument("-p", "--port", default=5000,
+                        type=int, help="port to listen on")
     args = parser.parse_args()
     port = args.port
     create_app()

@@ -7,12 +7,16 @@ import RootLayout from "@/components/layout/rootLayout";
 import EditorPage from "@/components/pages/editor";
 import App from "./App";
 import SignInPage from "@/components/pages/signIn";
-import SignUpPage from "@/components/pages/signUp";
 import AuthGate from "./components/auth/AuthGate";
+import GithubRedirectPage from "./components/pages/githubOauth";
 const router = createBrowserRouter([
   {
     element: <RootLayout />,
     children: [
+      {
+        path: "/callback/github",
+        element: <GithubRedirectPage />,
+      },
       {
         path: "/",
         element: <App />,
@@ -30,14 +34,6 @@ const router = createBrowserRouter([
         element: (
           <AuthGate>
             <SignInPage />
-          </AuthGate>
-        ),
-      },
-      {
-        path: "/sign-up",
-        element: (
-          <AuthGate>
-            <SignUpPage />
           </AuthGate>
         ),
       },

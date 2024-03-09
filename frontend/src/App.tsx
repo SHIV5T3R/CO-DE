@@ -1,7 +1,6 @@
 import React from "react";
 import LoadingPage from "./components/loading";
 import TestSocketConnectionComponent from "./tests/events/test-socket-connection-component";
-
 const LOADING_MESSAGE = [
   "Load environment variables",
   "Load configuration",
@@ -34,15 +33,17 @@ function App() {
   }, []);
 
   return (
-    <div className="m-auto w-full">
-      <TestSocketConnectionComponent />{" "}
-      {/* Just for testing socket connection from client-side, can remove when more pages are made */}
-      <LoadingPage progress={progress} message={message} />
-      {/* <CodeEditor height={"100%"} fileExtension={".jsx"} /> */}
-      <a href="/editor">Editor Page </a>
-      <a href="/sign-up">Sign up Page </a>
-      <a href="/sign-in">Sign in Page </a>
-    </div>
+   
+      <div className="m-auto w-full">
+        <TestSocketConnectionComponent />
+        {/* Just for testing socket connection from client-side, can remove when more pages are made */}
+        <LoadingPage progress={progress} message={message} />
+        {/* <CodeEditor height={"100%"} fileExtension={".jsx"} /> */}
+        <a href="/editor">Editor Page </a>
+        <a href="/sign-up">Sign up Page </a>
+        <a href="/sign-in">Sign in Page </a>
+      </div>
+    
   );
 }
 
