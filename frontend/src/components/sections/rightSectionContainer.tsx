@@ -29,19 +29,8 @@ function RightSectionContainer(props: Props) {
       state.selectedNode,
       state.setSelectedNode,
     ]);
-  const {
-    isSidebarCollapsed,
-    isTerminalVisible,
-    setIsTerminalVisible,
-  } = useEditorConfigStore((state) => state);
-
-  React.useEffect(() => {
-    if (!!selectedNode.node && !selectedNode.node.data?.isFolder) {
-      if (editorRef && editorRef.current) {
-        editorRef.current.focus();
-      }
-    }
-  }, [selectedNode.node]);
+  const { isSidebarCollapsed, isTerminalVisible, setIsTerminalVisible } =
+    useEditorConfigStore((state) => state);
 
   const splitterConfig: SplitProps = {
     minPrimarySize: isSidebarCollapsed ? "100%" : "60%",
@@ -79,6 +68,14 @@ function RightSectionContainer(props: Props) {
   };
 
   useEffect(() => {
+    if (!!selectedNode.node && !selectedNode.node.data?.isFolder) {
+      if (editorRef && editorRef.current) {
+        editorRef.current.focus();
+      }
+    }
+  }, [selectedNode.node]);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!e.repeat && (e.key === "Control" || e.key === "`")) {
         setKeysPressed((prev) => [...prev, e.key]);
@@ -110,6 +107,7 @@ function RightSectionContainer(props: Props) {
       <div className="r-section-container flex h-full w-full shrink flex-col transition-all">
         <TabTray />
         <Split defaultSplitterColors={splitterColors} {...splitterConfig}>
+          {/* eslint-disable-next-line no-nested-ternary */}
           {selectedNode.node === null ||
           (selectedNode.node !== null &&
             selectedNode.node.data?.isFolder === true) ? (
