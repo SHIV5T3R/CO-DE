@@ -1,24 +1,24 @@
+import Picker from "@emoji-mart/react";
+import { PopoverContent } from "@radix-ui/react-popover";
+import { ArrowRightCircle, Bell, MoreHorizontal, Smile, X } from "lucide-react";
 import { useState } from "react";
-import { Message } from "@/types/room";
 
-import { ScrollAreaWithMask } from "@/shadcn/components/ui/scroll-area";
-import { MoreHorizontal, Bell, X, Smile, ArrowRightCircle } from "lucide-react";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/shadcn/components/ui/avatar";
-import Picker from "@emoji-mart/react";
+import { Popover, PopoverTrigger } from "@/shadcn/components/ui/popover";
+import { ScrollAreaWithMask } from "@/shadcn/components/ui/scroll-area";
+import { Textarea } from "@/shadcn/components/ui/textarea";
+import { useTheme } from "@/shadcn/components/ui/theme-provider";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/shadcn/components/ui/tooltip";
-import { Textarea } from "@/shadcn/components/ui/textarea";
-import { useTheme } from "@/shadcn/components/ui/theme-provider";
-import { Popover, PopoverTrigger } from "@/shadcn/components/ui/popover";
-import { PopoverContent } from "@radix-ui/react-popover";
+import { Message } from "@/types/room";
 
 interface Emoji {
   id: string;
@@ -173,7 +173,10 @@ export default function ChatBox() {
               />
             </PopoverContent>
           </Popover>
-          <button className="absolute inset-y-0 right-2 text-border/60 hover:text-muted">
+          <button 
+            className="absolute inset-y-0 right-2 text-border/60 hover:text-muted"
+            type="button"
+          >
             <ArrowRightCircle />
           </button>
         </div>

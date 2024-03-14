@@ -141,7 +141,7 @@ export const themeList: { [p: string]: string } = {
   monoindustrial: "monoindustrial",
 };
 
-//This is a map of extensions to the icon file names in /src/components/code_editor/editor_icons
+// This is a map of extensions to the icon file names in /src/components/code_editor/editor_icons
 export const fileTypeIconsList = {
   ".js": "file_type_js",
   ".gitignore": "file_type_git",

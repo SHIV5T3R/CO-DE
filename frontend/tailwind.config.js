@@ -21,6 +21,7 @@ module.exports = {
         border: {
           DEFAULT: "hsl(var(--border))",
           secondary: "hsl(var(--border-secondary))",
+          hover: "hsl(var(--border-hover))",
         },
         input: "hsl(var(--input))",
         ring: {
@@ -29,6 +30,7 @@ module.exports = {
           error: "hsl(var(--ring-error))",
         },
         background: "hsl(var(--background))",
+        activityBackground: "hsl(var(--activity-background))",
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",

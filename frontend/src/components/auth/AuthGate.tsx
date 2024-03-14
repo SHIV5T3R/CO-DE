@@ -16,7 +16,8 @@ function AuthGate({ children, required }: Props) {
     return (
       <Navigate to="/sign-in" state={{ from: location.pathname }} replace />
     );
-  } else if (user && !required) {
+  }
+  if (user && !required) {
     return <Navigate to="/" replace />;
   }
   return <>{children}</>;

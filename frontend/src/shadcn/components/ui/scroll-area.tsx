@@ -1,5 +1,5 @@
-import * as React from "react";
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
+import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -29,11 +29,11 @@ const ScrollAreaWithMask = React.forwardRef<
     {...props}
   >
     <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit] [&>div]:!block">
-      <div className="absolute bottom-0  h-[20px] w-full bg-gradient-to-t from-background "></div>
+      <div className="absolute bottom-0  h-[20px] w-full bg-gradient-to-t from-background " />
 
       {children}
       {/* spacer */}
-      <div className="h-[38px] w-full"></div>
+      <div className="h-[38px] w-full" />
     </ScrollAreaPrimitive.Viewport>
     <ScrollBar />
     <ScrollAreaPrimitive.Corner />

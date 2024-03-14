@@ -22,4 +22,6 @@ export type DocumentNodeStore = {
 export type EditorConfigStore = {
   isSidebarCollapsed: boolean;
   setIsSidebarCollapsed: () => void;
+  isTerminalVisible: boolean;
+  setIsTerminalVisible: (isVisible: boolean) => void;
 };

@@ -1,16 +1,20 @@
-import { persist, createJSONStorage } from "zustand/middleware";
-import { EditorConfigStore } from "@/types/documentModel";
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
+
+import { EditorConfigStore } from "@/types/documentModel";
 
 const useEditorConfigStore = create<EditorConfigStore>()(
   persist(
     (set, get) => ({
-      //states
+      // states
       isSidebarCollapsed: true,
-      //state setters
+      isTerminalVisible: false,
+      // state setters
 
       setIsSidebarCollapsed: () =>
         set((state) => ({ isSidebarCollapsed: !state.isSidebarCollapsed })),
+      setIsTerminalVisible: (isVisible: boolean) =>
+        set(() => ({ isTerminalVisible: isVisible })),
     }),
     {
       name: "code_editor_config", // unique name

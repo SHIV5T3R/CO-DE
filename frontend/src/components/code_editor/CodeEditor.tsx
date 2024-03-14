@@ -1,6 +1,5 @@
+import { Editor, EditorProps, loader, OnMount } from "@monaco-editor/react";
 import React, { ComponentProps, useState } from "react";
-import { Editor, EditorProps, OnMount, loader } from "@monaco-editor/react";
-
 import {
   IStandaloneThemeData,
   MonacoTheme,
@@ -42,7 +41,7 @@ const CodeEditor = React.forwardRef<IStandaloneCodeEditor, CodeEditorProps>(
     React.useEffect(() => {
       loader.init().then((monaco) => {
         let found: boolean = false;
-  
+
         // ESLint complaining about i++ here??? lol
         for (let i = 0; i < monaco.languages.getLanguages().length; i += 1) {
           const lang = monaco.languages.getLanguages()[i];
@@ -75,9 +74,7 @@ const CodeEditor = React.forwardRef<IStandaloneCodeEditor, CodeEditorProps>(
       });
     }, [editorTheme]);
 
-
     const handleEditorChange = (value: string | undefined) => {
- 
       if (value) {
         modifyDocumentNodeContent(value);
       }

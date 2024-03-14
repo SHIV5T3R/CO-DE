@@ -1,17 +1,18 @@
-import React from "react";
 import {
-  Tree,
   getBackendOptions,
   MultiBackend,
+  Tree,
 } from "@minoru/react-dnd-treeview";
-import { DndProvider } from "react-dnd";
-import { mockDirectory } from "@/mocks/mockDirectory";
 import { ChevronDown, ChevronRight } from "lucide-react";
+import React from "react";
+import { DndProvider } from "react-dnd";
+
 import { cn } from "@/lib/utils";
+import { mockDirectory } from "@/mocks/mockDirectory";
 import useDocumentStore from "@/stores/useDocumentStore";
 import { CODENodeModel } from "@/types/documentModel";
 
-const ExplorerTreeView = () => {
+function ExplorerTreeView() {
   const [documentNodes, setDocumentNodes, selectedNode, setSelectedNode] =
     useDocumentStore((state) => [
       state.documentNodes,
@@ -20,7 +21,7 @@ const ExplorerTreeView = () => {
       state.setSelectedNode,
     ]);
   React.useEffect(() => {
-    //initialise the mockDirectory into session storage on initial load if not present.
+    // initialise the mockDirectory into session storage on initial load if not present.
     if (documentNodes.length === 0) {
       setDocumentNodes(mockDirectory);
     }
@@ -119,7 +120,7 @@ const ExplorerTreeView = () => {
           );
         }}
         dragPreviewRender={(monitorProps) => {
-          const item = monitorProps.item;
+          const { item } = monitorProps;
 
           return (
             <div className=" w-fit rounded-lg bg-muted/10 py-1 pl-2 pr-8 text-muted-foreground">
@@ -133,5 +134,5 @@ const ExplorerTreeView = () => {
       />
     </DndProvider>
   );
-};
+}
 export default ExplorerTreeView;

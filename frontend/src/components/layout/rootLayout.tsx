@@ -1,6 +1,7 @@
 import React from "react";
-import { ThemeProvider } from "shadcn/ui/theme-provider";
 import { Outlet } from "react-router-dom";
+import { ThemeProvider } from "shadcn/ui/theme-provider";
+
 const LOADING_MESSAGE = [
   "Load environment variables",
   "Load configuration",
@@ -36,8 +37,7 @@ function RootLayout(props: Props) {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="co-de-ui-theme">
       <main className="h-screen w-full bg-background dark:bg-background">
-        <div className="absolute bottom-5 right-3 z-50">
-        </div>
+        <div className="absolute bottom-5 right-3 z-50" />
         <Outlet />
       </main>
     </ThemeProvider>

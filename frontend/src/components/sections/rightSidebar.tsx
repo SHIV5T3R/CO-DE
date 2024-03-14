@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import useNotificationStore from "@/stores/useNotificationStore";
 
 import {
   Tabs,
@@ -7,9 +6,11 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/shadcn/components/ui/tabs";
-import RoomDetails from "../ui/roomDetails";
+import useNotificationStore from "@/stores/useNotificationStore";
+
 import ChatBox from "../ui/chatBox";
 import NotificationTab from "../ui/notificationTab";
+import RoomDetails from "../ui/roomDetails";
 
 export default function RightSidebar() {
   const notifStore = useNotificationStore((state) => state.notifications);

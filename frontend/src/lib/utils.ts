@@ -1,6 +1,7 @@
-import { fileTypeIconsList } from "@/components/code_editor/CodeEditorTypes";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+
+import { fileTypeIconsList } from "@/components/code_editor/CodeEditorTypes";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -20,7 +21,7 @@ export function getFileType(fileName: string) {
   if (extension) {
     for (let i = 0; i < exceptions.length; i++) {
       if (exceptions[i].includes(extension)) {
-        //gitignore and .env are .txt extensions
+        // gitignore and .env are .txt extensions
         return ".txt" as keyof typeof fileTypeIconsList;
       }
     }

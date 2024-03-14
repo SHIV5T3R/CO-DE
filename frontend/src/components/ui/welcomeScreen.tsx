@@ -1,5 +1,3 @@
-import { Button } from "@/shadcn/components/ui/button";
-import { Separator } from "@/shadcn/components/ui/separator";
 import {
   FolderOpen,
   GitBranchPlus,
@@ -8,12 +6,15 @@ import {
   Users,
 } from "lucide-react";
 
+import { Button } from "@/shadcn/components/ui/button";
+import { Separator } from "@/shadcn/components/ui/separator";
+
 type Props = {};
 
-const WelcomeScreen = (props: Props) => {
+function WelcomeScreen(props: Props) {
   return (
     //   TODO - modify current shadcn button component with extra variant that accepts icon and provide styling that matches figma design for reusability and cleaner code here.
-    <section className="flex max-w-5xl select-none flex-col gap-6 px-16 py-16">
+    <section className="flex h-full w-full select-none flex-col gap-6 overflow-y-auto bg-activityBackground p-16">
       <h1 className="text-3xl font-bold text-muted">CO-DE</h1>
       <h2 className="text-lg">Your creative coding playground</h2>
       <section className="flex flex-col gap-4">
@@ -22,15 +23,15 @@ const WelcomeScreen = (props: Props) => {
         </h3>
         <Separator orientation="horizontal" />
         <div className="flex w-fit flex-wrap gap-4">
-          <Button variant={"secondary"}>
+          <Button variant="secondary">
             <PlusSquare className="mr-2 h-auto w-4" />
             New project
           </Button>
-          <Button variant={"secondary"}>
+          <Button variant="secondary">
             <GitBranchPlus className="mr-2 h-auto w-4" />
             Open repository
           </Button>
-          <Button variant={"secondary"}>
+          <Button variant="secondary">
             <FolderOpen className="mr-2 h-auto w-4" />
             Open local folder
           </Button>
@@ -47,11 +48,11 @@ const WelcomeScreen = (props: Props) => {
         </h3>
         <Separator orientation="horizontal" />
         <div className="flex w-fit gap-4">
-          <Button variant={"secondary"}>
+          <Button variant="secondary">
             <Users className="mr-2 h-auto w-4" />
             Create room
           </Button>
-          <Button variant={"secondary"}>
+          <Button variant="secondary">
             <UserPlus className="mr-2 h-auto w-4" />
             Join an existing room
           </Button>
@@ -59,6 +60,6 @@ const WelcomeScreen = (props: Props) => {
       </section>
     </section>
   );
-};
+}
 
 export default WelcomeScreen;

@@ -1,9 +1,4 @@
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/shadcn/components/ui/popover";
-import {
   FileSearch,
   Folders,
   GitFork,
@@ -14,8 +9,22 @@ import {
   SquareDashedBottomCode,
   User,
 } from "lucide-react";
-import Logo from "@/components/ui/logo";
 import { ModeToggle } from "shadcn/ui/mode-toggle";
+
+import Logo from "@/components/ui/logo";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/shadcn/components/ui/dropdown-menu";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/shadcn/components/ui/popover";
+import useEditorConfigStore from "@/stores/useEditorConfigStore";
 
 type Props = {};
 
@@ -32,13 +41,44 @@ const BOTTOMSEGMENTICONS: Array<{ id: number; element: LucideIcon }> = [
   { id: 1, element: User },
   { id: 2, element: Settings },
 ];
-const ActivityBar = (props: Props) => {
+function ActivityBar(props: Props) {
+  const { isTerminalVisible, setIsTerminalVisible } = useEditorConfigStore(
+    (state) => state
+  );
+
   return (
     <nav className="flex h-full w-fit justify-end  py-4  pl-4">
       <div className=" flex h-full w-[56px] flex-col items-center justify-between rounded-xl border border-border/60 bg-background p-2">
         <div className="flex h-fit w-full flex-col  items-center gap-6">
           <Logo size="md" noText />
           {TOPSEGMENTICONS.map((Icon) => {
+            if (Icon.element === Menu) {
+              return (
+                <DropdownMenu key={Icon.id}>
+                  <DropdownMenuTrigger
+                    className="rounded-lg p-2"
+                    aria-label="menu"
+                    onClick={() => console.log("button clicked")}
+                  >
+                    <Icon.element className="text-muted-foreground hover:text-muted" />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent side="right">
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem
+                        className="cursor-pointer text-sm"
+                        onClick={() =>
+                          isTerminalVisible
+                            ? setIsTerminalVisible(false)
+                            : setIsTerminalVisible(true)
+                        }
+                      >
+                        Create terminal
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              );
+            }
             return (
               <Popover key={Icon.id}>
                 <PopoverTrigger className="rounded-lg p-2 ">
@@ -66,6 +106,6 @@ const ActivityBar = (props: Props) => {
       </div>
     </nav>
   );
-};
+}
 
 export default ActivityBar;
