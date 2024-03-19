@@ -18,7 +18,7 @@ interface RoomMessage {
     messages: string[]|Message[]
 }
 
-interface Message {
+export interface Message {
     _id: string,
     sender: string|User,
     content: any, // For now.

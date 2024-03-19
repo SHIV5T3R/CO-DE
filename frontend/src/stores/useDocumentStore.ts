@@ -12,6 +12,7 @@ const useDocumentStore = create<DocumentNodeStore>()(
       setSelectedNode: (node) => set({ selectedNode: { node } }),
       setDocumentNodes: (incomingDocumentNodes) =>
         set({ documentNodes: incomingDocumentNodes }),
+
     }),
     {
       name: "code_docs_store", // unique name

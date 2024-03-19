@@ -3,6 +3,7 @@ import axios, { AxiosError } from "axios";
 import { camelCase, isArray, isObject, snakeCase } from "lodash";
 
 import config from "@/config";
+import useAuthStore from "@/stores/authStore";
 
 const axiosInstance = axios.create({
   baseURL: config.VITE_BASE_URL,
@@ -59,7 +60,7 @@ axiosInstance.interceptors.response.use(
       error.response?.status === 401 &&
       error.response.config.url !== "/users/login"
     ) {
-      // TODO: token expired and the user must login again. Handle it when we decide neavigation
+      useAuthStore.getState().resetUser();
     }
     return Promise.reject(error);
   }

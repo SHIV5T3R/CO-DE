@@ -59,6 +59,8 @@
     --ring-error: 0 89% 56%;
     --ring-success: 166 95% 32%;
     --radius: 0.5rem;
+
+    --highlighted: 189 73% 52%;
   }
   .dark {
     --background: 229 26% 16%;
@@ -95,6 +97,18 @@
     --ring-success: var(--success);
     --radius: 0.5rem;
   }
+}
+.r-section-container .line {
+  width: 1px !important;
+  opacity: 0.4;
+}
+.editor-section .line {
+  width: 1px !important;
+  opacity: 0.3;
+}
+.default-splitter:hover {
+  width: 4px !important;
+  background-color: #687387;
 }
 
 @layer base {

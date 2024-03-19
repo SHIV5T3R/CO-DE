@@ -10,8 +10,8 @@ import { Input } from "@/shadcn/components/ui/input";
 
 import { SignUpRequest } from "@/services/auth/types";
 import { signUp } from "@/services/auth/auth";
+import DiscordLogo from "@/components/ui/DiscordLogo";
 import Logo from "../ui/logo";
-import DiscordLogo from "@/components/ui/discordLogo";
 
 const validationSchema: ZodType<SignUpRequest> = z
   .object({
@@ -43,7 +43,6 @@ function SignUpPage() {
     formState: { errors },
   } = useForm<SignUpRequest>({
     resolver: zodResolver(validationSchema),
-    mode: "onBlur",
   });
   const [message, setMessage] = useState<string | undefined>();
 

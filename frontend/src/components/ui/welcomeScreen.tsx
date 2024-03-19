@@ -34,10 +34,17 @@ const WelcomeScreen = (props: Props) => {
           </CreateProject>
           <Button className=" flex w-fit items-center gap-2 rounded-md border border-border/20 bg-muted-foreground/10 px-4 py-2 text-muted hover:bg-muted-foreground/30">
             <GitBranchPlus className="h-auto w-4" />
+        <div className="flex w-fit flex-wrap gap-4">
+          <Button variant={"secondary"}>
+            <PlusSquare className="mr-2 h-auto w-4" />
+            New project
+          </Button>
+          <Button variant={"secondary"}>
+            <GitBranchPlus className="mr-2 h-auto w-4" />
             Open repository
           </Button>
-          <Button className=" flex w-fit items-center gap-2 rounded-md border border-border/20 bg-muted-foreground/10 px-4 py-2 text-muted hover:bg-muted-foreground/30">
-            <FolderOpen className="h-auto w-4" />
+          <Button variant={"secondary"}>
+            <FolderOpen className="mr-2 h-auto w-4" />
             Open local folder
           </Button>
         </div>

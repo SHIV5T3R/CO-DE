@@ -1,7 +1,7 @@
 """[General Configuration Params]
 """
 import os
-from os import environ, path
+from os import path
 from dotenv import load_dotenv
 
 basedir = path.abspath(path.dirname(__file__))
@@ -11,6 +11,7 @@ load_dotenv(path.join(basedir, ".env"))
 class Config:
     FLASK_ENV = os.getenv("FLASK_ENV")
     DEBUG = os.getenv("DEBUG", "False") == "True"
+    RESTX_MASK_SWAGGER = False
 
     # db config
     DB_NAME = os.getenv("DB_NAME")
@@ -36,6 +37,13 @@ class Config:
 
     # CORS
     CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS")
+
+    # Github
+    GITHUB_REST_API_URL = os.getenv("GITHUB_REST_API_URL")
+    GITHUB_ACCESS_TOKEN_URL = os.getenv("GITHUB_ACCESS_TOKEN_URL")
+    GITHUB_OAUTH_CLIENT_ID = os.getenv("GITHUB_OAUTH_CLIENT_ID")
+    GITHUB_OAUTH_CLIENT_SECRET = os.getenv("GITHUB_OAUTH_CLIENT_SECRET")
+    GITHUB_OAUTH_REDIRECT_URI = os.getenv("GITHUB_OAUTH_REDIRECT_URI")
 
 
 class TestingConfig(Config):

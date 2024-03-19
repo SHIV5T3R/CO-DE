@@ -3,10 +3,9 @@ from typing import Iterable
 import pytest
 from app import create_app
 from constants import ImportType
+from models import Project, Room, User
 from flask import Flask
-from models.projects import Project
-from models.rooms import Room
-from models.users import User
+
 from mongoengine import disconnect
 
 
@@ -18,7 +17,6 @@ def app():
         email="test@email.com",
         username="test_user",
         full_name="Testing User",
-        password="0iHXk!1X",
     )
     test_user.save()
 
